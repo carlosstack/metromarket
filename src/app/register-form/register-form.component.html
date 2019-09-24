@@ -1,0 +1,64 @@
+<div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+    <div class="container">
+
+        <div class="row wow fadeIn">
+            <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+
+                <h1 class="display-4 font-weight-bold">Inicia sesión</h1>
+                <hr class="hr-light">
+                <p>
+                    <br>
+                    <form (submit)='onLoginEmail()'>
+                        <div class="md-form">
+                            <input [(ngModel)]="email" type="email" name="email" placeholder="Email"
+                                class="form-control">
+                        </div>
+                        <br>
+                        <div class="md-form">
+
+                            <input [(ngModel)]="pass" type="password" name="password" placeholder="Contraseña"
+                                class="form-control">
+                        </div>
+                        <br>
+                        <button class="btn btn-warning" type="submit"> Iniciar Sesión</button>
+                    </form>
+
+                    <p class="mb-4 d-none d-md-block">
+                        <br>
+                        <strong>Para tu tranquilidad solo aceptamos unimetanos.</strong>
+                    </p>
+
+
+            </div>
+            <div class="col-md-6 col-xl-5 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form (submit)='onRegister()'>
+                            <p class="h4 text-center mb-4">o también puedes registrarte</p>
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input [(ngModel)]="email2" type="email" class="form-control" name="email"
+                                    placeholder="Email">
+                                <label>Solo aceptamos emails @correo.unimet.edu.ve</label>
+                            </div>
+                            <br>
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input [(ngModel)]="pass2" type="password" name="pass" class="form-control"
+                                    placeholder="Ingresa una Contraseña">
+                            </div>
+                            <br>
+                            <div class="md-form">
+                                <i class="fa fa-exclamation-triangle prefix grey-text"></i>
+                                <input type="password" id="materialFormRegisterConfirmEx" class="form-control"
+                                    placeholder="Confirma tu Contraseña">
+                            </div>
+                       
+                        <div class="text-center mt-4">
+                            <button class="btn btn-warning" type="submit">Registrarme</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>        

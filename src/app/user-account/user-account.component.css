@@ -1,0 +1,38 @@
+.container{
+    margin-top: 4%;
+  }
+
+#uploadBtn{
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .file-upload{
+    margin: auto;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    width: 80%;
+
+  }
+
+  .progress{
+    width: 90%;
+    margin: auto;
+    margin-top:10px; 
+  }
+
+  .avatar{
+
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+  
+  }
+.col-sm-9{
+margin-top: auto;
+margin-bottom: auto;
+}
+
+
+

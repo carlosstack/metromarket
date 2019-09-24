@@ -1,0 +1,73 @@
+<div class="container">
+
+
+
+  <div class="row">
+
+    <div class="title-col col-md-12">
+      <figure class="" id="box">
+        <div class="row  ">
+          <div class=" col-md-12" div>
+
+            <h3 class="title">OFERTAS DISPONIBLES</h3>
+          </div>
+        </div>
+      </figure>
+    </div> <!-- col // -->
+
+
+    <table class="table col-md-12" *ngIf="oferts ; else loading">
+      <thead>
+        <td>Usuario</td>
+        <td>Descripción</td>
+        <td>Tasa</td>
+        <td></td>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let ofert of oferts" (click)="openModalConfirm(ofert)">
+          <td>@{{ ofert.username }}  <br><div class="date">{{ ofert.date | date:'medium' }} </div>  </td>
+          <td>
+            <div class="text-primary">{{ofert.tipo}} {{ ofert.monto + ofert.divisaMonto}} {{ ofert.origen }}</div> pago
+            por: {{ ofert.destino }} <br> se entrega:
+            {{ ofert.entrega}}
+          </td>
+
+          <th class="text-primary">{{ ofert.tasa }} {{ ofert.divisaTasa }}</th>
+          <td><button title="Aceptar oferta" class="btn btn-warning  aceptBtn" (click)="openModalConfirm(ofert)"><i
+                class="far fa-handshake fa-2x"></i></button></td>
+        </tr>
+
+      </tbody>
+
+      <tbody>
+        <br>
+        No hay más ofertas disponibles
+
+      </tbody>
+
+    </table>
+
+    <ng-template #loading>
+
+      <table class="table col-md-12">
+        <thead>
+          <td> Cargando ofertas...</td>
+        </thead>
+        <tbody>
+          <tr class="text-center">
+            <app-loading></app-loading>
+          </tr>
+        </tbody>
+      </table>
+
+    </ng-template>
+  </div>
+
+  <div id="ofertBtn" class="fixed-bottom text-right">
+
+    <button class=" btn-warning btn bttn " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      routerLink="/exchange/new-ofert"><i class="fas fa-plus "></i></button>
+
+  </div> <!-- col // -->
+  <br> <br> <br> <br>

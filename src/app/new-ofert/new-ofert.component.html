@@ -1,0 +1,153 @@
+<div  class="container bootstrap snippet">
+
+    <br>   <br>   <br>
+
+   
+<form *ngIf="!addBtnIsPulsed; else loading" (submit)="addOfert()">
+ 
+    <h2 class="text-center">PUBLICAR NUEVA OFERTA</h2>
+    <br>
+    <hr>
+    <br>
+
+    <div class="row">
+      
+        <div class="col-sm-4 ">
+              
+            <form class="form" id="">
+                <div class="form-group">
+
+                    <div class="col-xs-6">
+                        <label for="sel1">Tipo de Operación</label>
+                        <select class="form-control" id="sel1"  (change)="ofert.tipo=$event.target.value">
+                            <option>Seleccione una opción</option>
+                            <option>COMPRO</option>
+                            <option>VENDO</option>
+                            <option>CAMBIO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-xs-6">
+                        <label for="sel1">Origen: </label>
+                        <select class="form-control" id="sel1" (change)="ofert.origen=$event.target.value">
+                            <option>Seleccione una opción</option>
+                            <option>CASH</option>
+                            <option>ZELLE</option>
+                            <option>PAYPAL</option>
+                        </select>
+                    </div>
+                </div>
+
+            </form>
+
+            <hr>
+
+        </div>
+        <!--/col-9-->
+
+        <div class="col-sm-4 ">
+              
+            <form class="form" action="##" method="post" id="registrationForm">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label for="first_name">
+                                Monto:
+                            </label>
+                            <input (change)="ofert.monto=$event.target.value" type="number" class="form-control" name="first_name"
+                                id="first_name" placeholder="Ingresar monto" title="enter your first name if any.">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="sel1">Divisa:</label>
+                            <select class="form-control" id="sel1" (change)="ofert.divisaMonto=$event.target.value">
+                                <option>$</option>
+                                <option>€</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label for="first_name">
+                                Tasa:
+                            </label>
+                            <input (change)="ofert.tasa=$event.target.value" type="number" class="form-control" name="first_name"
+                                id="first_name" placeholder="Ingrese su tasa" title="enter your first name if any.">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="sel1">Divisa:</label>
+                            <select class="form-control" id="sel1" (change)="ofert.divisaTasa=$event.target.value">
+                                <option>BsS</option>
+                                <option>%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <hr>
+        </div>
+        <!--/col-9-->
+
+        <div class="col-sm-4 ">
+     
+            <form class="form" action="##" method="post" id="registrationForm">
+                <div class="form-group">
+
+                    <div class="col-xs-6">
+                        <label for="sel1">Destino:</label>
+                        <select class="form-control" id="sel1" (change)="ofert.destino=$event.target.value">
+                            <option>Seleccione una opción</option>
+                            <option>Venezuela</option>
+                            <option>Mercantil</option>
+                            <option>Plaza</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-xs-6">
+                        <label for="sel1">Entrega:</label>
+                        <select class="form-control" id="sel1" (change)="ofert.entrega=$event.target.value">
+                            <option>Seleccione una opción</option>
+                            <option>Hoy</option>
+                            <option>Mañana</option>
+                        </select>
+                    </div>
+                </div>
+
+            </form>
+
+            <hr>
+
+        </div>
+        <!--/col-9-->
+        
+        <div hidden class="tax">Comisión de la red (1% min 0.3{{ ofert.divisaMonto }} max 5{{ ofert.divisaMonto }}): {{ ofert.monto*0.01 }} {{ ofert.divisaMonto }}</div>
+
+
+        <div class="col-sm-12"><button class="btn btn-warning" type="submit"><i class="fas fa-plus-circle"></i> Publicar oferta</button></div>
+
+    </div>
+
+    <br><br>
+</form>
+    <!--/row-->
+
+    
+    <ng-template #loading>
+        <div class="container text-center">
+           
+                <br>
+        <br>
+        <app-loading class="text-center"></app-loading>
+        </div>
+
+    </ng-template>

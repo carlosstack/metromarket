@@ -1,0 +1,94 @@
+<div class=" fixed-top">
+    <nav class="navbar navbar-expand-md  navbar-dark ">
+        <!-- Brand -->
+        <div class="container">
+
+
+            <a class="navbar-brand" *ngIf="isLogged" routerLink="/exchange/all-oferts" id="title">{{ title }}</a>
+
+            <a class="navbar-brand title" *ngIf="!isLogged" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}" routerLink="" id="title">{{ title }}</a>
+
+            <div class="navbar-nav  ml-auto">
+                <!-- Toggler/collapsibe Button -->
+                <button (click)="onToggleMenu()" *ngIf="isLogged" class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2 "
+                [ngClass]="{'toggleMenuStyle': toggleMenu === true}" id="collapsibleNavbar">
+
+
+                <hr>
+
+                <ul *ngIf="isLogged && !toggleMenu" class="navbar-nav mr-auto  text-center">
+
+                    <a hidden class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        routerLink="/products"><i class="fas fa-store-alt "></i> Marketplace</a>
+
+                    <a hidden class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        routerLink="/exchange/all-oferts"><i class="fas fa-sync"></i> Exchange</a>
+
+                </ul>
+
+                <ul *ngIf="isLogged && !toggleMenu" class="navbar-nav  ml-auto text-center">
+
+                    <a hidden class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        routerLink="/notifications"><i class="fas fa-bell"></i> Notificaciones <span
+                            class="badge badge-pill badge-danger">11</span></a>
+                    <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        routerLink="/myaccount"> <i class="fas fa-user-circle"></i> Mi cuenta</a>
+
+
+
+
+                    <a *ngIf="isLogged && !toggleMenu" (click)="onLogout()" class="nav-link" id="exitBtn" name="Salir"
+                        title="Salir"> <i class="fas fa-sign-out-alt"></i> Salir</a>
+
+                </ul>
+
+
+
+
+                <ul *ngIf="isLogged && toggleMenu " class="navbar-nav mr-auto  text-center">
+
+                    <a hidden (click)="onToggleMenu()" class="nav-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}" routerLink="/products"><i
+                            class="fas fa-store-alt "></i>
+                        Marketplace</a>
+
+                    <a hidden (click)="onToggleMenu()" class="nav-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}" routerLink="/exchange/my-oferts"><i
+                            class="fas fa-sync"></i>
+                        Exchange</a>
+
+                </ul>
+
+                <ul *ngIf="isLogged && toggleMenu" class="navbar-nav  ml-auto text-center">
+
+
+                    <a hidden (click)="onToggleMenu()" class="nav-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}" routerLink="/notifications"><i
+                            class="fas fa-bell"></i>
+                        Notificaciones <span class="badge badge-pill badge-danger">11</span></a>
+
+                    <a (click)="onToggleMenu()" class="nav-link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}" routerLink="/myaccount"> <i
+                            class="fas fa-user-circle"></i> Mi
+                        cuenta</a>
+
+
+                    <hr>
+
+                    <a (click)="onToggleMenu()" (click)="onLogout()" class="nav-link  text-center" id="exitBtn"
+                        name="Salir" title="Salir"><i class="fas fa-sign-out-alt "></i> Salir</a>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <navbar-oferts *ngIf="isLogged"></navbar-oferts>
+</div>

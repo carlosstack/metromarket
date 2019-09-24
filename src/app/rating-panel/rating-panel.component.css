@@ -1,0 +1,62 @@
+.container{
+    margin-top: 15px;
+    z-index: 1001;
+}
+.cardbox{
+    margin: 5px;
+    
+}
+
+.btn-group .btn{
+width: 100px;
+margin: 10px;
+}
+
+.btn-group{
+    margin: auto;
+}
+.spinner-border{
+    margin:auto;
+}
+.add-btn {
+    padding: 2px;
+
+}
+.success{
+    padding: 20px;
+}
+
+.avatar{
+
+    border-radius: 50%;
+    width: 280px;
+    height: 280px;
+    margin: auto;
+
+  }
+
+  .card-title{
+      margin-top: auto;
+      margin-bottom: auto;
+
+  }
+  .rating{
+      width: auto;
+      margin: auto;
+      height: auto;
+  }
+  
+  @media only screen and (max-width:600px ) {
+      h6{
+          font-size: 1em;
+      }
+  }
+
+
+
+  tbody tr{
+    background-color: white;
+    height: 120px;
+
+  }
+

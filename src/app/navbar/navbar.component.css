@@ -1,0 +1,68 @@
+.form-control {
+min-width: 100px;
+width: 200px;
+}
+
+.navbar-brand{
+  font-size: 1.5rem;
+}
+
+nav{
+  width: 100%;
+}
+
+.navbar{
+  background-color: #00233d;
+}
+
+.nav-link{
+  font-size: 0.9rem;
+}
+
+.navbar-link-icons{
+  display: none;
+}
+
+ .active{
+     color: white;
+  
+  
+ }
+  .toggleMenuStyle{
+    display: block;
+  }
+  
+  @media screen and (max-width:810px) {
+    
+     nav i{
+       display: block;
+     }
+
+    .nav-link {
+      font-size: 20px;
+      margin: 5px;
+    
+    }
+
+  }
+
+  button,.md-form{
+    margin: auto;
+    margin-left: 4px;
+   
+  }
+
+  .nav-link > .fas {
+    top: 3px;
+    line-height: 12px;
+  }
+
+
+
+
+  .nav-link > .fas{
+    top: 3px;
+    line-height: 12px;
+  }
+
+

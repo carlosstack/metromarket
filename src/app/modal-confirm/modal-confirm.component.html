@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>¿Esta seguro?</h1>
+<div mat-dialog-content>
+    <p>Esta operación ya no se podrá revertir.</p>
+
+</div>
+<div mat-dialog-actions>
+    <div class="btn-group text-center">
+        <button mat-button (click)="onNoClick()" class="btn btn-danger"> No </button>
+        <button mat-button [mat-dialog-close]="answer" cdkFocusInitial class="btn btn-success"> Si </button>
+    </div>
+</div>
