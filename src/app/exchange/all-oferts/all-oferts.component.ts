@@ -40,6 +40,8 @@ export class AllOfertsComponent implements OnInit {
 
     this.authService.isAuth().subscribe(user => {
 
+      this.currentUsername = user.displayName;
+
       this.normalOfert.getAllOferts().subscribe(oferts => {
 
         this.oferts = oferts.filter(ofert => ofert.username != `${user.displayName}`);
@@ -76,26 +78,20 @@ export class AllOfertsComponent implements OnInit {
 
   onAccept(ofert: OfertInterface) {
 
-    var aux = true;
+    const takeOfert = this.afs.firestore.collection("normal-oferts").doc(ofert.id);
 
-    this.normalOfertService.getOneOfert(ofert.id).subscribe(ofert => {
-      if (ofert.acceptedBy == null) {
-        aux = false;
-        this.authService.isAuth().subscribe(user => {
-          this.afs.doc<OfertInterface>(`normal-oferts/${ofert.id}`).update({
-            acceptedBy: user.displayName
-          })
-          this.normalOfertService.deleteOfert(ofert.id).delete();
-          this.userService.addOfertUser(ofert);
-          this.userService.updateOfertPartner(ofert);
-          this.router.navigate([`/exchange/transaction/accepted-oferts/${ofert.id}`]);
-        })
-      } else {
-        if (aux) {
-          this.showAlert('Esta oferta ya fue tomada por alguien más.');
-        }
-      }
-    })
+    this.afs.firestore.runTransaction(t =>
+      t.get(takeOfert).then(ofert => {        
+        t.update(takeOfert, { acceptedBy: this.currentUsername });
+        this.userService.addOfertUser(ofert.data())
+        this.userService.updateOfertPartner(ofert.data())
+        t.delete(takeOfert);
+
+      })).then(() => {
+        this.router.navigate([`/exchange/transaction/accepted-oferts/${ofert.id}`])
+        this.showAlert('¡Aceptaste esta oferta! Comunicate con tu compañero para efectuar la transacción.')
+      })
+      .catch(error => this.showAlert('Esta oferta ya fue tomada por alguien más.' + error));
   }
 
 }
