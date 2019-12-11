@@ -1,0 +1,24 @@
+.w-sidebar {
+    width: 16%;
+    top: 60px;
+    
+}
+
+.nav-link{
+    color: black;
+}
+
+
+.sidebar-title{
+    padding: 10px;
+    background-color: rgb(97, 96, 96);
+}
+
+li :hover{
+    background-color: rgb(228, 228, 228);
+}
+
+li :active{
+    background-color: rgb(228, 228, 228);
+
+}
