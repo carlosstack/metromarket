@@ -1,6 +1,7 @@
 export interface OfertInterface {
 
     id?:string;
+    frecuency?:boolean;
     destino?: string;
     divisaMonto?: string;
     divisaTasa?: string;

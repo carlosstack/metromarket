@@ -1,69 +1,116 @@
-<div class="container">
+<!---start alert info -->
+<div hidden class="alert alert-info alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Success!</strong> Indicates a successful or positive action.
+</div>
+<!---end alert info -->
 
-  <div class="row">
 
-    <div class="title-col col-md-6">
-      <figure class="" id="box">
-        <div class="row  ">
-          <div class=" col-md-12 " div>
 
-            <h3 class="title">MIS OFERTAS</h3>
+<!---start table structure -->
+<ng-template #table>
+
+  <table class="table oferts-table" *ngIf="oferts ; else loading">
+    <thead class="oferts-table-head">
+      <td class="oferts-table-head-item d-flex">Mis ofertas</td>
+      <td class="oferts-table-head-item"></td>
+      <td class="oferts-table-head-item"></td>
+      <td class="oferts-table-head-item"></td>
+    </thead>
+    <tbody>
+      <tr class="shadow-sm w-100 oferts-table-tr" *ngFor="let ofert of oferts"
+        [routerLink]="['/app/exchange/transaction',type,ofert.id]">
+        <td>
+          <div class="oferts-username">@{{ ofert.username }}</div>
+          <div class="date">
+            <div class="oferts-date">{{ ofert.date | date:'short' }} </div>
           </div>
-        </div>
-      </figure>
-    </div> <!-- col // -->
+        </td>
+        <td>
+          <div class="text-primary h7">
+            <div class="oferts-description">
+              <div class="item d-flex">{{ofert.tipo}} {{ ofert.monto + ofert.divisaMonto}} {{ ofert.origen }}</div>
+              <div class="item d-flex">
+                <div class="badge badge-primary">VE</div>
+                <div class="badge badge-primary">PM</div>
+                <div class="badge badge-primary">ME</div>
+                <div class="badge badge-primary">BA</div>
+              </div>
+            </div>
+          </div>
+        </td>
 
+        <th class="tasa text-primary">
+          <div class="oferts-money d-flex">{{ ofert.divisaTasa }} {{ ofert.tasa }} </div>
+        </th>
+        <th class="oferts-status" [style.color]="getColor(ofert.status)">
+          <li class="fas fa-circle"></li>
+        </th>
 
-    <table class="table col-md-12" *ngIf="oferts ; else loading">
-      <thead>
-        <td>Usuario</td>
-        <td>Descripción</td>
-        <td>Tasa</td>
-        <td>Estado</td>
-      </thead>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+<!---end table structure -->
+<!---start ng-switch-->
+<span [ngSwitch]="oferts">
+  <p *ngSwitchCase="true">
+    <ng-container *ngTemplateOutlet="table"></ng-container>
+  </p>
+  <p *ngSwitchCase="false">
+    <ng-container *ngTemplateOutlet="loading"></ng-container>
+  </p>
+  <p *ngSwitchDefault>
+      <ng-container *ngTemplateOutlet="table"></ng-container>
+  </p>
+</span>
 
-      <tbody>
-        <tr *ngFor="let ofert of oferts" [routerLink]="['/exchange/transaction',type,ofert.id]">
-          <td>@{{ ofert.username }} <br> <div class="date">{{ ofert.date | date:'medium' }} </div> </td>
-          <td>
-            <div class="text-primary">{{ofert.tipo}} {{ ofert.monto + ofert.divisaMonto}} {{ ofert.origen }}</div> pago
-            por: {{ ofert.destino }} <br> se entrega:
-            {{ ofert.entrega}}
-          </td>
+<!---end ng-switch-->
 
-          <th class="text-primary">{{ ofert.tasa }} {{ ofert.divisaTasa }}</th>
-          <th [style.color]="getColor(ofert.status)">{{ getStatus(ofert) }}</th>
+<!---start loading template -->
+<ng-template #loading class="oferts-container">
+   <!-- <table class="table oferts-table">
+    <thead class="oferts-table-head">
+      <td class="oferts-table-head-item d-flex">Mis ofertas</td>
+      <td class="oferts-table-head-item"></td>
+      <td class="oferts-table-head-item"></td>
+      <td class="oferts-table-head-item"></td>
+    </thead>
+    <tbody>
+      <tr class="shadow-sm w-100 oferts-table-tr">
+        <td>
+          <div class="oferts-username text-primary ">@carlosehdr</div>
+          <div class="date">
+            <div class="oferts-date text-secondary ">30/12/2019</div>
+          </div>
+        </td>
+        <td>
+          <div class="text-primary h7">
+            <div class="oferts-description">
+              <div class="item d-flex">COMPRO 200$ CASH</div>
+              <div class="item d-flex">
+                <div class="badge badge-primary">VE</div>
+                <div class="badge badge-primary">PM</div>
+                <div class="badge badge-primary">ME</div>
+                <div class="badge badge-primary">BA</div>
+              </div>
+            </div>
+          </div>
+        </td>
 
-        </tr>
+        <th class="tasa text-primary">
+          <div class="oferts-money d-flex">BSS 53000</div>
+        </th>
+        <th class="oferts-status">
+          <li class="fas fa-circle"></li>
+        </th>
 
-      </tbody>
+      </tr>
 
-      <tbody>
-        <br>
-        No hay más ofertas disponibles
-
-      </tbody>
-
-    </table>
-    <ng-template #loading>
-      <table class="table col-md-12">
-        <thead>
-          <td> Cargando ofertas...</td>
-        </thead>
-        <tbody>
-          <tr class="text-center">
-            <app-loading></app-loading>
-          </tr>
-        </tbody>
-      </table>
-
-    </ng-template>
-  </div>
-
-  <div id="ofertBtn" class="fixed-bottom text-right">
-
-    <button class=" btn-warning btn bttn " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-      routerLink="/exchange/new-ofert"><i class="fas fa-plus "></i></button>
-
-  </div> <!-- col // -->
-  <br> <br> <br> <br>
+    </tbody>
+  </table>
+ ESTO ES LO QUE VA-->
+    <app-loading-exchange></app-loading-exchange>
+  
+</ng-template>
+<!---end loading template -->

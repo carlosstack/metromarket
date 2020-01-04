@@ -1,64 +1,47 @@
-<div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-    <div class="container">
+<form (submit)='onRegister()' class="register-form">
+    <h1 class="p-2">Crea una cuenta</h1>
+    <h6 class="p-2">Solo te tomará unos minutos</h6>
+    <div class="d-flex form-item name-and-surname">
+        <div class="text-center form-item-name flex-fill">
+            <input type="text" name="name" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="text-center form-item-surname flex-fill">
+            <input type="surname" name="surname" class="form-control" placeholder="Apellido">
+        </div>
+    </div>
+    <br>
+    <div class="d-flex text-center  form-item">
+        <input [(ngModel)]="email2" type="email" class="form-control flex-fill" name="email" placeholder="Email">
+    </div>
+    <br>
 
-        <div class="row wow fadeIn">
-            <div class="col-md-6 mb-4 white-text text-center text-md-left">
+    <div class="d-flex text-center  form-item">
+        <input [(ngModel)]="pass2" type="password" name="pass" class="form-control flex-fill"
+            placeholder="Ingresa una Contraseña">
+    </div>
 
+    <div class="form-item-sexo d-flex form-item">
 
-                <h1 class="display-4 font-weight-bold">Inicia sesión</h1>
-                <hr class="hr-light">
-                <p>
-                    <br>
-                    <form (submit)='onLoginEmail()'>
-                        <div class="md-form">
-                            <input [(ngModel)]="email" type="email" name="email" placeholder="Email"
-                                class="form-control">
-                        </div>
-                        <br>
-                        <div class="md-form">
+        <h6 class="form-item-sexo-title">Genero:</h6>
 
-                            <input [(ngModel)]="pass" type="password" name="password" placeholder="Contraseña"
-                                class="form-control">
-                        </div>
-                        <br>
-                        <button class="btn btn-warning" type="submit"> Iniciar Sesión</button>
-                    </form>
+        <div class="  form-item-sexo-option">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Másculino
+            </label>
+        </div>
+        <div class=" form-item-sexo-option">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">Femenino
+            </label>
+        </div>
+        <div class=" form-item-sexo-option">
+            <label class="form-check-label ">
+                <input type="radio" class="form-check-input" name="optradio">Otro
+            </label>
+        </div>
+    </div>
 
-                    <p class="mb-4 d-none d-md-block">
-                        <br>
-                        <strong>Para tu tranquilidad solo aceptamos unimetanos.</strong>
-                    </p>
-
-
-            </div>
-            <div class="col-md-6 col-xl-5 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <form (submit)='onRegister()'>
-                            <p class="h4 text-center mb-4">o también puedes registrarte</p>
-                            <div class="md-form">
-                                <i class="fa fa-envelope prefix grey-text"></i>
-                                <input [(ngModel)]="email2" type="email" class="form-control" name="email"
-                                    placeholder="Email">
-                                <label>Solo aceptamos emails @correo.unimet.edu.ve</label>
-                            </div>
-                            <br>
-                            <div class="md-form">
-                                <i class="fa fa-lock prefix grey-text"></i>
-                                <input [(ngModel)]="pass2" type="password" name="pass" class="form-control"
-                                    placeholder="Ingresa una Contraseña">
-                            </div>
-                            <br>
-                            <div class="md-form">
-                                <i class="fa fa-exclamation-triangle prefix grey-text"></i>
-                                <input type="password" id="materialFormRegisterConfirmEx" class="form-control"
-                                    placeholder="Confirma tu Contraseña">
-                            </div>
-                       
-                        <div class="text-center mt-4">
-                            <button class="btn btn-warning" type="submit">Registrarme</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>        
+    <div class="mt-4">
+        <button class="btn sign-up-btn" type="submit">Registrarme</button>
+    </div>
+</form>

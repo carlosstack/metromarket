@@ -1,0 +1,138 @@
+a{
+  text-decoration: none;
+}
+
+
+.group-option-btn{
+  padding: 8px;
+}
+
+.toolbar{
+ 
+}
+.option-btn{
+  height: 40px;
+  width: 150px;
+  background-color: white;
+  box-shadow: 0.5px 0.5px grey;
+  border-radius: 20px;
+  margin-left: 10px;
+  color: black;
+}
+
+.option-btn .fas{
+  padding-right: 8px;
+}
+
+  
+  .buttons-oferts-group {
+    display: inline-block;
+  }
+
+  .nav-link{
+    display: flex;
+  }
+
+  .table-outlet{
+    padding-top: 10px;
+  }
+  @media only screen and (max-width:600px){
+
+    .toolbar{
+      display: none;
+    }
+  
+
+  }
+
+  @media only screen and (max-width:800px){
+
+    .btn-text{
+      display: none;
+    }
+  
+    .fas{
+      font-size: 1.4em;
+    }
+
+  .fas{
+      padding: 5px;
+  }
+  }
+
+  @media only screen and (min-width:800px) and (max-width:1024px){
+
+    .btn-text{
+      font-size: 0.8em;
+    }
+  
+
+  }
+
+  /*--- START TRANSITION BUTTON EFFECT---*/
+  .option-btn {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    color: black;
+    border-radius: 25px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 0.8em;
+    
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .option-btn::before{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    top: 0;
+    left: 0;
+    background: rgba(255, 197, 90, 0.925);
+    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: linear-gradient(to right, orange, rgb(248, 212, 10));
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    opacity: 0;
+  }
+  
+  .option-btn:hover {
+    background: rgba(255, 197, 90, 0.925);
+    color: #fff;
+  }
+  
+  .option-btn:hover:before {
+    opacity: 1;
+  }
+
+
+    /*--- END TRANSITION BUTTON EFFECT---*/
+
+  /*--- START CLASS ACTIVE ---*/
+
+.active{
+    background: rgba(255, 197, 90, 0.925);
+    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: linear-gradient(to right, orange, rgb(248, 212, 10));
+} /*--- END CLASS ACTIVE ---*/

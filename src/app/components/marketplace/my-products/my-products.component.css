@@ -1,0 +1,15 @@
+.title{
+    padding: 2%;
+}
+thead tr{
+    background-color: gainsboro;
+    color: black;
+    height: 25px;
+  }
+  
+  
+  
+    tbody tr{
+      background-color: white;
+  
+    }

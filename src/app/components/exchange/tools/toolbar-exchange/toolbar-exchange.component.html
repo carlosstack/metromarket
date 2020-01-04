@@ -1,0 +1,41 @@
+<div class="profile-sidebar ">
+    <!-- SIDEBAR USERPIC -->
+    <div class="profile-userpic">
+        <div *ngIf="user ;else imgLoading">
+            <img src="{{user.photoURL}}" class="img-fluid mx-auto d-block img-thumbnail" alt="">
+        </div>
+        <ng-template #imgLoading>
+            <img src="../../../../../assets/profile.png" class="img-fluid mx-auto d-block img-thumbnail" alt="">
+        </ng-template>
+
+    </div>
+    <!-- END SIDEBAR USERPIC -->
+    <!-- SIDEBAR USER TITLE -->
+    <div class="profile-usertitle">
+        <div class="profile-usertitle-name">
+            <div *ngIf="user"> @{{user.displayName}}</div>
+        </div>
+        <div class="profile-usertitle-job">
+            <li class="fas fa-user-check"></li> Verificado
+        </div>
+    </div>
+    <!-- END SIDEBAR USER TITLE -->
+    <!-- APP RATING -->
+
+
+
+
+    <!-- END APP RAITN -->
+    <!-- SIDEBAR MENU -->
+    <nav class="profile-usermenu ">
+        <button class="d-flex btn justify-content-center align-items-center nav-link" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" [routerLink]="[{ outlets: {exchange: ['my-oferts'] } }]">
+            <i class="p-2 fas fa-user-cog"></i>
+            <div class="text-btn"> Configuración</div>
+        </button>
+
+
+
+    </nav>
+    <!-- END MENU -->
+</div>

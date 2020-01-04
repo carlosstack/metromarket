@@ -27,7 +27,7 @@ export class RegisterFormComponent implements OnInit {
     phone_number: '',
     photoUrl: '',
     username: ''
-  
+
   }
 
 
@@ -35,12 +35,12 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onRegister():void {
+  onRegister(): void {
     this.authService.registerUser(this.email2, this.pass2)
       .then((res) => {
-      
-        this.router.navigate(['/myaccount']);
-        
+
+        this.router.navigate(['/myaccount(sidebar:sidebar)']);
+
       }).catch(err => console.log('err', err));
 
   }
@@ -49,9 +49,10 @@ export class RegisterFormComponent implements OnInit {
 
     this.authService.loginUser(this.email, this.pass)
       .then((res) => {
-        this.router.navigate(['/exchange/all-oferts']);
-        
-      }).catch(err => console.log('err', err.mesage));   
+        this.router.navigate(['/social(sidebar:sidebar)']);
+
+      }).catch(err => console.log('err', err.mesage));
   }
+ 
 
 }

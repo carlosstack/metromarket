@@ -1,9 +1,11 @@
-export interface ProfileInterface{
+export interface ProductInterface{
     id ?: string;
     name ?:string;
-    last_name ?:string;
-    email ?:string;
-    password ?: string;
-    phone_number ?: string;
-    photoUrl ?: string;
+    description ?:string;
+    price ?: number;
+    category ?: string;
+    owner_id ?:string;
+    owner_name ?: string;
+    owner_phone_number ?: string;
+    date ?: number;
 }

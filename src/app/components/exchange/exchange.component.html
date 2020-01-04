@@ -1,16 +1,45 @@
- <!-- app sidebar -->
+<!--/ ESTRUCTURA PRINCIPAL DEL EXCHANGE -->
+<div class="">
+  <div class="row">
 
- <div class="container-fluid px-0">
-        <div class="row collapse show no-gutters d-flex h-100 position-relative">
-            <div class="col-2 p-0 h-100 w-sidebar navbar-collapse collapse d-none d-md-flex sidebar">
-                <app-exchange-sidebar></app-exchange-sidebar>
-            </div>
-    
-    <!-- content -->
-           
-           <div class="col-10 p-3">
-            <br><br>
-               <router-outlet name="exchangeRouter"></router-outlet>
-           </div>
-       </div>
+    <div class="col-md-3 toolbar">
+      <app-toolbar-exchange></app-toolbar-exchange>
     </div>
+
+    <!--/ col-lg-3 -->
+    <div class="col-md-9">
+    
+      <div class="group-option-btn d-flex ">
+
+        <!-- Links -->
+        <a class="d-flex option-btn shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          [routerLink]="[{ outlets: { exchange: ['new'] } }]"><i class="fas fa-plus"></i>
+          <div class="btn-text"> Publicar</div>
+        </a>
+
+        <a class="d-flex option-btn  shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          [routerLink]="[{ outlets: { exchange: ['all'] } }]"><i class="fas fa-search-dollar"></i>
+          <div class="btn-text">Disponibles</div>
+        </a>
+
+        <a class="d-flex option-btn shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          [routerLink]="[{ outlets: {exchange: ['accepted'] } }]"><i class="fas fa-handshake"></i>
+          <div class="btn-text"> Aceptadas</div>
+        </a>
+
+        <a class="d-flex option-btn  shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          [routerLink]="[{ outlets: {exchange: ['my-oferts'] } }]"><i class="fas fa-user"></i>
+          <div class="btn-text"> Mis ofertas</div>
+        </a>
+
+
+      </div>
+
+      <div class="outlet">
+        <router-outlet name='exchange'></router-outlet>
+      </div>
+
+    </div>
+  </div>
+
+</div>

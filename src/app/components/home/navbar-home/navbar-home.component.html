@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand fixed-top  navbar-light ml-auto shadow-sm">
+    <div class="container">
+        <!-- Brand -->
+        <div class="">
+            <img class="img-fluid" src="./../../../../assets/samannetlogo.png" >
+            <a hidden class="navbar-brand " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink=""
+                id="title">Samannet</a>
+
+        </div>
+        <!-- Navbar links -->
+        <div class="nav-item ">
+            <form (submit)='onLoginEmail()' class="d-flex">
+                <div class="md-form d-flex">
+                   
+                    <input [(ngModel)]="email" type="email" name="email" placeholder="Email" class="form-control">
+                </div>
+                <br>
+        
+                <div class="md-form d-flex">
+        
+                     <input [(ngModel)]="pass" type="password" name="password"
+                        placeholder="Contraseña" class="form-control">
+                </div>
+                <br>
+                <button class="btn text-center login-btn shadow-sm" type="submit"> Iniciar Sesión</button>
+            </form>
+       </div>
+    </div>  
+</nav>
+<hr class="col-12 fixed-top">  

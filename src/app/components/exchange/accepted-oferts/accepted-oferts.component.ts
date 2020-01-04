@@ -11,7 +11,7 @@ import { OfertInterface } from 'src/app/models/ofert';
 })
 export class AcceptedOfertsComponent implements OnInit {
 
-  constructor(private normalOfert: NormalOfertService, private authService: AuthService, private userService: UserService) { }
+  constructor( private normalOfert: NormalOfertService, private authService: AuthService, private userService: UserService) { }
 
   public oferts;
   public type = 'accepted-oferts';

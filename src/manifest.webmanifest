@@ -1,8 +1,8 @@
 {
-  "name": "Blipsnap",
-  "short_name": "Blipsnap",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Samannet",
+  "short_name": "Samannet",
+  "theme_color": "#0000",
+  "background_color": "#0000",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

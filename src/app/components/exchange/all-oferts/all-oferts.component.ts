@@ -4,11 +4,12 @@ import { AuthService } from '../../../services/auth.service';
 import { OfertInterface } from 'src/app/models/ofert';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { ModalConfirmComponent } from 'src/app/components/main/modal-confirm/modal-confirm.component';
+import { ModalConfirmComponent } from 'src/app/components/exchange/tools/modal-confirm/modal-confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertComponent } from 'src/app/components/main/alert/alert.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ExchangeComponent } from '../exchange.component';
 
 export interface Data {
   text: string;
@@ -37,6 +38,8 @@ export class AllOfertsComponent implements OnInit {
 
 
   ngOnInit() {
+
+
 
     this.authService.isAuth().subscribe(user => {
 
@@ -86,9 +89,8 @@ export class AllOfertsComponent implements OnInit {
         this.userService.addOfertUser(ofert.data())
         this.userService.updateOfertPartner(ofert.data())
         t.delete(takeOfert);
-
       })).then(() => {
-        this.router.navigate([`/exchange/transaction/accepted-oferts/${ofert.id}`])
+        this.router.navigate([`/app/exchange/transaction/accepted-oferts/${ofert.id}`])
         this.showAlert('¡Aceptaste esta oferta! Comunicate con tu compañero para efectuar la transacción.')
       })
       .catch(error => this.showAlert('Esta oferta ya fue tomada por alguien más.' + error));

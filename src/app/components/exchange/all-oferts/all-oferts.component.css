@@ -1,114 +1,151 @@
-
-  
-  @media only screen and (max-width:480px) {
-  
-      
-    th{
-       font-size: 0.7rem;
-    }
-
-    td{
-       font-size: 0.7rem;
-    
-    }
-  
-    tbody button{
-      font-size: 0.7rem;
-  
-    }
-  
-  }
-
+/*--- START OFERT TABLE ---*/
  
 
-
-thead tr{
-  background-color: gainsboro;
-  color: black;
-  height: 25px;
+  
+@media only screen and (max-width:810px ) {
+  .title{
+    display: none;
+  }
+  .container{
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
 }
 
 
 
-  tbody tr{
-    background-color: white;
-    height: 120px;
 
+@media only screen and (max-width:480px) {
+
+  
+  th{
+     font-size: 0.7rem;
+  }
+
+  td{
+     font-size: 0.7rem;
+  
   }
 
   tbody button{
-    margin: 3px;
-  }
-  table{
-    margin: 5px;
-    width: 100%;
-   
-  }
-
-  #box{
-    height: 80px;
+    font-size: 0.7rem;
 
   }
 
-  figure{
-    border-radius: 10px;
-  }
 
-  .col-md-4{
-    margin: auto;
-    
-  }
-
-  .bttn{
-    width: 50px; 
-    height: 50px; 
-    font-size: 0.9rem;
-    border-radius: 50%;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    }
-
-  h2{
-    font-family: Arial, Helvetica, sans-serif;
-
-  }
-
-  thead tr th{
-  padding: 2px;
-  }
-
-  
-  .title{
-    margin-top: 40px;
-  }
-  tbody :hover{
-    background-color: rgb(236, 236, 236);
-    cursor:pointer; 
-    cursor: hand;
-
-  }
-  @media only screen and (max-width:810px ) {
-    .title-col{
-      display: none;
-    }
-  }
-
+}
 
 
 @media only screen and (min-width:809px ) {
 
 
-.bttn{
-  display: none;
-  }
+
+}
 
 
-  }
+/*--- START OFERT TABLE ---*/
+thead tr{
+background-color: white;
+color: black;
+}
 
-  .bttn{
-    box-shadow: 1px 1px 5px #999;
-  }
+tbody tr{
+background-color: white;
+height: 110px;
+}
 
-  .date{
-    font-size: 12px;
-  }
+tbody button{
+margin: 3px;
+}
+table{
+
+width: 100%;
+
+}
+
+
+@media only screen and (max-width:810px ) {
+
+.container{
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+}
+
+
+@media only screen and (max-width:480px) {
+
+
+th{
+   font-size: 0.7rem;
+}
+
+td{
+   font-size: 0.7rem;
+
+}
+
+tbody button{
+  font-size: 0.7rem;
+
+}
+
+
+}
+
+
+@media only screen and (min-width:809px ) {
+
+
+
+}
+
+
+
+tbody :hover{
+background-color: rgb(236, 236, 236);
+cursor:pointer; 
+cursor: hand;
+
+}
+
+
+
+
+
+/* -----START  TABLE ------*/
+.oferts-table{
+background-color: white;
+margin-top: 10px;
+
+
+}
+/*-----TEXT----*/
+.oferts-username ,.oferts-date,.oferts-money{
+
+width: 6em;
+height: 24px;
+padding: 3px;
+
+
+}
+.oferts-date{
+font-size: 0.75em;
+}
+
+.oferts-description > .item{
+margin-bottom:10px ;
+width: 10em;
+height: 24px;
+}
+
+
+.badge{
+margin: 2px;
+}
+/* -----END TABLE ------*/
+

@@ -12,4 +12,5 @@ export class ExchangeComponent implements OnInit {
   ngOnInit() {
   }
 
+
 }

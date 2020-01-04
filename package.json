@@ -26,6 +26,7 @@
     "@angular/service-worker": "~8.1.2",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "angular-font-awesome": "^3.1.2",
+    "animejs": "^3.1.0",
     "firebase": "^6.3.3",
     "font-awesome": "^4.7.0",
     "git": "^0.1.5",

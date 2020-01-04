@@ -1,0 +1,131 @@
+/*--- START OFERT TABLE ---*/
+thead tr{
+    background-color: white;
+    color: black;
+    height: 25px;
+  }
+  
+    tbody tr{
+      background-color: white;
+      height: 110px;
+  
+    }
+  
+    tbody button{
+      margin: 3px;
+    }
+    table{
+     
+      width: 100%;
+     
+    }
+  
+  
+    @media only screen and (max-width:810px ) {
+      
+      .container{
+        padding-left: 0%;
+        padding-right: 0%;
+        margin-left: 0%;
+        margin-right: 0%;
+      }
+    }
+  
+    figure{
+      border-radius: 10px;
+    }
+
+    h2{
+      font-family: Arial, Helvetica, sans-serif;
+  
+    }
+  
+    thead tr th{
+    padding: 2px;
+    }
+
+
+    @media only screen and (max-width:480px) {
+  
+      
+      th{
+         font-size: 0.7rem;
+      }
+  
+      td{
+         font-size: 0.7rem;
+      
+      }
+    
+      tbody button{
+        font-size: 0.7rem;
+    
+      }
+
+    
+    }
+
+  
+  @media only screen and (min-width:809px ) {
+  
+
+  
+    }
+
+   
+
+
+
+    .date{
+      font-size: 12px;
+    }
+
+
+/* -----START LOADING TABLE ------*/
+.oferts-loading-table{
+  background-color: white;
+
+ 
+}
+/*---transition efect----*/
+.oferts-loading-table{
+  animation-name: opacity-change;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
+}
+
+@keyframes opacity-change{
+  from{
+    opacity: 10%;
+  }
+  to{
+    opacity: 100%;
+  }
+}
+/*-----TEXT----*/
+.oferts-loading-username ,.oferts-loading-date,.oferts-loading-money{
+
+  width: 6em;
+  height: 24px;
+  background-color: rgb(240, 240, 240); 
+  padding: 3px;
+ 
+
+}
+.oferts-loading-status{
+  color: rgb(240, 240, 240);
+}
+
+.oferts-loading-description > .item{
+  margin-bottom:10px ;
+  width: 10em;
+  height: 24px;
+  background-color: rgb(240, 240, 240);
+}
+
+
+.badge{
+  margin: 2px;
+}
+/* -----END LOADING TABLE ------*/

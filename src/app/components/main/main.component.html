@@ -1,16 +1,4 @@
- <!-- app sidebar -->
-
-<div class="container-fluid px-0">
-    <div class="row collapse show no-gutters d-flex h-100 position-relative">
-        <div class="col-2 p-0 h-100 w-sidebar navbar-collapse collapse d-none d-md-flex sidebar">
-            <router-outlet name='sidebar'></router-outlet>>
-        </div>
-
-<!-- content -->
-       
-       <div class="col-10 p-3">
-        <br><br>
-           <router-outlet></router-outlet>
-       </div>
-   </div>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+<router-outlet></router-outlet>
 </div>

@@ -1,0 +1,36 @@
+<div class="container">
+
+    <h2 class="title text-left col-12">MIS ARTÍCULOS</h2>
+
+
+<table class="table col-md-12" >
+
+    <thead>
+      <td>Título</td>
+      <td>Descripción</td>
+      <td>Precio</td>
+      <td></td>
+    </thead>
+
+    <tbody *ngFor="let product of products">
+      <tr>
+        <td>{{product.name}}  <br><div class="date">{{product.date}} </div>  </td>
+        <td>
+          {{product.description}}
+        </td>
+
+        <th class="text-primary"> {{ product.price }}</th>
+        <td><button class="btn btn-warning">Editar</button></td>
+      </tr>
+
+    </tbody>
+
+    <tbody>
+      <br>
+      No hay más productos
+
+    </tbody>
+
+  </table>
+
+</div>

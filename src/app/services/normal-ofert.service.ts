@@ -53,7 +53,7 @@ export class NormalOfertService {
           id:res.id
         });
 
-        this.router.navigate([`/exchange/transaction/my-oferts/${res.id}`]);
+        this.router.navigate([`app/exchange/transaction/my-oferts/${res.id}`]);
        
       });
 

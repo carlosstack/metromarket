@@ -1,0 +1,52 @@
+/* -----START LOADING ------*/
+
+  /*---transition efect----*/
+  .card-product-container{
+    animation-name: opacity-change;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    width: 100%;
+    height: 300px;
+  }
+  
+  @keyframes opacity-change{
+    from{
+      opacity: 10%;
+    }
+    to{
+      opacity: 100%;
+    }
+  }
+
+   /*-----img----*/
+  .card-product-container-img img {
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background-color: whitesmoke;
+}
+
+
+
+
+.card-product-container-img {
+    overflow: hidden;
+    position: relative;
+    height: 250px;
+    text-align: center;
+    width: 100%; 
+    background: rgb(240, 240, 240);
+}
+
+
+  /*-----TEXT----*/
+
+
+  .card-product-container-info{
+    height: 30px;
+    width: 100%;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-color: rgb(240, 240, 240);
+  
+  }
