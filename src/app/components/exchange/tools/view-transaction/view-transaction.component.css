@@ -184,39 +184,7 @@
     min-height: 460px;
   }
   
-  @media only screen and (max-width:770px){
-  
-  .profile-sidebar{
-    position: static;
-    height: 120px;
-    width: 100%;
-    padding-bottom: 50px;
-  
-  }
-  
-  
-  .profile-usertitle-job{
-    display: flex;
-    margin-top: -60px;
-    margin-left: 72%;
-  }
-  
-  .profile-usertitle-name{
-    display: none;
-  }
-  
-  .profile-usermenu{
-    display: flex;
-    margin-top: -165px;
-  }
-  .text-btn{
-    display: none;
-  }
-  
-  
-  
-  
-  }
+
 
 
 

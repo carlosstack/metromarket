@@ -6,13 +6,14 @@ import { MyOfertsComponent } from 'src/app/components/exchange/my-oferts/my-ofer
 import { AcceptedOfertsComponent } from 'src/app/components/exchange/accepted-oferts/accepted-oferts.component';
 import { NewOfertComponent } from 'src/app/components/exchange/new-ofert/new-ofert.component';
 import { ViewTransactionComponent } from 'src/app/components/exchange/tools/view-transaction/view-transaction.component';
+import { ExchangeDashboardComponent } from 'src/app/components/exchange/exchange-dashboard/exchange-dashboard.component';
 
 const routes: Routes = [
   {
     path: 'e',
     component: ExchangeComponent,
     children: [
-      { path: 'my-oferts', component: MyOfertsComponent, outlet: 'exchange' },
+      { path: 'dashboard', component: ExchangeDashboardComponent, outlet: 'exchange' },
       { path: 'all', component: AllOfertsComponent, outlet: 'exchange' },
       { path: 'accepted', component: AcceptedOfertsComponent, outlet: 'exchange' },
       { path: 'new', component: NewOfertComponent, outlet: 'exchange' },

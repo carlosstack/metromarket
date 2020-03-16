@@ -2,28 +2,22 @@
 
 /* Profile sidebar */
 .profile-sidebar {
-  padding: 30px;
+
   background: transparent;
-  position: fixed;
-  width: 20%;
-  border-radius: 20px;
-  margin: 40px;
+
 }
 
 .profile-userpic img {
   float: none;
   margin: 0 auto;
-  height: 150px;
-  width: 150px;
+  height: 80px;
+  width: 80px;
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
 }
 
-.profile-usertitle {
-  text-align: center;
-  margin-top: 20px;
-}
+
 
 .profile-usertitle-name {
   color: #5a7391;
@@ -58,7 +52,6 @@
 }
     
 .profile-usermenu {
-  margin-top: 20px;
 }
 
 
@@ -73,42 +66,13 @@
 }
   
 /* Profile Content */
-.profile-content {
-  padding: 20px;
-  background: #fff;
-  min-height: 460px;
-}
 
-@media only screen and (max-width:770px){
-
-.profile-sidebar{
-  position: static;
-  height: 120px;
-  width: 100%;
-  padding-bottom: 50px;
-
+.divider-vertical{
+  margin: 13px;
 }
 
 
-.profile-usertitle-job{
-  display: flex;
-  margin-top: -60px;
-  margin-left: 72%;
-}
-
-.profile-usertitle-name{
-  display: none;
-}
-
-.profile-usermenu{
-  display: flex;
-  margin-top: -165px;
-}
-.text-btn{
-  display: none;
-}
-
-
-
-
+.title-row h4{
+  font-size: 1.6em;
+  font-weight: 500;
 }

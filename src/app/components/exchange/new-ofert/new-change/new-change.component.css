@@ -1,0 +1,55 @@
+.input-right-align {
+    text-align: right;
+  }
+  
+  input.input-right-align::-webkit-outer-spin-button,
+  input.input-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.input-right-align {
+    -moz-appearance: textfield;
+  }
+
+
+
+  .mat-form-field{
+    width: 100%;
+    font-size: 1.15em;
+  }
+
+
+
+
+
+/* -----START LOADING TABLE ------*/
+
+/*---transition efect----*/
+.loading-item{
+  animation-name: opacity-change;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  color: rgb(68, 68, 68);
+}
+
+
+@keyframes opacity-change{
+  from{
+    opacity: 10%;
+  }
+  to{
+    opacity: 100%;
+  }
+}
+
+
+
+
+.btn{
+  margin: 10px;
+  width: 100%;
+}
+
+.stepper{
+  height: 100%;
+}

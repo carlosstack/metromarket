@@ -19,5 +19,7 @@ import { RatingPanelComponent } from 'src/app/components/exchange/tools/view-tra
     ExchangeTransactionRoutingModule
 
   ],entryComponents:[]
+  ,exports:[RatingComponent]
+
 })
 export class ExchangeTransactionModule { }

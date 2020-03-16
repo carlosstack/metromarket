@@ -1,45 +1,30 @@
 <!--/ ESTRUCTURA PRINCIPAL DEL EXCHANGE -->
+
+
+
 <div class="">
-  <div class="row">
 
-    <div class="col-md-3 toolbar">
-      <app-toolbar-exchange></app-toolbar-exchange>
-    </div>
+  <div class="p-2 group-option-btn d-flex">
 
-    <!--/ col-lg-3 -->
-    <div class="col-md-9">
-    
-      <div class="group-option-btn d-flex ">
+    <!-- Links -->
+    <a class="d-flex option-btn shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      [routerLink]="[{ outlets: { exchange: ['new'] } }]"><i class="fas fa-plus"></i>
+      <div class="btn-text"> Publicar</div>
+    </a>
 
-        <!-- Links -->
-        <a class="d-flex option-btn shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          [routerLink]="[{ outlets: { exchange: ['new'] } }]"><i class="fas fa-plus"></i>
-          <div class="btn-text"> Publicar</div>
-        </a>
-
-        <a class="d-flex option-btn  shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          [routerLink]="[{ outlets: { exchange: ['all'] } }]"><i class="fas fa-search-dollar"></i>
-          <div class="btn-text">Disponibles</div>
-        </a>
-
-        <a class="d-flex option-btn shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          [routerLink]="[{ outlets: {exchange: ['accepted'] } }]"><i class="fas fa-handshake"></i>
-          <div class="btn-text"> Aceptadas</div>
-        </a>
-
-        <a class="d-flex option-btn  shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          [routerLink]="[{ outlets: {exchange: ['my-oferts'] } }]"><i class="fas fa-user"></i>
-          <div class="btn-text"> Mis ofertas</div>
-        </a>
+    <a class="d-flex option-btn  shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      [routerLink]="[{ outlets: { exchange: ['all'] } }]"><i class="fas fa-search-dollar"></i>
+      <div class="btn-text">Disponibles</div>
+    </a>
 
 
-      </div>
+    <a class="d-flex option-btn  shadow-sm " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      [routerLink]="[{ outlets: {exchange: ['dashboard'] } }]"><i class="fas fa-user"></i>
+      <div class="btn-text"> Mis publicaciones</div>
+    </a>
 
-      <div class="outlet">
-        <router-outlet name='exchange'></router-outlet>
-      </div>
-
-    </div>
   </div>
-
+  <div class="outlet">
+    <router-outlet name='exchange'></router-outlet>
+  </div>
 </div>

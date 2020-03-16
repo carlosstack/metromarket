@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RatingInterface } from '../../../../../models/rating';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
@@ -12,8 +12,11 @@ import { OfertInterface } from '../../../../../models/ofert';
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.css']
 })
+
+
 export class RatingComponent implements OnInit {
 
+  @Input() public user:string;
 
 
   constructor(private afs: AngularFirestore, private OfertService: NormalOfertService, private route: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
@@ -24,51 +27,9 @@ export class RatingComponent implements OnInit {
 
   ngOnInit() {
 
-    const idOfert = this.route.snapshot.params['id'];
-    const type = this.route.snapshot.params['type'];
-
-
-
-    this.authService.isAuth().subscribe(user => {
-
-      if (type == 'my-oferts') {
-
-        
-        this.userService.getOneOfert(idOfert, user.displayName, type).subscribe(ofert => {
-
-          this.ofert = ofert;
-
-          if (ofert != null) {
-            this.calculate_rating(ofert.acceptedBy);
-          } else if (ofert == null) {
-            this.OfertService.getOneOfert(idOfert).subscribe(ofert => {
-              if(ofert==null){
-                this.userService.getOneOfert(idOfert,user.displayName,'my-oferts').subscribe(ofert=>{
-                  this.ofert = ofert;
-                  this.calculate_rating(ofert.username);
-                });
-
-              }else{
-                this.ofert = ofert;
-                this.calculate_rating(ofert.username);
-              }
-              
-            });
-          }
-        });
-
-      } else if (type == 'accepted-oferts') {
-
-        this.userService.getOneOfert(idOfert, user.displayName, type).subscribe(ofert => {
-
-          this.ofert = ofert;
-          this.calculate_rating(ofert.username);
-        });
-
-      }
-
-    });
-
+          this.calculate_rating(this.user);
+          console.log(this.user);
+ 
   }
 
   calculate_rating(username:string) {

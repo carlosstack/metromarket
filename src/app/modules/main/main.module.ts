@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from 'src/app/components/main/main.component';
 import { NavbarComponent } from 'src/app/components/main/navbar/navbar.component';
+import { MatToolbarModule, MatDivider, MatDividerModule } from '@angular/material';
 
 
 @NgModule({
@@ -15,8 +16,9 @@ import { NavbarComponent } from 'src/app/components/main/navbar/navbar.component
    ],
   imports: [
     CommonModule,
-    MainRoutingModule
-
+    MainRoutingModule,
+    MatToolbarModule,
+    MatDividerModule
 
   ],
   exports:[]

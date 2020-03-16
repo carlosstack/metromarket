@@ -1,0 +1,35 @@
+.dashboard-container{
+}
+.app-rating{
+    font-size: 1.6em;
+}
+.profile-img{
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+
+@media only screen and (max-width:800px){
+    .dashboard-container{
+        border-radius: 0;
+        padding: 0px;
+    }
+
+    .app-rating{
+        font-size: 1.1em;
+    }
+
+    h4{
+        font-size: 1.3em;
+    }
+
+    .profile-img{
+        height: 100px;
+        width: 100px;
+        margin: 10px;
+   
+    }
+  
+}

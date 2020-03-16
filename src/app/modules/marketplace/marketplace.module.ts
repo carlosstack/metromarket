@@ -17,7 +17,6 @@ import { NewProductComponent } from 'src/app/components/marketplace/new-product/
     NewProductComponent,
     ContentComponent
 
-
   ],
   imports: [
     CommonModule,

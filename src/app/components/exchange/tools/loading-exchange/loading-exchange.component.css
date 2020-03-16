@@ -20,16 +20,7 @@ thead tr{
      
     }
   
-  
-    @media only screen and (max-width:810px ) {
-      
-      .container{
-        padding-left: 0%;
-        padding-right: 0%;
-        margin-left: 0%;
-        margin-right: 0%;
-      }
-    }
+
   
     figure{
       border-radius: 10px;

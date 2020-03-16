@@ -1,13 +1,35 @@
 
-.container-fluid{
-    margin-top: 60px;
+
+.btn{
+ 
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 10px;
+    background: whitesmoke ;
+ 
+    
+}
+.float-nav-btn{
+    display: none;
+    margin-left: 85%;
+    opacity: 0.7;
 }
 
 
 @media only screen and (max-width:800px){
-    .container-fluid{
-        margin-top: 60px;
-        margin-left: 0;
-        margin-right: 0;
+    .float-nav-btn{
+        display: inline;
+
+    }
+    .main{
+        padding-top: 35px;
     }
 }
+
+.fas{
+    font-size: 1.5em;
+    padding: 6px;
+    
+}
+

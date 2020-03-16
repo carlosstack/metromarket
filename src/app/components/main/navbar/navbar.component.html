@@ -1,10 +1,14 @@
-<nav class="navbar navbar-expand fixed-top  navbar-light ml-auto shadow-sm">
-    <div class="container">
-        <!-- Brand -->
-        <div class="">
-            <img class="img-fluid logo" src="./../../../../assets/samannetlogo.png" >
 
-            <a hidden class="navbar-brand " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink=""
+
+<nav class="navbar navbar-expand ml-auto nav-top shadow-sm">
+    <div class="container-fluid">
+        <!-- Brand -->
+        <div class="d-flex">
+            <div  hidden class="btn bg-white"><li class="fas fa-bars p-2 nav-bars-btn"></li></div>
+            <img   class="img-fluid logo " src="./../../../../assets/icon2.png">
+
+
+            <a  class="navbar-brand p-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink=""
                 id="title">Samannet</a>
 
         </div>
@@ -17,11 +21,11 @@
             
             </div>
             
-            <a hidden class=" nav-link" routerLink="/app/social">Social</a>
+            <a  class="nav-link page-name" routerLink="/app/myAccount">Mi cuenta</a>
             <a class=" nav-link page-name" 
                 [routerLink]="['/app/exchange/e',{ outlets: { exchange: ['all'] } }]">Exchange</a>
             <a class=" nav-link page-name" [routerLink]="['/app/marketplace/m',{ outlets: { marketplace: ['products'] } }]">Marketplace</a>
         </div>
     </div>
 </nav>
-<hr class="col-12 fixed-top">
+<nav class="navbar navbar-expand ml-auto toolbar "></nav>

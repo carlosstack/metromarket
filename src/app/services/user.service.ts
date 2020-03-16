@@ -30,6 +30,9 @@ export class UserService {
 
   private chats: Observable<MessageInterface[]>;
   private userChatsCollection: AngularFirestoreCollection<MessageInterface>;
+
+  private photoUrl = '../../../assets/profile.png';
+
   getAllUsers() {
 
     this.userCollection = this.afs.collection<UserInterface>('users-profile');
@@ -64,11 +67,8 @@ export class UserService {
   }
 
   getOneUser(idUser: string) {
-
     this.userDoc = this.afs.collection<UserInterface>('users-profile').doc('@' + `${idUser}`);
-
     return this.userDoc;
-
   }
 
   updateUser(User: UserInterface) {
@@ -85,84 +85,45 @@ export class UserService {
 
   }
 
-  addOfertUser(ofert: OfertInterface): void {
-
-      this.authService.isAuth().subscribe(user => {
-
-
-        this.afs.collection<OfertInterface>(`users-oferts/@${user.displayName}/accepted-oferts`).doc(`${ofert.id}`).set({
-          id: ofert.id,
-          destino: ofert.destino,
-          divisaMonto: ofert.divisaMonto,
-          divisaTasa: ofert.divisaTasa,
-          entrega: ofert.entrega,
-          monto: ofert.monto,
-          origen: ofert.origen,
-          tasa: ofert.tasa,
-          tipo: ofert.tipo,
-          username: ofert.username,
-          status: ofert.status,
-          date: ofert.date,
-          acceptedBy:ofert.acceptedBy
-        });
-      });
-
-
+  addOfertPartner(ofert): void {
+      this.afs.collection(`users-oferts/${ofert.acceptedByUID}/accepted-oferts`)
+      .doc(ofert.id).set(ofert);
+  }
+  updateMyOfert(ofert): void {
+      this.afs.collection(`users-oferts/${ofert.ownerUID}/normal-oferts`)
+      .doc(ofert.id).set(ofert);
   }
 
-  updateOfertPartner(ofert: OfertInterface): void {
-
-    this.authService.isAuth().subscribe(user => {
-        this.afs.collection<OfertInterface>(`users-oferts/@${ofert.username}/normal-oferts`).doc(`${ofert.id}`).set({
-          id: ofert.id,
-          destino: ofert.destino,
-          divisaMonto: ofert.divisaMonto,
-          divisaTasa: ofert.divisaTasa,
-          entrega: ofert.entrega,
-          monto: ofert.monto,
-          origen: ofert.origen,
-          tasa: ofert.tasa,
-          tipo: ofert.tipo,
-          username: ofert.username,
-          status: ofert.status,
-          date: ofert.date,
-          acceptedBy:ofert.acceptedBy
-        });
-      });
-
-  }
-
-
-  sendNewMessage(ofert: OfertInterface, content: string,sendTo:string,sendBy:string): void {
+  sendNewMessage(ofert: OfertInterface, content: string, sendTo: string, sendBy: string): void {
 
 
     this.authService.isAuth().subscribe(user => {
 
-      this.afs.collection(`users-chats`).doc(`@${ofert.username}_@${ofert.acceptedBy}_${ofert.id}`).collection<MessageInterface>('messages').add({
-        content:content,
-        username:sendTo,
-        partner:sendBy,
+      this.afs.collection(`users-chats`).doc(`@${ofert.owner}_@${ofert.acceptedBy}_${ofert.id}`).collection<MessageInterface>('messages').add({
+        content: content,
+        username: sendTo,
+        partner: sendBy,
         date: Date.now()
       });
 
     });
 
-}
+  }
 
-getMyMessages(ofert: OfertInterface) {
+  getMyMessages(ofert: OfertInterface) {
 
-  this.userChatsCollection = this.afs.collection(`users-chats`).doc(`@${ofert.username}_@${ofert.acceptedBy}_${ofert.id}`).collection<MessageInterface>('messages',ref =>
-  ref.orderBy('date','asc'))
+    this.userChatsCollection = this.afs.collection(`users-chats`).doc(`@${ofert.owner}_@${ofert.acceptedBy}_${ofert.id}`).collection<MessageInterface>('messages', ref =>
+      ref.orderBy('date', 'asc'))
 
-  this.chats = this.userChatsCollection.valueChanges();
+    this.chats = this.userChatsCollection.valueChanges();
 
-  return this.chats;
-}
+    return this.chats;
+  }
 
   getMyOferts(uid: string) {
 
-    this.userOfertCollectionGroup = this.afs.collectionGroup('normal-oferts',ref =>
-    ref.where('username', '==', `${uid}`).orderBy('date','desc'))
+    this.userOfertCollectionGroup = this.afs.collectionGroup('normal-oferts', ref =>
+      ref.where('owner', '==', `${uid}`).orderBy('date', 'desc'))
 
     this.oferts = this.userOfertCollectionGroup.valueChanges();
 
@@ -173,8 +134,8 @@ getMyMessages(ofert: OfertInterface) {
   getMyOfertsByQuery(uid: string) {
 
     this.userOfertCollection = this.afs.collection<OfertInterface>('normal-oferts', ref =>
-      ref.where('username', '==', `${uid}`).orderBy('date','desc'));
-    
+      ref.where('owner', '==', `${uid}`).orderBy('date', 'desc'));
+
 
     this.oferts = this.userOfertCollection.valueChanges();
 
@@ -183,8 +144,8 @@ getMyMessages(ofert: OfertInterface) {
 
   getMyAcceptedOferts(uid: string) {
 
-    this.userOfertCollection = this.afs.collection<OfertInterface>(`users-oferts/@${uid}/accepted-oferts`,ref =>
-    ref.orderBy('date','desc'));
+    this.userOfertCollection = this.afs.collection<OfertInterface>(`users-oferts/@${uid}/accepted-oferts`, ref =>
+      ref.orderBy('date', 'desc'));
     this.oferts = this.userOfertCollection.valueChanges();
 
     return this.oferts;
@@ -199,8 +160,10 @@ getMyMessages(ofert: OfertInterface) {
 
   getOneOfert(idOfert: string, uid: string, type: string) {
 
-    if(type=='my-oferts'){
-      type='normal-oferts';
+
+
+    if (type == 'my-oferts') {
+      type = 'normal-oferts';
     }
 
     this.ofertDoc = this.afs.doc<OfertInterface>(`users-oferts/@${uid}/${type}/${idOfert}`);

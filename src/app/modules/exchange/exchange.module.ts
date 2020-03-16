@@ -9,7 +9,7 @@ import { MyOfertsComponent } from 'src/app/components/exchange/my-oferts/my-ofer
 import { AcceptedOfertsComponent } from 'src/app/components/exchange/accepted-oferts/accepted-oferts.component';
 import { NewOfertComponent } from 'src/app/components/exchange/new-ofert/new-ofert.component';
 import { LoadingExchangeComponent } from 'src/app/components/exchange/tools/loading-exchange/loading-exchange.component';
-import { MatSnackBarModule, MatDialogModule, MatOptionModule, MatInputModule, MatButtonModule, MatStepperModule, MatIconModule, MatTabsModule, MatDividerModule, MatSlideToggleModule } from '@angular/material';
+import { MatSnackBarModule, MatDialogModule, MatOptionModule, MatInputModule, MatButtonModule, MatStepperModule, MatIconModule, MatTabsModule, MatDividerModule, MatSlideToggleModule, MatTableModule, MatSidenavModule, MatToolbarModule, MatCheckboxModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { ModalConfirmComponent } from 'src/app/components/exchange/tools/modal-confirm/modal-confirm.component';
 import { SuccessfulTransactionComponent } from 'src/app/components/exchange/tools/view-transaction/successful-transaction/successful-transaction.component';
 import { UnsuccessfulTransactionComponent } from 'src/app/components/exchange/tools/view-transaction/unsuccessful-transaction/unsuccessful-transaction.component';
@@ -24,6 +24,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper/typings/stepper';
 import { NewSellComponent } from 'src/app/components/exchange/new-ofert/new-sell/new-sell.component';
 import { NewBuyComponent } from 'src/app/components/exchange/new-ofert/new-buy/new-buy.component';
 import { NewChangeComponent } from 'src/app/components/exchange/new-ofert/new-change/new-change.component';
+import { ExchangeTransactionModule } from '../exchange-transaction/exchange-transaction.module';
+import { AdvancedFilterComponent } from 'src/app/components/exchange/tools/advanced-filter/advanced-filter.component';
+import { ExchangeDashboardComponent } from 'src/app/components/exchange/exchange-dashboard/exchange-dashboard.component';
 
 
 @NgModule({
@@ -42,12 +45,16 @@ import { NewChangeComponent } from 'src/app/components/exchange/new-ofert/new-ch
     LoadingComponent,
     NewSellComponent,
     NewBuyComponent,
-    NewChangeComponent
+    NewChangeComponent,
+    AdvancedFilterComponent,
+    ExchangeDashboardComponent
+    
   
  ],
   imports: [
     CommonModule,
     ExchangeRoutingModule,
+    ExchangeTransactionModule,
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
@@ -62,7 +69,13 @@ import { NewChangeComponent } from 'src/app/components/exchange/new-ofert/new-ch
     MatIconModule,
     MatDividerModule,
     MatTabsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule
+
 
     
   ],

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentData } from "@angular/fire/firestore";
 import { OfertInterface } from "../models/ofert";
+import { OfertChangeInterface } from "../models/ofert";
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/internal/operators/map';
@@ -22,28 +23,35 @@ export class NormalOfertService {
   private ofertDoc: AngularFirestoreDocument<OfertInterface>;
   private ofert: Observable<OfertInterface>;
 
+  private ofertChangeDoc: AngularFirestoreDocument<OfertChangeInterface>;
+  private ofertChange: Observable<OfertChangeInterface>;
+  private ofertsChangeCollection: AngularFirestoreCollection<OfertChangeInterface>;
+
+
   private usersCollection: AngularFirestoreCollection<UserInterface>;
   private userDoc: AngularFirestoreDocument<UserInterface>;
 
   private date = new Date();
 
 
-  getAllOferts() {
+  getAllOferts(user:String) {
 
-    this.ofertsCollection = this.afs.collection<OfertInterface>('normal-oferts',ref =>
-    ref.orderBy('date','desc'));
-    this.oferts = this.ofertsCollection.valueChanges();
-
+    this.oferts  = this.afs.collectionGroup('normal-oferts',ref =>
+    ref.where('status','==','new').orderBy('date','desc')).valueChanges();
+  
     return this.oferts;
   }
 
-  addOfert(ofert: OfertInterface) {
-
+  addOfert(ofert) {
 
     this.authService.isAuth().subscribe(user => {
       ofert.date=Date.now();
-      ofert.username = user.displayName;
-      this.ofertsCollection = this.afs.collection<OfertInterface>('normal-oferts');
+      ofert.ownerPhotoUrl=user.photoURL;
+      ofert.ownerUID = user.uid;
+      ofert.owner = user.displayName;
+      ofert.phoneNumber = user.phoneNumber
+
+      this.ofertsCollection = this.afs.collection('users-oferts').doc(ofert.ownerUID).collection('normal-oferts');
       this.ofertsCollection.get();
       this.ofertsCollection.add(ofert).then((res) => {
 
@@ -61,6 +69,32 @@ export class NormalOfertService {
 
   }
 
+  addOfertOfTypeChange(ofert: OfertChangeInterface) {
+
+
+    this.authService.isAuth().subscribe(user => {
+      ofert.date=Date.now();
+      ofert.owner = user.displayName;
+      ofert.ownerUID = user.uid;
+      ofert.ownerPhotoUrl=user.photoURL;
+      this.ofertsChangeCollection = this.afs.collection<OfertChangeInterface>('normal-oferts');
+      this.ofertsChangeCollection.get();
+      this.ofertsChangeCollection.add(ofert).then((res) => {
+
+        this.ofertChangeDoc = this.afs.doc<OfertChangeInterface>(`normal-oferts/${res.id}`);
+      
+        this.ofertChangeDoc.update({
+          id:res.id
+        });
+
+        this.router.navigate([`app/exchange/transaction/my-oferts/${res.id}`]);
+       
+      });
+
+    })
+
+  }
+  
   getOneOfert(idOfert: string) {
 
     this.ofertDoc = this.afs.doc<OfertInterface>(`normal-oferts/${idOfert}`);

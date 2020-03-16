@@ -1,64 +1,51 @@
-<div class="" *ngIf="ofert">
-    <div class="row">
 
-        <div class="rating col-sm-12 flex-row">
-            
-            <div class="text-center">
+
+            <div class="d-flex justify-content-center">
 
                 <div *ngIf="getRatingRounded()===0" class="rating">
 
-                    <span id="1" class="far fa-star"></span><span id="2" class="far fa-star">
-                    </span><span id="3" class="far fa-star"></span><span id="4" class="far fa-star">
-                    </span><span id="5" class="far fa-star"></span>
+                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
+                    </span><span id="3" class="far fa-star "></span><span id="4" class="far fa-star ">
+                    </span><span id="5" class="far fa-star "></span>
                 </div>
 
                 <div *ngIf="getRatingRounded()===1" class="rating">
 
-                    <span id="1" class="far fa-star"></span><span id="2" class="far fa-star">
-                    </span><span id="3" class="far fa-star"></span><span id="4" class="far fa-star">
+                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
+                    </span><span id="3" class="far fa-star "></span><span id="4" class="far fa-star ">
                     </span><span id="5" class="fas fa-star"></span>
                 </div>
 
                 <div *ngIf="getRatingRounded()===2" class="rating">
 
-                        <span id="1" class="far fa-star"></span><span id="2" class="far fa-star">
-                        </span><span id="3" class="far fa-star"></span><span id="4" class="fas fa-star">
-                        </span><span id="5" class="fas fa-star"></span>
+                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
+                    </span><span id="3" class="far fa-star "></span><span id="4" class="fas fa-star">
+                    </span><span id="5" class="fas fa-star"></span>
                 </div>
 
                 <div *ngIf="getRatingRounded()===3" class="rating">
 
-                        <span id="1" class="far fa-star"></span><span id="2" class="far fa-star">
-                        </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
-                        </span><span id="5" class="fas fa-star"></span>
+                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
+                    </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
+                    </span><span id="5" class="fas fa-star"></span>
                 </div>
 
                 <div *ngIf="getRatingRounded()===4" class="rating">
 
-                        <span id="1" class="far fa-star"></span><span id="2" class="fas fa-star">
-                        </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
-                        </span><span id="5" class="fas fa-star"></span>
+                    <span id="1" class="far fa-star "></span><span id="2" class="fas fa-star">
+                    </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
+                    </span><span id="5" class="fas fa-star"></span>
                 </div>
 
                 <div *ngIf="getRatingRounded()===5" class="rating">
 
-                        <span id="1" class="fas fa-star"></span><span id="2" class="fas fa-star">
-                        </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
-                        </span><span id="5" class="fas fa-star"></span>
+                    <span id="1" class="fas fa-star"></span><span id="2" class="fas fa-star">
+                    </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
+                    </span><span id="5" class="fas fa-star"></span>
                 </div>
-                
 
+                <div class=""> &nbsp;({{ rating_count }})  </div>
 
             </div>
-        </div>
 
-        <div class="reviews col-sm-12">
-            {{ rating_count }} comentarios
             
-        </div>
-
-
-    </div>
-</div>
-
-

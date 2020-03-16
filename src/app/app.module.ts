@@ -24,18 +24,13 @@ import { MatSidenavModule } from "@angular/material";
 import { HomeComponent } from './components/home/home.component';
 import { NavbarHomeComponent } from './components/home/navbar-home/navbar-home.component';
 import { RegisterFormComponent } from './components/home/register-form/register-form.component';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper/index';
-import { NewBuyComponent } from './components/exchange/new-ofert/new-buy/new-buy.component';
-import { NewSellComponent } from './components/exchange/new-ofert/new-sell/new-sell.component';
-import { NewChangeComponent } from './components/exchange/new-ofert/new-change/new-change.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarHomeComponent,
-    RegisterFormComponent  
-
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,

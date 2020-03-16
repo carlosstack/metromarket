@@ -1,187 +1,180 @@
 <div class="container-fluid">
-<div class="row">
+    <div class="row">
 
 
-    <div class="process col-12">
-        <div class="process-row">
-            <div class="process-step">
-                <button [style.background-color]="getColorStatusNew(ofert.status)" type="button"
-                    class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
-                        class="fas fa-user fa-2x"></i></button>
-            </div>
-            <div class="process-step">
-                <button [style.background-color]="getColorStatusPending(ofert.status)" type="button"
-                    class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
-                        class="fas fa-tasks fa-2x"></i></button>
-            </div>
-            <div class="process-step" *ngIf="ofert.status!='canceled-and-waiting-for-rating'">
-                <button [style.background-color]="getColorStatusWaiting(ofert.status)" type="button"
-                    class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
-                        class="fas fa-thumbs-up fa-2x"></i></button>
-            </div>
-            <div *ngIf="ofert.status==='canceled-and-waiting-for-rating'" class="process-step">
-                <button type="button" class="btn btn-default btn-circle shadow-sm bg-danger" disabled="disabled"><i
-                        class="fas fa-thumbs-up fa-2x"></i></button>
-            </div>
+        <div class="process col-12">
+            <div class="process-row">
+                <div class="process-step">
+                    <button [style.background-color]="getColorStatusNew(ofert.status)" type="button"
+                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                            class="fas fa-user fa-2x"></i></button>
+                </div>
+                <div class="process-step">
+                    <button [style.background-color]="getColorStatusPending(ofert.status)" type="button"
+                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                            class="fas fa-tasks fa-2x"></i></button>
+                </div>
+                <div class="process-step" *ngIf="ofert.status!='canceled-and-waiting-for-rating'">
+                    <button [style.background-color]="getColorStatusWaiting(ofert.status)" type="button"
+                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                            class="fas fa-thumbs-up fa-2x"></i></button>
+                </div>
+                <div *ngIf="ofert.status==='canceled-and-waiting-for-rating'" class="process-step">
+                    <button type="button" class="btn btn-default btn-circle shadow-sm bg-danger" disabled="disabled"><i
+                            class="fas fa-thumbs-up fa-2x"></i></button>
+                </div>
 
 
-            <div *ngIf="ofert.status!='canceled-and-finalized' && ofert.status!='canceled-by-owner'"
-                class="process-step">
-                <button [style.background-color]="getColorStatusFinalized(ofert.status)" type="button"
-                    class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
-                        class="fas fa-check-double fa-2x"></i></button>
+                <div *ngIf="ofert.status!='canceled-and-finalized' && ofert.status!='canceled-by-owner'"
+                    class="process-step">
+                    <button [style.background-color]="getColorStatusFinalized(ofert.status)" type="button"
+                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                            class="fas fa-check-double fa-2x"></i></button>
+                </div>
+
+                <div *ngIf="ofert.status==='canceled-and-finalized'" class="process-step">
+                    <button [style.background-color]="getColorStatusFinalized(ofert.status)" type="button"
+                        class="btn btn-default bg-danger btn-circle" disabled="disabled"><i
+                            class="fas fa-times fa-2x"></i></button>
+                </div>
+
+                <div *ngIf="ofert.status==='canceled-by-owner'" class="process-step">
+                    <button type="button" class="btn btn-default btn-circle shadow-sm bg-danger" disabled="disabled"><i
+                            class="fas fa-times fa-2x"></i></button>
+                </div>
+
             </div>
 
-            <div *ngIf="ofert.status==='canceled-and-finalized'" class="process-step">
-                <button [style.background-color]="getColorStatusFinalized(ofert.status)" type="button"
-                    class="btn btn-default bg-danger btn-circle" disabled="disabled"><i
-                        class="fas fa-times fa-2x"></i></button>
-            </div>
+        </div>
 
-            <div *ngIf="ofert.status==='canceled-by-owner'" class="process-step">
-                <button type="button" class="btn btn-default btn-circle shadow-sm bg-danger" disabled="disabled"><i
-                        class="fas fa-times fa-2x"></i></button>
+        <div class="col-12 p-3">
+
+            <div class="row">
+
+                <div class="col-md-4 col-left">
+
+                    <div class="profile-sidebar shadow-sm bg-white">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            <img src="{{person.photoUrl}}" class="img-fluid mx-auto d-block img-thumbnail" alt="">
+                        </div>
+                        <!-- END SIDEBAR USERPIC -->
+                        <!-- SIDEBAR USER TITLE -->
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                @{{person.username}}
+                            </div>
+                            <div class="profile-usertitle-job">
+                                <li class="fas fa-user-check"></li> Verificado
+                            </div>
+                        </div>
+                        <!-- END SIDEBAR USER TITLE -->
+                        <!-- APP RATING -->
+
+                        <app-rating [user]="person.username"></app-rating>
+                        <!-- END APP RAITN -->
+                        <!-- SIDEBAR MENU -->
+                        <nav class="profile-usermenu ">
+                            <button class="d-flex btn justify-content-center align-items-center nav-link"
+                                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                [routerLink]="[{ outlets: {exchange: ['my-oferts'] } }]">
+                                <i class="p-2 fas fa-user-cog"></i>
+                                <div class="text-btn"> Configuración</div>
+                            </button>
+
+
+
+                        </nav>
+                        <!-- END MENU -->
+                    </div>
+
+                </div>
+                <div class="col-md-8  col-right">
+
+
+                    <div class="alert alert-info p-2 shadow-sm">Importante:</div>
+
+                    <table class="table bg-white transaction-details-table shadow-sm">
+                        <thead>
+                            <tr>
+                                <th>ID DE TRANSACCIÓN: {{ ofert.id }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="">{{ofert.type}} {{ ofert.amountMin + ofert.currencyAmount}}<div
+                                            *ngIf="ofert.amountMax > 0"> - {{ofert.amountMax + ofert.currencyAmount}}</div>
+                                        {{ ofert.from }}</div> pago por: {{ ofert.payForms }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">TASA: {{ ofert.rate }} Bs.</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="option alert alert-light shadow-sm">
+                        <!--left col-->
+                        <div class="success cardbox p-5 text-center ">
+                            <h3 *ngIf="(ofert.status==='pending' || ofert.status==='new') && type==='my-oferts'">
+                                ¿Desea
+                                cancelar la
+                                transacción?</h3>
+
+                            <h3 *ngIf="ofert.status==='pending' && type==='accepted-oferts'">¿Se ha completado con
+                                éxito
+                                la
+                                transacción?</h3>
+
+                            <h3 *ngIf="ofert.status==='finalized'"><br>¡Transacción completada con exito!<br><br>
+                            </h3>
+                            <h3 *ngIf="ofert.status==='canceled-and-finalized'"><br>¡Transacción cancelada!<br><br>
+                            </h3>
+                            <h3 *ngIf="ofert.status==='canceled-by-owner'"><br>¡Transacción cancelada!<br><br></h3>
+                            <h3 *ngIf="ofert.status==='waiting-for-rating'">¡Transacción completada con exito!,
+                                califica
+                                a
+                                tu compañero</h3>
+                            <h3 *ngIf="ofert.status==='canceled-and-wating-for-rating'">¡Transacción cancelada!,
+                                califica a
+                                tu compañero</h3>
+
+                            <div class="btn-group">
+                                <button class="btn btn-danger"
+                                    *ngIf="(ofert.status==='new' || ofert.status==='pending') && type==='my-oferts'"
+                                    mat-raised-button (click)="openDialogToCancel()">Cancelar</button>
+
+                                <button class="btn btn-success" *ngIf="ofert.status==='waiting-for-rating'"
+                                    mat-raised-button (click)="openSuccesful()">Calificar</button>
+
+                                <button class="btn btn-success" *ngIf="ofert.status==='canceled-and-wating-for-rating'"
+                                    mat-raised-button (click)="openUnsuccesful()">Calificar</button>
+
+
+                                <button class="btn btn-success"
+                                    *ngIf="ofert.status==='pending' && type==='accepted-oferts'" mat-raised-button
+                                    (click)="openDialogSuccess()">SI</button>
+
+                                <button class="btn btn-danger"
+                                    *ngIf="ofert.status==='pending' && type==='accepted-oferts'" mat-raised-button
+                                    (click)="openDialogUnsuccess()">NO</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
             </div>
 
         </div>
 
     </div>
-
-    <div class="col-12 p-3">
-
-        <div class="row">
-
-            <div class="col-md-4 col-left">
-
-                <div class="profile-sidebar shadow-sm bg-white">
-                    <!-- SIDEBAR USERPIC -->
-                    <div class="profile-userpic">
-                        <img src="{{person.photoUrl}}" class="img-fluid mx-auto d-block img-thumbnail" alt="">
-                    </div>
-                    <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle">
-                        <div class="profile-usertitle-name">
-                            @{{person.username}}
-                        </div>
-                        <div class="profile-usertitle-job">
-                            <li class="fas fa-user-check"></li> Verificado
-                        </div>
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- APP RATING -->
-
-                    <app-rating></app-rating>
-                    <!-- END APP RAITN -->
-                    <!-- SIDEBAR MENU -->
-                    <nav class="profile-usermenu ">
-                        <button class="d-flex btn justify-content-center align-items-center nav-link"
-                            routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                            [routerLink]="[{ outlets: {exchange: ['my-oferts'] } }]">
-                            <i class="p-2 fas fa-user-cog"></i>
-                            <div class="text-btn"> Configuración</div>
-                        </button>
-
-
-
-                    </nav>
-                    <!-- END MENU -->
-                </div>
-
-            </div>
-            <div class="col-md-8  col-right">
-
-
-                <div class="alert alert-info p-2 shadow-sm">Importante:</div>
-
-                <table class="table bg-white transaction-details-table shadow-sm">
-                    <thead>
-                        <tr>
-                            <th>ID DE TRANSACCIÓN: {{ ofert.id }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-
-                        <tr>
-                            <td>
-                                <div class="">{{ofert.tipo}} {{ ofert.monto + ofert.divisaMonto}}
-                                    {{ ofert.origen }}</div> pago por: {{ ofert.destino }} se entrega:
-                                {{ ofert.entrega}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="">TASA: {{ ofert.tasa }} {{ofert.divisaTasa }}</td>
-
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="option alert alert-light shadow-sm">
-                    <!--left col-->
-                    <div class="success cardbox p-5 text-center ">
-                        <h3 *ngIf="(ofert.status==='pending' || ofert.status==='new') && type==='my-oferts'">
-                            ¿Desea
-                            cancelar la
-                            transacción?</h3>
-            
-                        <h3 *ngIf="ofert.status==='pending' && type==='accepted-oferts'">¿Se ha completado con
-                            éxito
-                            la
-                            transacción?</h3>
-            
-                        <h3 *ngIf="ofert.status==='finalized'"><br>¡Transacción completada con exito!<br><br>
-                        </h3>
-                        <h3 *ngIf="ofert.status==='canceled-and-finalized'"><br>¡Transacción cancelada!<br><br>
-                        </h3>
-                        <h3 *ngIf="ofert.status==='canceled-by-owner'"><br>¡Transacción cancelada!<br><br></h3>
-                        <h3 *ngIf="ofert.status==='waiting-for-rating'">¡Transacción completada con exito!,
-                            califica
-                            a
-                            tu compañero</h3>
-                        <h3 *ngIf="ofert.status==='canceled-and-wating-for-rating'">¡Transacción cancelada!,
-                            califica a
-                            tu compañero</h3>
-            
-                        <div class="btn-group">
-                            <button class="btn btn-danger"
-                                *ngIf="(ofert.status==='new' || ofert.status==='pending') && type==='my-oferts'" mat-raised-button
-                                (click)="openDialogToCancel()">Cancelar</button>
-            
-                            <button class="btn btn-success" *ngIf="ofert.status==='waiting-for-rating'" mat-raised-button
-                                (click)="openSuccesful()">Calificar</button>
-            
-                            <button class="btn btn-success" *ngIf="ofert.status==='canceled-and-wating-for-rating'"
-                                mat-raised-button (click)="openUnsuccesful()">Calificar</button>
-            
-            
-                            <button class="btn btn-success" *ngIf="ofert.status==='pending' && type==='accepted-oferts'"
-                                mat-raised-button (click)="openDialogSuccess()">SI</button>
-            
-                            <button class="btn btn-danger" *ngIf="ofert.status==='pending' && type==='accepted-oferts'"
-                                mat-raised-button (click)="openDialogUnsuccess()">NO</button>
-            
-                        </div>
-            
-                    </div>
-            
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-
-
-
-
+    
 </div>
-</div>
-
-

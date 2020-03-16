@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
     this.authService.loginUser(this.email, this.pass)
       .then((res) => {
-        this.router.navigate(['/app/marketplace/m/(marketplace:products)']);
+        this.router.navigate( [ '/app/exchange/e', {outlets: { exchange: ['all']}}]);
 
       }).catch(err => this.errorMessage(err.message));
   }

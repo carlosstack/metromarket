@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NormalOfertService } from 'src/app/services/normal-ofert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { OfertInterface } from 'src/app/models/ofert';
+
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
 
 @Component({
   selector: 'app-my-oferts',
@@ -10,28 +15,32 @@ import { OfertInterface } from 'src/app/models/ofert';
   styleUrls: ['./my-oferts.component.css']
 })
 export class MyOfertsComponent implements OnInit {
-  constructor(private normalOfert: NormalOfertService, private authService: AuthService, private userService: UserService) { }
+
+  displayedColumns: string[] = ['owner', 'type', 'amountMin', 'payForms'];
+  dataSource: MatTableDataSource<OfertInterface>;
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  
+  constructor(private normalOfert: NormalOfertService, private authService: AuthService, private userService: UserService) {
+    this.authService.isAuth().subscribe(user => {
+
+
+      this.userService.getMyOferts(user.displayName).subscribe(oferts => {
+        this.oferts = oferts;
+        this.dataSource = new MatTableDataSource(this.oferts);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    
+
+        
+      })
+
+    })
+   }
 
   public oferts;
 
-  private ofert_for_develop: OfertInterface = {
-    monto: 235,
-    tipo: 'VENDO',
-    destino: 'Venezuela',
-    divisaTasa: 'Bss',
-    divisaMonto: '$',
-    entrega: 'Hoy',
-    status: 'new',
-    username: '@ramonvelasquez',
-    date: 18 / 8 / 2018,
-    origen: 'Zelle',
-    tasa: 52300,
-    id: 'djfjdnfjndfjnjnfjdn',
-    acceptedBy: ''
-
-  };
-
-  private items=[0,1,2,3,4];
 
   public type = 'my-oferts';
 
@@ -39,20 +48,22 @@ export class MyOfertsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.authService.isAuth().subscribe(user => {
+  
 
-
-      this.userService.getMyOferts(user.displayName).subscribe(oferts => {
-        this.oferts = oferts;
-
-      })
-
-    })
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   getColor(status: string) {
     switch (status) {
       case 'new':
-        return 'gray';
+        return 'blue';
       case 'pending':
         return 'green';
       case 'waiting-for-rating':
@@ -64,21 +75,26 @@ export class MyOfertsComponent implements OnInit {
       case 'canceled-by-owner':
         return 'gray';
       case 'canceled-and-waiting-for-rating':
-        return 'orange';
+        return 'gray';
     }
   }
 
   getStatus(ofert: OfertInterface) {
-    if (ofert.status == 'new') {
-      return 'En espera'
-    } else if (ofert.status == 'canceled-by-owner' || ofert.status == 'canceled-and-finalized') {
-      return 'Cancelado';
-    } else if (ofert.status == 'pending') {
-      return 'Aceptado';
-    } else if (ofert.status == 'waiting-for-rating' || ofert.status == 'canceled-and-waiting-for-rating') {
-      return 'Por calificar';
-    } else if (ofert.status == 'finalized') {
-      return 'Finalizado';
+    switch (ofert.status) {
+      case 'new':
+        return 'En espera';
+      case 'pending':
+        return 'Aceptado';
+      case 'waiting-for-rating':
+        return 'Por calificar';
+      case 'finalized':
+        return 'Finalizado';
+      case 'canceled-and-finalized':
+        return 'Cancelado';
+      case 'canceled-by-owner':
+        return 'Cancelado';
+      case 'canceled-and-waiting-for-rating':
+        return 'Cancelado';
     }
   }
 

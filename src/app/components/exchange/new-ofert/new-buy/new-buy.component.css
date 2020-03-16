@@ -15,9 +15,9 @@
 
   .mat-form-field{
     width: 100%;
-    font-size: 1em;
-    
+    font-size: 1.15em;
   }
+
 
 
 
@@ -29,7 +29,7 @@
   animation-name: opacity-change;
   animation-duration: 2s;
   animation-iteration-count: infinite;
-  color: gray;
+  color: rgb(68, 68, 68);
 }
 
 
@@ -43,8 +43,13 @@
 }
 
 
-mat-vertical-stepper{
-  background-color: transparent;
+
+
+.btn{
+  margin: 10px;
+  width: 100%;
 }
 
-
+.stepper{
+  height: 100%;
+}

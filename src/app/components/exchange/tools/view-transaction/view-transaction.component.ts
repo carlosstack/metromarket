@@ -77,21 +77,10 @@ export class ViewTransactionComponent implements OnInit {
         });
 
       } else if (type == 'accepted-oferts') {
-
+        console.log('entra a accepted');
         this.userService.getOneOfert(idOfert, user.displayName, type).subscribe(ofert => {
 
-          if (ofert.status == 'new') {
-
-            ofert.acceptedBy = user.displayName;
-            ofert.status = 'pending';
-
-            this.userService.updateOfertPartner(ofert);
-            this.userService.addOfertUser(ofert);
-            this.OfertService.deleteOfert(ofert.id);
-          }
-
-          this.userService.getOneUser(ofert.username).valueChanges().subscribe(partner => {
-            this.partner = partner;
+          this.userService.getOneUser(ofert.owner).valueChanges().subscribe(partner => {
             this.person = partner;
           });
 
@@ -101,9 +90,6 @@ export class ViewTransactionComponent implements OnInit {
 
           this.ofert = ofert;
 
-          this.userService.getMyMessages(this.ofert).subscribe(chats => {
-            this.chats = chats;
-          });
         });
 
       }
@@ -159,7 +145,7 @@ export class ViewTransactionComponent implements OnInit {
     if (this.type == 'my-oferts') {
       user = this.ofert.acceptedBy;
     } else {
-      user = this.ofert.username;
+      user = this.ofert.owner;
     }
     const dialogRef = this.dialog.open(SuccessfulTransactionComponent, {
       width: '70%',
@@ -173,7 +159,7 @@ export class ViewTransactionComponent implements OnInit {
     if (this.type == 'my-oferts') {
       user = this.ofert.acceptedBy;
     } else {
-      user = this.ofert.username;
+      user = this.ofert.owner;
     }
     const dialogRef = this.dialog.open(UnsuccessfulTransactionComponent, {
       width: '70%',
@@ -212,7 +198,7 @@ export class ViewTransactionComponent implements OnInit {
       console.log('error', e);
     });
 
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.username}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
+    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.owner}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
 
       status: 'waiting-for-rating'
 
@@ -227,39 +213,12 @@ export class ViewTransactionComponent implements OnInit {
     if (this.ofert.status == 'new') {
 
       var old_ofert = this.ofert;
-
       this.ofert.status = 'canceled-by-owner';
 
-      this.userService.updateOfertPartner(this.ofert);
-      this.userService.getOneOfert(this.ofert.id, this.ofert.username, 'my-oferts').subscribe(ofert => {
-        this.ofert = ofert;
+      this.userService.updateMyOfert(this.ofert);
+      this.router.navigate([`/exchange/my-oferts/`]);
 
-        this.OfertService.deleteOfert(old_ofert.id);
-
-        this.router.navigate([`/exchange/my-oferts/`]);
-      });
-
-
-
-
-    } else {
-
-      this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.acceptedBy}`).collection('accepted-oferts').doc(`${this.ofert.id}`).update({
-
-        status: 'canceled-by-owner'
-
-      }).catch(e => {
-        console.log('error', e);
-      });
-
-      this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.username}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
-
-        status: 'canceled-by-owner'
-
-      }).catch(e => {
-        console.log('error', e);
-      });
-    }
+    } 
   }
 
   setStatusCanceledAndWait() {
@@ -272,7 +231,7 @@ export class ViewTransactionComponent implements OnInit {
       console.log('error', e);
     });
 
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.username}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
+    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.owner}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
 
       status: 'canceled-and-waiting-for-rating'
 

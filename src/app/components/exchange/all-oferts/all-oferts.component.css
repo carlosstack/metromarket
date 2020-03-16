@@ -1,7 +1,10 @@
 /*--- START OFERT TABLE ---*/
- 
 
-  
+.border-curve{
+  border-radius: 10px;
+
+}
+
 @media only screen and (max-width:810px ) {
   .title{
     display: none;
@@ -12,10 +15,10 @@
     margin-left: 0%;
     margin-right: 0%;
   }
+  .border-curve{
+    border-radius: 0;
+  }
 }
-
-
-
 
 @media only screen and (max-width:480px) {
 
@@ -47,13 +50,13 @@
 
 /*--- START OFERT TABLE ---*/
 thead tr{
-background-color: white;
+background-color: transparent;
 color: black;
 }
 
 tbody tr{
-background-color: white;
-height: 110px;
+background-color: transparent;
+height: 60px;
 }
 
 tbody button{
@@ -98,11 +101,7 @@ tbody button{
 }
 
 
-@media only screen and (min-width:809px ) {
 
-
-
-}
 
 
 
@@ -113,39 +112,150 @@ cursor: hand;
 
 }
 
+img{
+  border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  margin-top: 5px;
+}
 
 
-
+.table-row:hover > td{
+  background-color: rgb(236, 236, 236);
+  cursor:pointer; 
+  cursor: hand;
+  
+  }
 
 /* -----START  TABLE ------*/
 .oferts-table{
-background-color: white;
 margin-top: 10px;
 
 
 }
 /*-----TEXT----*/
-.oferts-username ,.oferts-date,.oferts-money{
+.oferts-username ,.oferts-money{
 
-width: 6em;
-height: 24px;
 padding: 3px;
 
 
 }
-.oferts-date{
-font-size: 0.75em;
+
+.oferts-title-row{
+  background: transparent;
+  color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
 }
 
-.oferts-description > .item{
-margin-bottom:10px ;
-width: 10em;
-height: 24px;
-}
 
+
+.oferts-table-row-title{
+  font-size: 1.45em;
+  font-weight: 500;
+}
+.oferts-table-row-subtitle{
+  font-size: 1.4em;
+  font-weight: 500;
+  color: gold;
+}
 
 .badge{
 margin: 2px;
 }
+
+
+
+.btn-ofert{
+  height: 40px;
+  width: 120px;
+  border-radius: 20px;
+  font-size: 1em;
+    background: rgb(83, 83, 255);
+    background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: -o-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: -moz-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+}
+
+
+.date{
+  font-size: 0.8em;
+}
+
+
 /* -----END TABLE ------*/
+
+.hidden-in-desktop{
+  display: none;
+}
+
+.oferts-table-head-item{
+font-size: 0.7em;
+}
+
+.oferts-description{
+  font-size: 1.05em;
+  margin-top: 12px;
+}
+
+.btn-ofert-mobile{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 85%;
+  background: rgb(83, 83, 255);
+  background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+  background: -o-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+  background: -moz-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+  background: linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+}
+
+.btn-ofert-mobile .fas{
+  font-size: 1.1em;
+}
+
+.header-user-details{
+  width: 20%;
+}
+@media only screen and (max-width:800px ) {
+
+
+
+.hidden-in-mobile{
+  display: none;
+}
+
+.hidden-in-desktop{
+  display: block;
+}
+
+.oferts-table-row-title{
+  font-size: 1.2em;
+
+}
+.oferts-table-row-subtitle{
+  font-size: 1em;
+
+}
+
+.oferts-description{
+  font-size: 1.1em;
+}
+.ofert-amounts{
+  display: flex;
+}
+
+.oferts-title-row{
+
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+
+}
+
+.header-user-details{
+  width: 45%;
+}
+
+}
 

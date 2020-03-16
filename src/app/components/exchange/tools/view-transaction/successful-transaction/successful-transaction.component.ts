@@ -80,7 +80,7 @@ export class SuccessfulTransactionComponent implements OnInit {
     });
   }else{
 
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.username}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
+    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.owner}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
 
       status: 'finalized'
 
