@@ -1,34 +1,11 @@
-<div class="row bg-white shadow-sm dashboard-container">
-    <div hidden class="col-12">
-        <div class="row">
-            <div class="col-6 d-flex flex-row-reverse">
-                <img src="{{ user.photoURL}}" class="img-fluid d-block img-thumbnail profile-img"
-                     *ngIf="user.photoURL; else defaultProfilePhoto">
+<div class=" dashboard-container">
+    <mat-tab-group mat-stretch-tabs class="">
 
-                <ng-template #defaultProfilePhoto>
-                    <img src="../../../../assets/profile.png" class="img-fluid d-block img-thumbnail profile-img">
-
-                </ng-template>
-            </div>
-            <div class="col-6 p-4">
-                <h4>@{{user.displayName}}</h4>
-                <app-rating [user]="user.displayName" class="app-rating"></app-rating>
-            </div>
-            <div class="col-12">
-                <mat-divider></mat-divider>
-
-            </div>
-
-        </div>
-    </div>
-
-    <mat-tab-group mat-stretch-tabs class="col-12">
-
-        <mat-tab label="En proceso" class="p-2">
+        <mat-tab label="MIS OFERTAS" class="p-2">
             <app-my-oferts></app-my-oferts>
         </mat-tab>        
         
-        <mat-tab label="Historial">
+        <mat-tab label="OFERTAS ACEPTADAS">
             <app-accepted-oferts></app-accepted-oferts>
         </mat-tab>
     </mat-tab-group>

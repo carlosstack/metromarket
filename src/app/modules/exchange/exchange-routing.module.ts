@@ -9,20 +9,20 @@ import { ViewTransactionComponent } from 'src/app/components/exchange/tools/view
 import { ExchangeDashboardComponent } from 'src/app/components/exchange/exchange-dashboard/exchange-dashboard.component';
 
 const routes: Routes = [
+  
+  
   {
     path: 'e',
     component: ExchangeComponent,
     children: [
+      { path: '', component: AllOfertsComponent, outlet: 'exchange' } ,
       { path: 'dashboard', component: ExchangeDashboardComponent, outlet: 'exchange' },
-      { path: 'all', component: AllOfertsComponent, outlet: 'exchange' },
       { path: 'accepted', component: AcceptedOfertsComponent, outlet: 'exchange' },
       { path: 'new', component: NewOfertComponent, outlet: 'exchange' },
-
+      {path: 'transaction/:uid/:id',component:ViewTransactionComponent  ,outlet: 'exchange'},
     ],
   },
-  {
-    path: 'transaction/:type/:id', loadChildren: () => import(`../../modules/exchange-transaction/exchange-transaction.module`).then(m => m.ExchangeTransactionModule)
-  }
+  { path:'**', redirectTo:'e'}
 
 ];
 

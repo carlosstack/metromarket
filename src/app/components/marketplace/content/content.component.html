@@ -2,35 +2,41 @@
     <div class="row" *ngIf="products ; else loading">
 
 
-        <div class="col-md-3 col-sm-4 col-12 justify-content-center align-items-center text-center"
+        <div class=" col-sm-3 col-12 justify-content-center align-items-center text-center"
             *ngFor="let product of products">
-            <figure class="card card-product shadow-sm bg-white">
+            <figure class=" card-product">
                 <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                    [routerLink]="['/app/marketplace/products',product.id]">
-                    <div class="img-wrap "><img class="img-fluid "
-                            src="https://m.media-amazon.com/images/I/61SVEUsMepL._AC_UY218_ML3_.jpg">
+                [routerLink]="['/app/marketplace/m',{ outlets: {marketplace: ['product',product.id] } }]">
+                    <div class="img-wrap ">
+                        <img class="img img-fluid" src="{{product.galery[0]}}">
+                        <div class="price">{{product.currency}}{{ product.price }}</div>
                     </div>
-                    <div class="price">{{ product.price }}$</div>
-                    <span class="h6 text-secondary info-wrap">{{ product.name }} </span>
-                </a> </figure>
+                    
+                    <div class=" small product-title d-flex justify-content-center align-items-center">{{ product.title }} </div>
+                </a> 
+            </figure>
         </div> <!-- col // -->
 
+
     </div> <!-- row.// -->
+
+    <div *ngIf="loadingData" class="d-flex justify-content-center align-items-center p-3">
+        Cargando...
+    </div>
 
 </div>
 <!--container.//-->
 
-
 <div *ngIf="products.length==0">
     <app-loading-marketplace></app-loading-marketplace>
 </div>
-<div class="container w-100">
+
+
     <ng-template #loading>
 
 
         <app-loading-marketplace></app-loading-marketplace>
 
     </ng-template>
-</div>
 
 <!--<app-page></app-page>-->

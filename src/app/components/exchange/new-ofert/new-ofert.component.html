@@ -1,13 +1,11 @@
-<div class="row">
-
-  <div class="col-md-12 bg-white shadow-sm">
-<h5 class=" d-flex justify-content-center title-page p-2">¿QUÉ DESEAS HACER?</h5>
-
     <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
-        <mat-tab label="Comprar"> <app-new-buy [type]="'COMPRO'"></app-new-buy></mat-tab>
-        <mat-tab label="Vender">  <app-new-buy [type]="'VENDO'"></app-new-buy> </mat-tab>
-        <mat-tab label="Cambiar"> <app-new-change></app-new-change> </mat-tab>
+      <mat-tab label="COMPRAR">
+        <app-new-buy [type]="'COMPRA'"></app-new-buy>
+      </mat-tab>
+      <mat-tab label="VENDER">
+        <app-new-buy [type]="'VENTA'"></app-new-buy>
+      </mat-tab>
+      <mat-tab label="CAMBIAR">
+        <app-new-change></app-new-change>
+      </mat-tab>
     </mat-tab-group>
-</div>
-</div>
-

@@ -1,40 +1,8 @@
-.container{
-    display: block;
-  
+.example-container {
+  height: 400px;
+  overflow: auto;
 }
 
-.rating-num{
-    font-size: 3em;
+table {
+  width: 100%;
 }
-
-.reviews{
-    font-size: 0.6em;
-    margin-left: 20px;
-}
-
-.rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-   
-  }
-  
-  .rating > span {
-    display: inline-block;
-    position: relative;
-    font-size: 1.1em;
-    color: gold;
-   
-  }
-
-  @media only screen and (max-width:800px){
-    .rating > span {
-
-        font-size: 0.9em;
-       
-      }
-
-      .reviews{
-        font-size: 1em;
-   
-    }
-  }

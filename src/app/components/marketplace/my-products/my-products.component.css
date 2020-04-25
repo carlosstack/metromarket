@@ -1,15 +1,13 @@
-.title{
-    padding: 2%;
-}
-thead tr{
-    background-color: gainsboro;
-    color: black;
-    height: 25px;
+table,mat-paginator{
+  width: 100%;
+  background-color: transparent;
   }
-  
-  
-  
-    tbody tr{
-      background-color: white;
-  
-    }
+  .img{
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+  }
+  mat-form-field{
+    font-size: 10px;
+    width: 150px;
+  }

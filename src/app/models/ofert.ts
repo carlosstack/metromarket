@@ -1,46 +1,36 @@
 export interface OfertInterface {
-
-    id?: string;
-    payForms?: [{}];
-    payFormsAb?:[{}];
-    from?: string;
-    currencyAmount?: string;
-    dateDelivery?: string;
-    amountMin?: number;
-    amountMax?: number;
-    type?: string;
-    rate?: number;
-    owner?: string;
-    ownerUID?: string;
-    status?: string;
-    acceptedBy?: string;
-    acceptedByUID?: string;
-    ownerPhotoUrl?:string;
-    date?: number;
-    phoneNumber?:string
-
-}
-
-export interface OfertChangeInterface {
-
-    id?: string;
-    from?: string;
-    fromCurrency?: string;
-    toCurrency?: string;
-    dateDelivery?: string;
-    amountToChange?: number;
-    amountToReceive?: number;
-    fee?: number;
-    type?: string;
-    owner?: string;
-    ownerUID?: string;
-    status?: string;
-    acceptedBy?: string;
-    acceptedByUID?: string;
-    date?: number;
-    ownerPhotoUrl?:string;
-    payForms?: [{}];
-    payFormsAb?:[{}];
-    phoneNumber?:string
     
+    id?: string;
+    date?: number;
+    payForms?: [{}];
+    payFormsAb?:[{}];
+    from?: string;
+    type?: string;
+
+    status?: string;
+    statusOwner?:string;
+    statusAcceptedBy?:string;
+
+    amountToSend?: number;
+    currencyAmountToSend?: string;
+
+    amountToReceive?:number;
+    currencyAmountToReceive?:string;
+
+    rate?:number;
+    currencyRate?:string;
+
+    owner?: string;
+    ownerUID?: string;
+    ownerPhotoUrl?:string;
+    ownerRating?:number;
+    ownerRatingCount?:number;
+
+    acceptedBy?: string;
+    acceptedByUID?: string;
+    acceptedByPhotoUrl?:string;
+    acceptedByRating?:number;
+    acceptedByRatingCount?:number;
 }
+
+

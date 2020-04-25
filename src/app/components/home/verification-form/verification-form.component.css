@@ -1,0 +1,112 @@
+.container-fluid{
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-top: 2%;
+  }
+  @media only screen and (max-width:767px){
+    .container-fluid{
+        padding-left: 5%;
+        padding-right: 5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+      }
+    .stepLabel{
+        font-size: 0.8em;
+    }
+    .title{
+        padding: 5px;
+        font-size: 1.2em;
+    }
+  }
+  .register-form{
+    width: 100%;
+
+  }
+  
+  mat-form-field{
+    border-radius: 30px;
+    width: 100%;
+  }
+  .brand{
+    max-width: 60px;
+    max-height: 60px;
+  }
+  .btn-verification{
+    background-color: darkcyan;
+    color: white;
+  }
+  .btn-gradient {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    border-radius: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 1em;
+    
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+  
+    height: 40px;
+    padding: 5px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-radius: 20px;
+    color: black;
+  
+    background: rgba(255, 197, 90, 0.925);
+    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
+    background: linear-gradient(to right, orange, rgb(248, 212, 10));
+  }
+  .btn{
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    border-radius: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 1em;
+    
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+  
+    height: 40px;
+    padding: 5px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-radius: 20px;
+    color: white;
+  }
+
+  :host ::ng-deep .custom-spinner circle{   
+    stroke: rgba(255, 197, 90, 0.925);
+  }
+  .spinner{
+    height: 60vh;
+  }
+  
+ 

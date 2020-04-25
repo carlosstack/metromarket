@@ -1,0 +1,17 @@
+.btn{
+    margin: 5px;
+    width: 50%;
+}
+img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.btn-copy{
+    margin-left: 5px;
+}
+
+.copied-text{
+    font-size: 12px;
+}

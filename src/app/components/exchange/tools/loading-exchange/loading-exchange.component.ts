@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loading-exchange.component.css']
 })
 export class LoadingExchangeComponent implements OnInit {
-
+  
   constructor() { }
-
+  
   ngOnInit() {
   }
 

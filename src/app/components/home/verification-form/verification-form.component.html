@@ -1,0 +1,256 @@
+<div class="container-fluid">
+    <div class="shadow-lg bg-white">
+        <div *ngIf="!loading;else spinner">
+            <h4 class="p-4 title"> Completa tus datos personales</h4>
+            <mat-horizontal-stepper [linear]="true" #stepper class="stepper">
+
+                <ng-template matStepperIcon="edit">
+                    <li class="fas fa-check"></li>
+                </ng-template>
+
+                <ng-template matStepperIcon="done">
+                </ng-template>
+
+
+                <mat-step [stepControl]="formGroupPersonal">
+                    <ng-template matStepLabel>
+                        <h6 class="stepLabel">Datos personales</h6>
+                    </ng-template>
+
+                    <div>
+
+                        <form class="register-form" [formGroup]="formGroupPersonal" novalidate>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Nombre</mat-label>
+                                            <input matInput type="text" formControlName="firstName"
+                                                class="input-right-align">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Apellido</mat-label>
+                                            <input matInput type="text" formControlName="lastName"
+                                                class="input-right-align">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Genero</mat-label>
+                                            <mat-select formControlName="gender">
+                                                <mat-option [value]="'Masculino'">
+                                                    Masculino
+                                                </mat-option>
+                                                <mat-option [value]="'Femenino'">
+                                                    Femenino
+                                                </mat-option>
+                                                <mat-option [value]="'Otro'">
+                                                    Otro
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                        <button mat-button matStepperNext class="btn-gradient">
+                            <li class="fas fa-arrow-right"></li>
+                        </button>
+
+                    </div>
+
+                </mat-step>
+                <mat-step [stepControl]="formGroupAddress">
+                    <ng-template matStepLabel>
+                        <h6 class="stepLabel">Dirección y Telefono</h6>
+                    </ng-template>
+
+                    <div>
+
+                        <form class="" [formGroup]="formGroupAddress" novalidate>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Dirección</mat-label>
+                                            <input matInput placeholder="Dirección" type="text"
+                                                formControlName="address" class="input-right-align">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Numero de celular</mat-label>
+                                            <input matInput placeholder="ej: 04121231212" type="number"
+                                                formControlName="phoneNumber" class="input-right-align">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+                        </form>
+                        <div class="d-flex">
+                            <button mat-button matStepperPrevious class="btn-gradient">
+                                <li class="fas fa-arrow-left"></li>
+                            </button>
+                            <button mat-button matStepperNext class="btn-gradient">
+                                <li class="fas fa-arrow-right"></li>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>
+                        <h6 class="stepLabel">Verifica tu email</h6>
+                    </ng-template>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="p-3">
+                                        <div class="p-1">
+                                            <button mat-button *ngIf="!getVerificationStatus();else verified"
+                                                class="btn btn-success btn-verification"
+                                                (click)="sendEmailVerification()">
+                                                Enviar email de Verificación</button>
+                                            <ng-template #verified>
+                                                <div class="h2 p-2">
+                                                    <li class="fas fa-check text-success"></li>
+                                                    <label class="p-2">Email verificado!</label>
+                                                </div>
+                                            </ng-template>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                        <div class="d-flex">
+                            <button mat-button matStepperPrevious class="btn-gradient">
+                                <li class="fas fa-arrow-left"></li>
+                            </button>
+                            <button mat-button matStepperNext class="btn-gradient">
+                                <li class="fas fa-arrow-right"></li>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+
+                </mat-step>
+                <mat-step [stepControl]="formGroupIdentity">
+                    <ng-template matStepLabel>
+                        <h6 class="stepLabel">Identidad</h6>
+                    </ng-template>
+
+                    <div>
+
+                        <form class="" [formGroup]="formGroupIdentity" novalidate>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Cedula de Identidad</mat-label>
+                                            <input matInput type="number" formControlName="dni"
+                                                class="input-right-align">
+
+
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12 p-3">
+
+                                    <div class="flex-fill ">
+                                        <label>Sube una foto de tu cedula de identidad</label>
+                                        <input formControlName="DNICapture" type="file"
+                                            class="card file-upload form-control" accept=".png, .jpg"
+                                            (change)="onUpload($event)">
+                                        <div class="progress" id="progress">
+                                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
+                                                    aria-valuemax="100" [style.width]="(uploadPercent | async) +'%'">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </form>
+
+                        <label class='p-2 text-danger' *ngIf="!getVerificationStatus()">Verifica tu email para
+                            continuar.</label>
+                        <div class="d-flex">
+                            <button mat-button matStepperPrevious class="btn-gradient">
+                                <li class="fas fa-arrow-left"></li>
+                            </button>
+                            <button [disabled]="formGroupIdentity.invalid || !getVerificationStatus()  || !dniImgUploadComplete"
+                                class="btn btn-success" (click)="verifyAccount()">
+                                <li class="fas fa-check p-2"></li> Verificar mi cuenta
+                            </button>
+
+
+                        </div>
+                    </div>
+
+                </mat-step>
+            </mat-horizontal-stepper>
+            <div>
+            </div>
+        </div>
+        <ng-template #spinner>
+            <div class="spinner col-md-12 d-flex justify-content-center align-items-center">
+                <mat-spinner diameter="50" class="custom-spinner"></mat-spinner>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,36 +1,94 @@
 a{
   text-decoration: none;
-}
-
-
-.group-option-btn{
-  padding: 8px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-.toolbar{
- 
-}
-.option-btn{
-  height: 40px;
-  width: 150px;
-  background-color: white;
-  box-shadow: 0.5px 0.5px grey;
-  border-radius: 20px;
-  margin-left: 10px;
   color: black;
+  margin-bottom: 2px;
 }
 
-.option-btn .fas{
-  padding-right: 8px;
+
+.main{
+  min-height: 100vh;
+  margin-left: 20vw;
 }
 
+.sidebar{
+  width: 20vw;
+  height: 100vh;
+  position: fixed;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  border-right: 0.5px solid whitesmoke;
+
+}
+.sidebar-title{
+  padding: 5px;
+}
+.sidebar-icon{
+  background-color: transparent;
+  margin-right: 15px;
+  font-size: 1.1em;
+  padding: 10px;
   
-  .buttons-oferts-group {
-    display: inline-block;
-  }
+}
+.sidebar:hover{
+  overflow-y:scroll;
 
+}
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: whitesmoke; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(209, 209, 209); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(209, 209, 209); 
+}
+
+.btn-text{
+  padding: 5px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 14px;
+
+}
+
+    .fas{
+      width: 30px;
+      height: 30px;
+      padding: 8px;
+      border-radius: 50%;
+      font-size: 0.9em;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+.icon-menu{
+  background: #2196F3
+;
+
+}
+
+
+.sidebar-icon{
+  background-color: transparent;
+  margin-right: 15px;
+  font-size: 1.1em;
+  padding: 10px;
+  color: #2196F3
+;
+}
   .nav-link{
     display: flex;
   }
@@ -38,16 +96,13 @@ a{
   .table-outlet{
     padding-top: 10px;
   }
-  @media only screen and (max-width:600px){
 
-    .toolbar{
-      display: none;
-    }
-  
+.transaction-active{
+  margin-left: 5px;
+  color: rgb(136, 153, 166);
 
-  }
-
-  @media only screen and (max-width:800px){
+}
+  @media only screen and (max-width:900px){
 
     .btn-text{
       display: none;
@@ -75,72 +130,26 @@ a{
 
   }
 
-  /*--- START TRANSITION BUTTON EFFECT---*/
-  .option-btn {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
-    color: black;
-    border-radius: 25px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 0.8em;
-    
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .option-btn::before{
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    border-radius: 25px;
-    top: 0;
-    left: 0;
-    background: rgba(255, 197, 90, 0.925);
-    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: linear-gradient(to right, orange, rgb(248, 212, 10));
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    opacity: 0;
-  }
-  
-  .option-btn:hover {
-    background: rgba(255, 197, 90, 0.925);
-    color: #fff;
-  }
-  
-  .option-btn:hover:before {
-    opacity: 1;
-  }
-
-
-    /*--- END TRANSITION BUTTON EFFECT---*/
-
   /*--- START CLASS ACTIVE ---*/
 
-.active{
-    background: rgba(255, 197, 90, 0.925);
-    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: linear-gradient(to right, orange, rgb(248, 212, 10));
-} /*--- END CLASS ACTIVE ---*/
+  .active{
+    background: whitesmoke;
+  } 
+  a:hover{
+    background: whitesmoke;
+  } 
 
 
+/*--- END CLASS ACTIVE ---*/
+
+
+@media only screen and (max-width:900px) {
+
+  .hidden-in-mobile{
+    display: none;
+  }
+  .main{
+    margin-left: 0;
+    padding: 0;
+  }
+}

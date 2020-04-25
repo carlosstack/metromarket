@@ -2,8 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NormalOfertService } from 'src/app/services/normal-ofert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConstantsService } from 'src/app/services/constants.service';
-import { OfertChangeInterface } from "../../../../models/ofert";
 import { AuthService } from 'src/app/services/auth.service';
+import { OfertInterface } from 'src/app/models/ofert';
+import { OfertPreviewComponent } from '../../tools/ofert-preview/ofert-preview.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalConfirmComponent } from '../../tools/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-new-change',
@@ -12,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NewChangeComponent implements OnInit {
 
-  private ofert: OfertChangeInterface = {};
+  private ofert: OfertInterface = {};
 
   public type ='CAMBIO';
 
@@ -22,7 +25,7 @@ export class NewChangeComponent implements OnInit {
   formGroupBanks: FormGroup;
 
 
-  constructor(private authService:AuthService,private normalOfertService: NormalOfertService, private formBuilder: FormBuilder, private constService: ConstantsService) { }
+  constructor(public dialog: MatDialog,private authService:AuthService,private normalOfertService: NormalOfertService, private formBuilder: FormBuilder, private constService: ConstantsService) { }
 
   ngOnInit() {
 
@@ -51,27 +54,50 @@ export class NewChangeComponent implements OnInit {
     });
   }
 
-  
+  openDialogPreview(): void {
+    this.authService.isAuth().subscribe((user) => {
+      this.setValuesToOfert();
+      const dialogRef = this.dialog.open(ModalConfirmComponent, {
+        width: '300px',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result) {
+          this.addOfert()
+        }
+      });
+    })
+
+  }
   addOfert() {
-    this.setValuesToOfert();
-    this.normalOfertService.addOfertOfTypeChange(this.ofert);
+    this.normalOfertService.addOfert(this.ofert);  
   }
 
   setValuesToOfert() {
     this.authService.isAuth().subscribe(user => {
 
-    this.ofert.phoneNumber = user.phoneNumber
 
-    this.ofert.amountToChange = this.formGroupAmountAndRate.get('amountToChange').value;
+    this.ofert.amountToSend = this.formGroupAmountAndRate.get('amountToChange').value;
     this.ofert.amountToReceive = this.formGroupAmountAndRate.get('amountToReceive').value;
-    this.ofert.fromCurrency = this.formGroupAmountAndRate.get('amountToChangeCurrency').value;
-    this.ofert.toCurrency = this.formGroupAmountAndRate.get('amountToReceiveCurrency').value;
+
+    this.ofert.currencyAmountToSend = this.formGroupAmountAndRate.get('amountToChangeCurrency').value;
+    this.ofert.currencyAmountToReceive = this.formGroupAmountAndRate.get('amountToReceiveCurrency').value;
+
+    this.ofert.rate= parseFloat((((this.ofert.amountToSend/this.ofert.amountToReceive)*100)-100).toPrecision(3)) 
+    
+    if(this.ofert.rate<0){
+      this.ofert.rate = this.ofert.rate*(-1)
+    }
+
+    this.ofert.currencyRate = '%';
 
     this.getDataFromPayForm(this.formGroupBanks.get('to').value);
 
     this.ofert.from = this.formGroupBanks.get('from').value;
     this.ofert.type = this.type;
-    this.ofert.status = 'new';
+    this.ofert.statusOwner = 'NEW';
+    this.ofert.status ='NEW';
     })
   }
 

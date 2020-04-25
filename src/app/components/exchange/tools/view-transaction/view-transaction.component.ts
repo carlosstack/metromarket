@@ -1,17 +1,17 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Component, OnInit } from '@angular/core';
 import { NormalOfertService } from '../../../../services/normal-ofert.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { UserService } from '../../../../services/user.service';
 import { OfertInterface } from '../../../../models/ofert';
 import { UserInterface } from '../../../../models/user';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SuccessfulTransactionComponent } from './successful-transaction/successful-transaction.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
+import { SuccessfulTransactionComponent } from './successful-transaction/successful-transaction.component';
 import { UnsuccessfulTransactionComponent } from './unsuccessful-transaction/unsuccessful-transaction.component';
-import { RatingPanelComponent } from './rating-panel/rating-panel.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material';
 
 export interface SuccessfulData {
   type: string;
@@ -27,77 +27,61 @@ export interface SuccessfulData {
 })
 export class ViewTransactionComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private afs: AngularFirestore, private OfertService: NormalOfertService, private route: ActivatedRoute, private router: Router, private authService: AuthService, private userService: UserService) { }
+  constructor(private _snackBar: MatSnackBar, private afs: AngularFirestore, public dialog: MatDialog, private OfertService: NormalOfertService, private route: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
 
-  public ofert: OfertInterface;
+  public ofert;
   public user: UserInterface;
   public partner: UserInterface;
   public person: UserInterface;
-  public type: string;
   public idOfert: string;
   public content: string;
   public chats;
-  public secureAnswer: string = 'NORMAL';
 
+  public status: string = '';
+
+  currentUserUID: string = '';
+
+  WA_LINK: string = '#'
 
   ngOnInit() {
 
+    this.route.queryParams.subscribe(queryParams => {
+      // do something with the query params
+    });
+  
+    
+    this.route.params.subscribe(routeParams => {
 
     this.authService.isAuth().subscribe(user => {
 
-      const idOfert = this.route.snapshot.params['id'];
-      const type = this.route.snapshot.params['type'];
-      this.type = type;
-      this.idOfert = idOfert;
+      this.currentUserUID = user.uid
 
+      const id = routeParams.id;
+      const uid = routeParams.uid;
+      this.idOfert = id
 
+      this.OfertService.getOneOfert(id, uid).subscribe(ofert => {
 
-      if (type == 'my-oferts') {
+        this.ofert = ofert;
 
-        this.userService.getOneOfert(idOfert, user.displayName, type).subscribe(ofert => {
+        if (ofert.acceptedByUID && (ofert.acceptedByUID != this.currentUserUID)) {
+          this.userService.getOneUser(ofert.acceptedByUID).subscribe(user => {
+            this.WA_LINK = `https://wa.me/${user.phone_number}`
+            this.person = user;
 
-          this.ofert = ofert;
-
-          if (ofert == null) {
-            this.OfertService.getOneOfert(idOfert).subscribe(ofert => {
-              this.ofert = ofert;
-
-              this.userService.getOneUser(user.displayName).valueChanges().subscribe(user => {
-                this.person = user;
-              });
-
-            });
-
-          } else {
-
-            this.userService.getOneUser(this.ofert.acceptedBy).valueChanges().subscribe(partner => {
-              this.person = partner;
-            });
-          }
-        });
-
-      } else if (type == 'accepted-oferts') {
-        console.log('entra a accepted');
-        this.userService.getOneOfert(idOfert, user.displayName, type).subscribe(ofert => {
-
-          this.userService.getOneUser(ofert.owner).valueChanges().subscribe(partner => {
-            this.person = partner;
           });
-
-          this.userService.getOneUser(user.displayName).valueChanges().subscribe(user => {
-            this.user = user;
+        } else {
+          this.userService.getOneUser(ofert.ownerUID).subscribe(user => {
+            this.WA_LINK = `https://wa.me/${user.phone_number}`
+            this.person = user;
           });
-
-          this.ofert = ofert;
-
-        });
-
-      }
-
+        }
+      });
 
     });
-
+  });
   }
+
 
   openDialogToCancel(): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
@@ -120,8 +104,7 @@ export class ViewTransactionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.setStatusWait();
-        this.openSuccesful();
+        this.setStatus('ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING')
       }
     });
   }
@@ -129,162 +112,192 @@ export class ViewTransactionComponent implements OnInit {
   openDialogUnsuccess(): void {
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       width: '300px',
+      data: [this.ofert, this.user,]
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result) {
-        this.setStatusCanceledAndWait();
-        this.openUnsuccesful();
+        this.setStatus('ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING')
       }
     });
   }
 
   openSuccesful(): void {
     var user;
-    if (this.type == 'my-oferts') {
-      user = this.ofert.acceptedBy;
+    if (this.ofert.ownerUID == this.currentUserUID) {
+      user = this.ofert.acceptedByUID;
     } else {
-      user = this.ofert.owner;
+      user = this.ofert.ownerUID;
     }
-    const dialogRef = this.dialog.open(SuccessfulTransactionComponent, {
-      width: '70%',
-      height: '70%',
-      data: { idOfert: this.ofert.id, type: this.type, idUser: user, ofert: this.ofert }
 
+    const dialogRef = this.dialog.open(SuccessfulTransactionComponent, {
+      width: '40vw',
+      data: { idUser: user , ofert:this.ofert}
     });
   }
   openUnsuccesful(): void {
-    var user;
-    if (this.type == 'my-oferts') {
-      user = this.ofert.acceptedBy;
+    var uid;
+    if (this.ofert.ownerUID == this.currentUserUID) {
+      uid = this.ofert.acceptedByUID;
     } else {
-      user = this.ofert.owner;
+      uid = this.ofert.ownerUID;
     }
     const dialogRef = this.dialog.open(UnsuccessfulTransactionComponent, {
-      width: '70%',
-      height: '70%',
-      data: { idOfert: this.ofert.id, type: this.type, idUser: user, ofert: this.ofert }
-
+      width: '40vw',
+      data: { idUser: uid , ofert:this.ofert}
     });
   }
 
   showRatingPanel(): void {
 
-    var partner;
+   
 
-    if (this.ofert.status == 'new' || this.ofert.status == 'canceled-by-owner') {
-      partner = this.person.username;
-
-    } else {
-      partner = this.partner.username;
-    }
-
-    const dialogRef = this.dialog.open(RatingPanelComponent, {
-      width: '75%',
-      height: '90%',
-      data: { idOfert: this.ofert.id, type: this.type, idUser: partner, ofert: this.ofert }
-
-    });
-  }
-
-  setStatusWait() {
-
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.acceptedBy}`).collection('accepted-oferts').doc(`${this.ofert.id}`).update({
-
-      status: 'waiting-for-rating'
-
-    }).catch(e => {
-      console.log('error', e);
-    });
-
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.owner}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
-
-      status: 'waiting-for-rating'
-
-    }).catch(e => {
-      console.log('error', e);
-    });
   }
 
 
   setStatusCancel() {
 
-    if (this.ofert.status == 'new') {
+    if (this.ofert.acceptedByUID && (this.ofert.acceptedByUID == this.currentUserUID)) {
+      this.ofert.statusAcceptedBy = 'CANCELED';
+    } else {
+      this.ofert.statusOwner = 'CANCELED'
+    }
 
-      var old_ofert = this.ofert;
-      this.ofert.status = 'canceled-by-owner';
-
-      this.userService.updateMyOfert(this.ofert);
-      this.router.navigate([`/exchange/my-oferts/`]);
-
-    } 
+    this.OfertService.updateOfert(this.ofert)
   }
 
-  setStatusCanceledAndWait() {
+  showAlert(txt: string) {
 
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.acceptedBy}`).collection('accepted-oferts').doc(`${this.ofert.id}`).update({
-
-      status: 'canceled-and-waiting-for-rating'
-
-    }).catch(e => {
-      console.log('error', e);
-    });
-
-    this.afs.collection<OfertInterface>(`users-oferts`).doc(`@${this.ofert.owner}`).collection('normal-oferts').doc(`${this.ofert.id}`).update({
-
-      status: 'canceled-and-waiting-for-rating'
-
-    }).catch(e => {
-      console.log('error', e);
+    this._snackBar.open(txt, 'X', {
+      duration: 3000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+      panelClass: 'notif'
     });
   }
 
 
+  setStatus(status: string) {
+    var ofertDoc = this.afs.doc<OfertInterface>(`users-oferts/${this.ofert.ownerUID}/oferts/${this.ofert.id}`);
 
-  changeAnswer(an: string) {
-    this.secureAnswer = an;
-  }
-
-  sendMessage() {
-    this.authService.isAuth().subscribe(user => {
-      this.userService.sendNewMessage(this.ofert, this.content, this.partner.username, user.displayName);
-      this.content = '';
-    });
+    this.afs.firestore.runTransaction(t =>
+      t.get(ofertDoc.ref).then(of => {
+        if (of.data().ownerUID == this.currentUserUID) {
+          if (this.ofert.statusAcceptedBy == 'ACCEPTED') {
+            this.ofert.statusOwner = status;
+            t.update(of.ref, this.ofert);
+            if(status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'){
+              this.openUnsuccesful();
+            } else if(status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING'){
+              this.openSuccesful();
+            }
+          } else if (this.ofert.statusAcceptedBy == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING' || this.ofert.statusAcceptedBy == 'CANCELED') {
+            if (status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') {
+              this.ofert.statusOwner = status;
+              t.update(of.ref, this.ofert);
+              this.openUnsuccesful();
+            } else if (status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING') {
+              this.showAlert('Tu compañero a indicado que la transacción no se llevó a cabo, en caso de no ser así, por favor pidele que lo cambie.')
+            }
+          }else if (this.ofert.statusAcceptedBy == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING' || this.ofert.statusAcceptedBy == 'COMPLETED') {
+            if (status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING') {
+              this.ofert.statusOwner = status;
+              t.update(of.ref, this.ofert);
+              this.openSuccesful()
+            } else if (status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') {
+              this.showAlert('Tu compañero a indicado que la transacción si se llevó a cabo, debes indicar lo mismo.')
+            }
+          }
+        } else if (of.data().acceptedByUID == this.currentUserUID) {
+          if (this.ofert.statusOwner == 'ACCEPTED') {
+            this.ofert.statusAcceptedBy = status;
+            t.update(of.ref, this.ofert);
+            if(status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'){
+              this.openUnsuccesful();
+            } else if(status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING'){
+              this.openSuccesful();
+            }
+          } else if (this.ofert.statusOwner == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING' || this.ofert.statusOwner == 'CANCELED') {
+            if (status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') {
+              this.ofert.statusAcceptedBy = status;
+              t.update(of.ref, this.ofert);
+              this.openUnsuccesful()
+            } else if (status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING') {
+              this.showAlert('Tu compañero a indicado que la transacción no se llevó a cabo, en caso de no ser así, por favor pidele que lo cambie.')
+            }
+          }else if (this.ofert.statusOwner == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING' || this.ofert.statusOwner == 'COMPLETED') {
+            if (status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING') {
+              this.ofert.statusAcceptedBy = status;
+              t.update(of.ref, this.ofert);
+              this.openSuccesful()
+            } else if (status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') {
+              this.showAlert('Tu compañero a indicado que la transacción si se llevó a cabo, debes indicar lo mismo.')
+            }
+          }
+        }
+      }))
+      .catch(error => console.log(error));
   }
 
   getColorStatusNew(status: string) {
-    if (status == 'new') {
-      return '#5bc0de';
+    if (status == 'NEW') {
+      return 'dodgerblue';
     } else {
-      return '#ccc';
+      return 'rgb(235, 235, 235)';
     }
   }
 
   getColorStatusPending(status: string) {
-    if (status == 'pending') {
-      return '#5bc0de';
+    if (status == 'ACCEPTED') {
+      return 'teal';
     } else {
-      return '#ccc';
+      return 'rgb(235, 235, 235)';
     }
   }
 
   getColorStatusWaiting(status: string) {
-    if (status == 'waiting-for-rating') {
-      return '#5bc0de';
+    if (status == 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING' || status == 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') {
+      return 'coral';
     } else {
-      return '#ccc';
+      return 'rgb(235, 235, 235)';
     }
   }
 
   getColorStatusFinalized(status: string) {
-    if (status == 'finalized') {
-      return '#22bb33';
+    if (status == 'COMPLETED') {
+      return 'grey';
     } else {
-      return '#ccc';
+      return 'rgb(235, 235, 235)';
+    }
+  }
+  getColorStatusCanceled(status: string) {
+    if (status == 'CANCELED') {
+      return 'grey';
+    } else {
+      return 'rgb(235, 235, 235)';
     }
   }
 
+  getStatus() {
+    if (this.currentUserUID == this.ofert.ownerUID) {
+      return this.ofert.statusOwner;
+    } else if (this.currentUserUID == this.ofert.acceptedByUID) {
+      return this.ofert.statusAcceptedBy;
+    }
+  }
 
+  canChange(){
+    if(this.ofert.ownerUID == this.currentUserUID){
+      if((this.ofert.statusOwner=='CANCELED' || this.ofert.statusOwner=='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') && (this.ofert.statusAcceptedBy == 'ACCEPTED') ){
+        return true;
+      }
+    }else if(this.ofert.acceptedByUID == this.currentUserUID){
+      if((this.ofert.statusAcceptedBy=='CANCELED' || this.ofert.statusAcceptedBy=='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING') && (this.ofert.statusOwner == 'ACCEPTED') ){
+        return true;
+      }
+    }
+    return false;
+  }
 
 }

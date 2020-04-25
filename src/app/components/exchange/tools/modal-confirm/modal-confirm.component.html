@@ -1,11 +1,8 @@
 <h1 mat-dialog-title>¿Esta seguro?</h1>
-<div mat-dialog-content>
-    <p>Se le redirigirá a Whatsapp.</p>
 
-</div>
 <div mat-dialog-actions>
     <div class="btn-group text-center">
-        <button mat-button (click)="onNoClick()" class="btn btn-danger"> No </button>
-        <button mat-button [mat-dialog-close]="answer" cdkFocusInitial class="btn btn-success"> Si </button>
+        <button (click)="onNoClick()" class="btn btn-secondary"> NO </button>
+        <button [mat-dialog-close]="answer" cdkFocusInitial class="btn btn-primary"> SI </button>
     </div>
 </div>

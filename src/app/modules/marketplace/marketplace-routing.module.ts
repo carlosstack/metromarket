@@ -4,6 +4,10 @@ import { MarketplaceComponent } from "../../components/marketplace/marketplace.c
 import { NewProductComponent } from 'src/app/components/marketplace/new-product/new-product.component';
 import { ContentComponent } from 'src/app/components/marketplace/content/content.component';
 import { MyProductsComponent } from 'src/app/components/marketplace/my-products/my-products.component';
+import { ProductDetailsComponent } from 'src/app/components/marketplace/tools/product-details/product-details.component';
+import { MarketplaceSearchComponent } from 'src/app/components/marketplace/marketplace-search/marketplace-search.component';
+import { MarketplaceCategoryComponent } from 'src/app/components/marketplace/marketplace-category/marketplace-category.component';
+import { EditProductComponent } from 'src/app/components/marketplace/edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -13,11 +17,15 @@ const routes: Routes = [
       {path:'new',component: NewProductComponent, outlet:'marketplace'},
       {path:'products',component: ContentComponent, outlet:'marketplace'},
       {path:'my-products',component: MyProductsComponent, outlet:'marketplace'},
+      {path:'search/:q',component: MarketplaceSearchComponent, outlet:'marketplace'},
+      {path:'category/:category',component: MarketplaceCategoryComponent, outlet:'marketplace'},
+      {path:'edit/:id',component: EditProductComponent, outlet:'marketplace'},
+      { path: 'product/:id', component:ProductDetailsComponent, outlet:'marketplace'}
     ]
   }, 
-  { path: 'products/:id', loadChildren: () => import(`../../modules/products-details/products-details.module`).then(m => m.ProductsDetailsModule)}
+ 
+  { path:'**', redirectTo:'m'}
 
-  
 ];
 
 

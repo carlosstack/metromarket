@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/services/product.service';
+import { ProductInterface } from 'src/app/models/product';
+import { ProductContactInfoComponent } from '../product-contact-info/product-contact-info.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-product-details',
@@ -7,9 +12,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  constructor() { }
+  public product:ProductInterface;
+
+  constructor(private route: ActivatedRoute, private productService: ProductService,private dialog:MatDialog) { }
 
   ngOnInit() {
+    var productID = this.route.snapshot.params['id'];
+    this.productService.getOne(productID).subscribe((product)=>{
+      this.product = product;
+    });
+  }
+
+  openDialogContact(): void {
+    const dialogRef = this.dialog.open(ProductContactInfoComponent, {
+      width: '400px',
+      data: {userUID:this.product.owner_id}
+    });
   }
 
 }

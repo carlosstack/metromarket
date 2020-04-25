@@ -1,13 +1,18 @@
 
-    
+.table{
+  border-top: 0.5px solid whitesmoke;
+}
 .process-row {
     display: table-row;
+   
+    
 }
 
 .process {
     display: table;     
     position: relative;
-    margin-top: 10px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .process-step button[disabled] {
@@ -16,13 +21,13 @@
 }
 
 .process-row:before {
-    top: 50px;
+    top: 25px;
     bottom: 0;
     position: absolute;
     content: " ";
-    width: 98%;
-    height: 1px;
-    background-color: #ccc;
+    width: 97%;
+    height: 0.5px;
+    background-color: whitesmoke;
     
 }
 
@@ -39,68 +44,21 @@
 }
 
 .btn-circle {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   text-align: center;
   padding: 6px 0;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1.428571429;
   border-radius: 50%;
-  color: white;
+  color: rgb(255, 255, 255);
+  opacity: 0.8;
+  background-color: rgb(235, 235, 235);
+  border: 1px solid whitesmoke;
 }
 
 
 /*--- for moviles ----*/
-
-@media only screen and (max-width:800px){
-    
-.btn-circle {
-    width: 40px;
-    height: 40px;
-    font-size: 8px;
-  }
-
-  .process-row:before {
-    top: 20px;
-  
-    
-}
-
-
-
-
-
-
-.avatar{
-    border-radius: 50%;
-    max-height: 200px;
-  }
-
-  .card-title{
-      margin-top: auto;
-      margin-bottom: auto;
-  }
-  .rating{
-      width: auto;
-      margin: auto;
-      height: auto;
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Profile container */
@@ -110,91 +68,116 @@
   
   /* Profile sidebar */
   .profile-sidebar {
-    padding: 30px;
-    background: transparent;
-    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-top: 30px;
+    border:0.5px solid whitesmoke;
+    
   }
   
   .profile-userpic img {
     float: none;
-    margin: 0 auto;
-    height: 200px;
-    width: 200px;
+    height: 190px;
+    width: 190px;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
+    margin-bottom: 20px;
   }
   
   .profile-usertitle {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
   }
   
   .profile-usertitle-name {
     color: #5a7391;
     font-size: 16px;
     font-weight: 600;
-    margin-bottom: 7px;
   }
-  
-  .profile-usertitle-job {
-    text-transform: uppercase;
-    color: #5b9bd1;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  
-  .profile-userbuttons {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .profile-userbuttons .btn {
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 15px;
-    margin-right: 5px;
-  }
-  
-  .profile-userbuttons .btn:last-child {
-    margin-right: 0px;
-  }
-      
+   
   .profile-usermenu {
     margin-top: 20px;
   }
   
   
-  .profile-usermenu button{
-    background-color: transparent;
-    color: #93a3b5;
-    font-size: 16px;
-  }
-  
   .profile-usermenu button:hover{
     color: #0077ff;
   }
-    
-  /* Profile Content */
-  .profile-content {
-    padding: 20px;
-    background: #fff;
-    min-height: 460px;
-  }
+.action-box{
+  height: 150px;
+}    
+.col-right{
+  height: 100%;
+  border-left:0.5px solid whitesmoke;
+  border-right:0.5px solid whitesmoke;
+  border-bottom:0.5px solid whitesmoke;
+
   
-
-
-
-
+}
   /*------STAR TRANSACTION DETAILS TABLE  -----*/
   .transaction-details-table{
-    padding: 30px;
+    padding: 45px;
     margin-top: 10px;
   }
 
 
-  .col-right ,.col-left{
-      padding: 20px;
+
+  .btn-action{
+    min-width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px;
   }
+
+  .action-box{
+    width: 100%;
+  }
+  .btn-action{
+    margin: 10px;
+    min-width: 80px;
+    padding: 5px;
+  }
+  @media only screen and (max-width:900px){
+
+    .wa-btn{
+      margin-top:10px;
+    }
+    
+    .btn-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 8px;
+      }
+    
+      .process-row:before {
+        top: 20px;
+      
+        
+    }
+    
+    .avatar{
+        border-radius: 50%;
+        max-height: 200px;
+      }
+    
+      .card-title{
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+      .rating{
+          width: auto;
+          margin: auto;
+          height: auto;
+      }
+    
+      .transaction-details-table{
+        margin-top: 0px;
+      }
+
+  
+
+    }
+    

@@ -1,18 +1,22 @@
 <div class="page">
     <div class="container">
       <div class="left text-center">
-        <div class="login"> <img src="../../../assets/icon3.png" class="img-fluid brand-logo-img" height="200px" width="200px"> </div>
+        <div class="login"> 
+          <img src="../../../assets/logoblue.png" class="img-fluid brand" > </div>
       </div>
-      <div class="right shadow-lg">
 
-        <form class="form" (submit)='onLoginEmail()'>
-          <label for="email">Email</label>
-          <input [(ngModel)]="email" type="email" name="email" id="email"  class="" (click)='hideErrorMessage()'>
-          <label for="password">Password</label>
-          <input  [(ngModel)]="pass" type="password" name="pass" id="password"  class="" (click)='hideErrorMessage()'>
-          <button type="submit"class='btn btn-dark btn-login ' >Ingresar</button>
-          <label class="error-label text-warning text-center">{{ error }}</label>
-        </form>
+      <div class="right shadow-lg ">
+
+        <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+          <mat-tab label="Acceder"> 
+            <app-login-form></app-login-form>
+          </mat-tab>
+          <mat-tab label="Crear una cuenta">  
+            <app-register-form></app-register-form> 
+          </mat-tab>
+      </mat-tab-group>
+
+        
       </div>
     </div>
   </div>

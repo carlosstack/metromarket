@@ -10,13 +10,17 @@
 }
 
 .page {
-  background: rgb(250, 250, 250);
+   
+  background: linear-gradient(to bottom, rgb(57, 57, 57) 0%,rgb(57, 57, 57) 40%,rgb(57, 57, 57) 40%,rgb(247, 247, 255) 40%,rgb(247, 247, 255),rgb(247, 247, 255) 100%); /* W3C */
   display: flex;
   flex-direction: column;
   height: 100%;
   position: absolute;
   place-content: center;
   width: 100%;
+}
+.brand{
+  max-width: 200px;
 }
 @media (max-width: 767px) {
   .page {
@@ -25,34 +29,24 @@
     padding-bottom: 20px;
   }
 }
-.container {
-  display: flex;
-  height: 320px;
-  margin: 0 auto;
-  width: 640px;
-}
-@media (max-width: 767px) {
+
   .container {
     flex-direction: column;
     height: 630px;
-    width: 320px;
+    width: 360px;
   }
-}
-.left {
-  background: transparent;
-  height: calc(100% - 40px);
-  top: 20px;
-  position: relative;
-  width: 50%;
-}
-@media (max-width: 767px) {
+
+
+  
   .left {
+    width: calc(100% - 10px);
     height: 100%;
-    left: 20px;
-    width: calc(100% - 40px);
-    max-height: 270px;
+    max-height: 190px;
   }
-}
+  .brand{
+    height: 170px;
+  }
+
 .login {
   font-size: 50px;
   font-weight: 900;
@@ -64,84 +58,13 @@
   line-height: 1.5;
   margin: 40px;
 }
-.right {
-  background: #474A59;
-  color: #F1F1F2;
-  position: relative;
-  width: 50%;
-}
-@media (max-width: 767px) {
+
   .right {
     flex-shrink: 0;
     height: 100%;
     width: 100%;
-    max-height: 350px;
+    max-height: 300px;
   }
-}
-svg {
-  position: absolute;
-  width: 320px;
-}
-path {
-  fill: none;
-  stroke: url(#linearGradient);;
-  stroke-width: 4;
-  stroke-dasharray: 240 1386;
-}
-.form {
-  margin: 40px;
-  position: absolute;
-}
-label {
-  color:  #c2c2c5;
-  display: block;
-  font-size: 14px;
-  height: 16px;
-  margin-top: 20px;
-  margin-bottom: 5px;
-}
-input {
-  background: transparent;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  color: #f2f2f2;
-  font-size: 20px;
-  height: 30px;
-  line-height: 30px;
-  width: 100%;
-}
-
-.btn-login{
-  background: transparent;
-  color: #f2f2f2;
-  font-size: 20px;
-  height: 50px;
-  width: 100%;
-
-  margin-top: 50px;
-  border-radius: 25px;
-}
-input::-moz-focus-inner { 
-  border: 0; 
-}
-.btn-login {
-  color: white;
-  margin-top: 40px;
-  transition: color 300ms;
-}
-.btn-login:focus {
-  color: #f2f2f2;
-}
-.btn-login:active {
-  color: #d0d0d2;
-}
-
-.brand-logo-img{
-  margin-top: 10px;
-}
-
-.error-label{
-  font-size: 0.55em;
   
-}
+
+

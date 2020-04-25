@@ -1,11 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { RatingInterface } from '../../../../../models/rating';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
-import { NormalOfertService } from '../../../../../services/normal-ofert.service';
-import { AuthService } from '../../../../../services/auth.service';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { UserService } from '../../../../../services/user.service';
-import { OfertInterface } from '../../../../../models/ofert';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { AuthService } from 'src/app/services/auth.service';
+import { RatingInterface } from 'src/app/models/rating';
 
 @Component({
   selector: 'app-rating',
@@ -16,50 +13,36 @@ import { OfertInterface } from '../../../../../models/ofert';
 
 export class RatingComponent implements OnInit {
 
-  @Input() public user:string;
+  @Input() public UID:string;
+ 
+  displayedColumns: string[] = ['type', 'comment'];
+  dataSource: MatTableDataSource<RatingInterface>;
 
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private afs: AngularFirestore, private OfertService: NormalOfertService, private route: ActivatedRoute, private authService: AuthService, private userService: UserService) { }
+ public ratings;
+ public countPositive;
+ public countNegative;
+ public countNeutral;
 
-  public rating_value: number;
-  public rating_count: number;
-  public ofert: OfertInterface;
+  constructor( private userService: UserService,  private authService: AuthService) {
+
+  }
 
   ngOnInit() {
-
-          this.calculate_rating(this.user);
-          console.log(this.user);
- 
-  }
-
-  calculate_rating(username:string) {
-
-    this.rating_value = 0;
-    this.rating_count = 0;
-
-    this.afs.collection<RatingInterface>(`users-rating`).doc(`@${username}`).collection('my-ratings').valueChanges().subscribe(ratings => {
-      this.rating_count = ratings.length;
-    });
-
-    this.afs.collection<RatingInterface>(`users-rating`).doc(`@${username}`).collection<RatingInterface>('my-ratings').valueChanges().subscribe(userRating => {
-      userRating.forEach(rating => {
-
-        if (rating.value) {
-
-          this.rating_value += rating.value;
-
-        }
-
+      this.userService.getUserRatings(this.UID).subscribe(ratings => {
+        this.ratings = ratings;
+        this.countNegative = ratings.filter(rating => rating.type != 'NEGATIVE').length;
+        this.countPositive = ratings.filter(rating => rating.type != 'POSITIVE').length;
+        this.countNeutral = ratings.filter(rating => rating.type != 'NEUTRAL').length;
+        this.dataSource = new MatTableDataSource(this.ratings);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       });
-
-      this.rating_value = this.rating_value / this.rating_count;
-
-    });
   }
 
-  getRatingRounded() {
-    return parseFloat(this.rating_value.toPrecision(1));
-  }
+
 
 
 }

@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { ProductInterface} from '../models/product' ;
+import { ProductInterface } from '../models/product';
 import { map } from 'rxjs/operators';
 import { UserInterface } from '../models/user';
 
@@ -12,7 +12,7 @@ import { UserInterface } from '../models/user';
 })
 export class ProductService {
 
-  constructor(private afs: AngularFirestore, private authService: AuthService,private router: Router) {
+  constructor(private afs: AngularFirestore, private authService: AuthService, private router: Router) {
 
   }
   private elementsCollection: AngularFirestoreCollection<ProductInterface>;
@@ -22,17 +22,84 @@ export class ProductService {
 
   private usersCollection: AngularFirestoreCollection<UserInterface>;
   private userDoc: AngularFirestoreDocument<UserInterface>;
-  
+
   //actual date
   private date = new Date();
   //Data collection
   private collection = 'marketplace-products';
-  
-  getAll() {
 
-    this.elementsCollection = this.afs.collection<ProductInterface>(this.collection,ref =>
-    ref.orderBy('date','desc'));
+
+  getAll(first, last) {
+
+    var ref = this.afs.collection<ProductInterface>(this.collection);
+
+    if (first) {
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').limit(20).endBefore(first.date));
+      this.elements = this.elementsCollection.valueChanges();
+    } else if (last) {
+      console.log('in last')
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').limit(20).startAfter(last.date));
+      this.elements = this.elementsCollection.valueChanges();
+    } else {
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').limit(20));
+      this.elements = this.elementsCollection.valueChanges();
+    }
+
+    return this.elements;
+  }
+
+  getMyProducts(id) {
+
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').where('owner_id', '==', id));
+      this.elements = this.elementsCollection.valueChanges();
+    
+
+    return this.elements;
+  }
+
+
+  searchProducts(word: string,first,last) {
+    word = word.trim().toLowerCase()
+    if (word.length > 0) {
+
+     if(first){
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').where("productSearch", "array-contains", word).endBefore(first.date).limit(20));
+      this.elements = this.elementsCollection.valueChanges();
+     }else if(last){
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').where("productSearch", "array-contains", word).startAfter(last.date).limit(20));
+      this.elements = this.elementsCollection.valueChanges();
+     }else{
+      this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+        ref.orderBy('date', 'desc').where("productSearch", "array-contains", word).limit(20));
+      this.elements = this.elementsCollection.valueChanges();
+     }
+
+      return this.elements;
+    }
+  }
+
+  searchCategory(category,first,last) {
+   if(first){
+    this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+      ref.orderBy('date', 'desc').where("category", "==", category).endBefore(first.date).limit(20));
     this.elements = this.elementsCollection.valueChanges();
+   }else if(last){
+    this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+      ref.orderBy('date', 'desc').where("category", "==", category).startAfter(last.date).limit(20));
+    this.elements = this.elementsCollection.valueChanges();
+
+   }else{
+    this.elementsCollection = this.afs.collection<ProductInterface>(this.collection, ref =>
+      ref.orderBy('date', 'desc').where("category", "==", category).limit(20));
+    this.elements = this.elementsCollection.valueChanges();
+
+   }
 
     return this.elements;
   }
@@ -40,22 +107,33 @@ export class ProductService {
   add(element: ProductInterface) {
 
     this.authService.isAuth().subscribe(user => {
-      element.date=Date.now();
-      element.owner_name=user.displayName;
-      element.owner_phone_number=user.phoneNumber;
+      element.date = Date.now();
       element.owner_id = user.uid;
+      var cleanTitle = element.title.toLowerCase()
+      cleanTitle = cleanTitle.trim()
+      var arrayClean = []
+      cleanTitle.split(' ').forEach(element => {
+        if (element.length > 0) {
+          arrayClean.push(element.trim())
+        }
+      });
+      element.productSearch = arrayClean;
+
       this.elementsCollection = this.afs.collection<ProductInterface>(this.collection);
       this.elementsCollection.get();
       this.elementsCollection.add(element).then((res) => {
 
-        this.elementDoc = this.afs.doc<ProductInterface>(this.collection+`/${res.id}`);
-      
+        this.elementDoc = this.afs.doc<ProductInterface>(this.collection + `/${res.id}`);
+
         this.elementDoc.update({
-          id:res.id
+          id: res.id
+        }).then(() => {
+          this.router.navigateByUrl(`/app/marketplace/m/(marketplace:product/${res.id})`);
+
         });
-      // this go to the product details page
-      //  this.router.navigate([`/exchange/transaction/my-elements/${res.id}`]);
-       
+        // this go to the product details page
+
+
       });
 
     })
@@ -64,7 +142,7 @@ export class ProductService {
 
   getOne(idElement: string) {
 
-    this.elementDoc = this.afs.doc<ProductInterface>(this.collection+`/${idElement}`);
+    this.elementDoc = this.afs.doc<ProductInterface>(this.collection + `/${idElement}`);
 
     return this.element = this.elementDoc.snapshotChanges().pipe(map(action => {
 
@@ -79,16 +157,20 @@ export class ProductService {
 
   }
 
-  update(idElement: string){
-    this.elementDoc = this.afs.doc<ProductInterface>(this.collection+`/${idElement}`);
-    this.elementDoc.update({  
-    })
-
+  update(product:ProductInterface) {
+    this.elementDoc = this.afs.doc<ProductInterface>(this.collection + `/${product.id}`);
+    return this.elementDoc.update(product)
   }
 
   delete(idElement: string) {
-    this.elementDoc = this.afs.doc<ProductInterface>(this.collection+`/${idElement}`);
-    return this.elementDoc;
+    this.elementDoc = this.afs.doc<ProductInterface>(this.collection + `/${idElement}`);
+    return this.elementDoc.delete();
+  }
+
+  changeStatus(product, status: string) {
+    product.status = status;
+    this.elementDoc = this.afs.doc<ProductInterface>(this.collection + `/${product.id}`);
+    return this.elementDoc.update(product);
   }
 
 }

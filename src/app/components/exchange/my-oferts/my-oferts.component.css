@@ -1,20 +1,12 @@
-table {
-  width: 100%;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td, th {
-  width: 25%;
-}
-
-
-
-
 /*--- START OFERT TABLE ---*/
+table,mat-paginator{
+  background-color: transparent;
+}
+.border-curve{
+  border-radius: 10px;
+
+}
+
 @media only screen and (max-width:810px ) {
   .title{
     display: none;
@@ -24,6 +16,9 @@ td, th {
     padding-right: 0%;
     margin-left: 0%;
     margin-right: 0%;
+  }
+  .border-curve{
+    border-radius: 0;
   }
 }
 
@@ -57,10 +52,13 @@ td, th {
 
 /*--- START OFERT TABLE ---*/
 thead tr{
+background-color: transparent;
 color: black;
 }
 
 tbody tr{
+background-color: transparent;
+height: 60px;
 }
 
 tbody button{
@@ -72,6 +70,16 @@ width: 100%;
 
 }
 
+
+@media only screen and (max-width:810px ) {
+
+.container{
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+}
 
 
 @media only screen and (max-width:480px) {
@@ -99,16 +107,27 @@ tbody button{
 
 
 
-.table-row:hover > td{
+tbody :hover{
 background-color: rgb(236, 236, 236);
 cursor:pointer; 
 cursor: hand;
 
 }
 
+img{
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  margin-top: 5px;
+}
 
 
-
+.table-row:hover > td{
+  background: whitesmoke;
+  cursor:pointer; 
+  cursor: hand;
+  
+  }
 
 /* -----START  TABLE ------*/
 .oferts-table{
@@ -124,10 +143,18 @@ padding: 3px;
 
 }
 
+.oferts-title-row{
+  background: transparent;
+  color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+
 
 
 .oferts-table-row-title{
-  font-size: 1.2em;
+  font-size: 1.45em;
   font-weight: 500;
 }
 .oferts-table-row-subtitle{
@@ -143,24 +170,13 @@ margin: 2px;
 
 
 .btn-ofert{
-  height: 40px;
-  width: 120px;
-  border-radius: 20px;
+  height: 30px;
+  border-radius: 15px;
+  width: 90px;
   font-size: 1em;
-    
+  
 }
 
-.btn-ofert-mobile{
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  margin-top: 5px;
-  height: 35px;
-  width: 80%;
-
-}
-.header-user-details{
-  width:30%;
-}
 
 .date{
   font-size: 0.8em;
@@ -173,35 +189,38 @@ margin: 2px;
   display: none;
 }
 
-.oferts-description{
-  font-size: 0.9em;
+.oferts-table-head-item{
+font-size: 0.7em;
 }
 
+.oferts-description{
+  font-size: 1.05em;
+  margin-top: 12px;
+}
 
+.btn-ofert-mobile{
+  font-size: 0.9em;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 85%;
+  margin-top: 10px;
+
+  
+}
 
 .btn-ofert-mobile .fas{
   font-size: 0.9em;
-  color: white;
 }
 
-.img-owner{
-  margin-top: 45px;
-  border-radius: 50%;
-  height: 45px;
-  width: 45px;
+.header-user-details{
+  width: 20%;
 }
-.img-partner{
-  border-radius: 50%;
-  height: 90px;
-  width: 90px;
-}
-
-
-
-
 @media only screen and (max-width:800px ) {
 
-
+.img{
+  width: 80px;
+  height: 80px;
+}
 
 .hidden-in-mobile{
   display: none;
@@ -227,8 +246,15 @@ margin: 2px;
   display: flex;
 }
 
+.oferts-title-row{
+
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+
+}
+
 .header-user-details{
-  width: 35%;
+  width: 40%;
 }
 
 }

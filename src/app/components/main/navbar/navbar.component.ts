@@ -12,44 +12,55 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  private isLogged: boolean = false;
-
-
-
-  private page_name='La red del Samán';
-
   constructor(private AuthService: AuthService, public afAuth: AngularFireAuth, private router: Router) { }
-
+  public user;
   ngOnInit() {
-    //this.getCurrentUser();
+  this.AuthService.isAuth().subscribe((user)=>{
+    this.user = user
+  })
   }
 
+  setStyleByRoute(url: string) {
+    if (url.includes('exchange')) {
+      document.getElementById('exchange').classList.add('active');
+    } else {
+      document.getElementById('exchange').classList.remove('active');
+    }
+    if (url.includes('marketplace')) {
+      document.getElementById('marketplace').classList.add('active');
+    } else {
+      document.getElementById('marketplace').classList.remove('active');
+    }
+    if (url.includes('myAccount')) {
+      document.getElementById('userAccount').classList.add('active');
+    } else {
+      document.getElementById('userAccount').classList.remove('active');
+    }
+    if (url.includes('forum')) {
+      document.getElementById('forum').classList.add('active');
+    } else {
+      document.getElementById('forum').classList.remove('active');
+    }
+  }
 
   onLogout() {
     this.AuthService.logoutUser()
       .then((res) => {
 
-
-
-        this.router.navigate(['login']);
+        this.router.navigate(['/login']);
 
       }).catch(err => console.log('err', err.mesage));
 
   }
 
-  private getCurrentUser() {
 
-    this.AuthService.isAuth().subscribe(auth => {
-      if (auth) {
 
-        this.isLogged = true;
-      } else {
-
-        this.isLogged = false;
-      }
-    });
+  isActive(name: string) {
+    if (this.router.getCurrentNavigation.toString().search(name)) {
+      return true
+    } else {
+      return false
+    }
   }
-
-
 
 }

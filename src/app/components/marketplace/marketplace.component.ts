@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-marketplace',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketplaceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
+
+  public query;
 
   ngOnInit() {
+  }
+
+  search(){
+    if(this.query.trim()){
+      this.router.navigateByUrl(`/app/marketplace/m/(marketplace:search/${this.query})`);
+    }
+    
   }
 
 }

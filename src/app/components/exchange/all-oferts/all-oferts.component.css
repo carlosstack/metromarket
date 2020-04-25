@@ -1,10 +1,11 @@
 /*--- START OFERT TABLE ---*/
-
-.border-curve{
-  border-radius: 10px;
+.table-container{
 
 }
 
+table,mat-paginator{
+  background-color: transparent;
+}
 @media only screen and (max-width:810px ) {
   .title{
     display: none;
@@ -114,14 +115,14 @@ cursor: hand;
 
 img{
   border-radius: 50%;
-  height: 90px;
-  width: 90px;
-  margin-top: 5px;
+  height: 60px;
+  width: 60px;
+  margin: 10px;
 }
 
 
 .table-row:hover > td{
-  background-color: rgb(236, 236, 236);
+  background: whitesmoke;
   cursor:pointer; 
   cursor: hand;
   
@@ -168,15 +169,12 @@ margin: 2px;
 
 
 .btn-ofert{
-  height: 40px;
-  width: 120px;
-  border-radius: 20px;
+  height: 30px;
+  border-radius: 15px;
+  width: 90px;
   font-size: 1em;
-    background: rgb(83, 83, 255);
-    background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
-    background: -o-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
-    background: -moz-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
-    background: linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: #2196F3;
+   
 }
 
 
@@ -201,8 +199,10 @@ font-size: 0.7em;
 }
 
 .btn-ofert-mobile{
+  font-size: 0.9em;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  margin-top: 10px;
   width: 85%;
   background: rgb(83, 83, 255);
   background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
@@ -220,7 +220,10 @@ font-size: 0.7em;
 }
 @media only screen and (max-width:800px ) {
 
-
+.img{
+  width: 80px;
+  height: 80px;
+}
 
 .hidden-in-mobile{
   display: none;
@@ -254,7 +257,7 @@ font-size: 0.7em;
 }
 
 .header-user-details{
-  width: 45%;
+  width: 40%;
 }
 
 }

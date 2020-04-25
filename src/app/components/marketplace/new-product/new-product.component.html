@@ -1,62 +1,399 @@
-<div class="row container">
-    
-    <h2 class="title text-left col-12">VENDER</h2>
+<div class=" ">
+
+    <div class="stepper ">
+
+        <div class="">
+            <div class="d-flex flex-column ">
+                <mat-vertical-stepper [linear]="true" #stepper>
+
+                    <ng-template matStepperIcon="edit">
+                        <li class="fas fa-check"></li>
+                    </ng-template>
+
+                    <ng-template matStepperIcon="done">
+                    </ng-template>
 
 
-        <div class="col-md-4">
-            Imagenes here
-                </div>
-        <div class="col-md-8">
-    <!--
-            <form class="was-validated" (submit)='add()'>
-                <div class="form-group">
-                    <label for="uname">Titulo:</label>
-                    <input [(ngModel)]="product.name" type="text" class="form-control" id="uname"
-                        placeholder="Enter username" name="uname" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                    <label for="uprice">Precio:</label>
-                    <input [(ngModel)]="product.price" type="number" class="form-control" id="uprice" placeholder="Precio"
-                        name="uprice" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                    <label for="desc">Descripción:</label>
-                    <textarea class="form-control" [(ngModel)]="product.description" rows="3" id="description"
-                        name="description" placeholder="Descripción" required></textarea>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
+                    <mat-step [stepControl]="formGroupProductTitle">
+                        <ng-template matStepLabel>
+                            <h6>Ingresa un título y el estado del producto</h6>
+                        </ng-template>
+                        <form class="" [formGroup]="formGroupProductTitle" novalidate>
 
-                <div class="form-group">
+                            <div class="flex-fill">
+                                <mat-form-field appearance="outline" class="mat-form-field">
+                                    <mat-label>Título</mat-label>
+                                    <input matInput #input maxlength="60"
+                                        placeholder="ej: Cooler Contigo 24 onz, Toyota Meru" type="text"
+                                        formControlName="title" class="input-right-align"
+                                        (keyup.Space)="input.value = toSentenceFormat(input.value)">
+                                    <mat-hint align="end">{{input.value?.length || 0}}/60</mat-hint>
 
-                        <div class="col-xs-6">
-                            <label for="categoria">Categoria:</label>
-                            <select class="form-control" id="categoria"  (change)="product.category=$event.target.value" required>
-                                <option value="" selected disabled hidden>Choose here</option>                                <option>Automóviles</option>
-                                <option>Electronica</option>
-                                <option>Ropa</option>
-                                <option>Juguetes</option>
-                                <option>Alimentos</option>
-                                <option>Zapatos</option>
-                            </select>
-                        </div>
-                    </div>
-                <button type="submit" class="btn btn-primary">Publicar</button>
-            </form>
-            -->
+                                </mat-form-field>
+                            </div>
+
+                            <mat-radio-group aria-label="Select an option" formControlName="quality"
+                                [color]="'primary'">
+                                <mat-radio-button value="Nuevo">Nuevo</mat-radio-button>
+                                <mat-radio-button value="Usado">Usado</mat-radio-button>
+                            </mat-radio-group>´
+
+
+                        </form>
+                        <button mat-button matStepperNext>Siguiente</button>
+
+
+                    </mat-step>
+                    <mat-step [stepControl]="formGroupProductGalery">
+
+                        <ng-template matStepLabel>
+                            <h6>Seleccione fotos e ingrese una descripción</h6>
+                        </ng-template>
+
+                        <form [formGroup]="formGroupProductGalery" novalidate>
+
+                            <label class="small p-1"><strong>Imagenes:</strong> {{galeryFiles.length}}/7</label><label
+                                class="small p-2" *ngIf="galeryFiles.length>0"><strong>Imagen principal:</strong>
+                                {{galeryFiles[0].name}}</label>
+                            <label class="small text-danger p-2"><strong>{{sizeError}}</strong></label>
+                            <label class="small p-2 text-danger" *ngIf="galeryFiles.length==0">Debe seleccionar al menos
+                                una
+                                imagen.
+                            </label>
+                            <div class="d-flex flex-wrap">
+                                <div class=" file-preview-zone" id="file-preview-zone" dropzone
+                                    (hovered)="toggleHover($event)" (dropped)="onDrop($event)"
+                                    [class.hovering]="isHovering">
+                                    <input id="file-upload" multiple formControlName="galery" type="file"
+                                        class="file-upload" accept=".png, .jpg" (change)="saveImgFile($event)">
+                                    <label id="label-file-upload" for="file-upload" class="custom-file-upload btn">
+                                    </label>
+                                </div>
+
+                                <ng-container *ngIf="editProduct">
+                                    <div *ngFor="let img of editProductGalery; let i=index">
+                                        <div class="file-preview-container img-container">
+                                            <img src="{{img}}" class="img img-fluid">
+                                            <button class="shadow-sm btn-trash" (click)="deleteImgEdit(i)">
+                                                <li class="fas fa-trash-alt"></li>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div *ngFor="let file of galeryFiles; let i=index">
+                                    <div id="{{file.name}}" class="file-preview-container">
+                                        <upload-task [file]="file" (cancel)="deleteImg($event)"
+                                            (finished)="onImgLoadFinished($event)"></upload-task>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex-fill description">
+                                <mat-form-field appearance="outline" class="mat-form-field">
+                                    <mat-label>Descripción</mat-label>
+                                    <textarea matInput #textArea maxlength="3000" rows="10" type="text"
+                                        formControlName="description" class="input-right-align"></textarea>
+
+                                    <mat-hint align="end">{{textArea.value?.length || 0}}/3000</mat-hint>
+                                </mat-form-field>
+                            </div>
+
+                        </form>
+                        <button mat-button matStepperPrevious>Anterior</button>
+                        <button mat-button matStepperNext>Siguiente</button>
+
+                    </mat-step>
+                    <mat-step [stepControl]="formGroupProductPrice">
+                        <ng-template matStepLabel>
+                            <h6>Ingresa el precio y selecciona la categoría</h6>
+                        </ng-template>
+                        <form class="" [formGroup]="formGroupProductPrice" novalidate>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Precio</mat-label>
+                                            <input matInput type="number" formControlName="price"
+                                                class="input-right-align price-input">
+                                            <span matSuffix class="p-2">
+                                                <mat-select [value]="'$'" formControlName="amountCurrency">
+                                                    <mat-option [value]="'$'">
+                                                        $
+                                                    </mat-option>
+                                                    <mat-option [value]="'Bs'">
+                                                        Bs
+                                                    </mat-option>
+                                                </mat-select>&nbsp;
+                                            </span>
+
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="flex-fill ">
+                                        <mat-form-field appearance="outline" class="mat-form-field">
+                                            <mat-label>Categoría</mat-label>
+                                            <mat-select formControlName="category">
+                                                <mat-option [value]="'vehiculos'">
+                                                    Vehículos
+                                                </mat-option>
+                                                <mat-option [value]="'electronica'">
+                                                    Electrónica
+                                                </mat-option>
+                                                <mat-option [value]="'casa y jardin'">
+                                                    Casa y jardín
+                                                </mat-option>
+                                                <mat-option [value]="'ropa y accesorios'">
+                                                    Ropa y accesorios
+                                                </mat-option>
+                                                <mat-option [value]="'pasatiempos'">
+                                                    Pasatiempos
+                                                </mat-option>
+                                                <mat-option [value]="'familia'">
+                                                    Familia
+                                                </mat-option>
+                                                <mat-option [value]="'alquileres'">
+                                                    Alquileres
+                                                </mat-option>
+                                                <mat-option [value]="'viviendas en venta'">
+                                                    Viviendas en venta
+                                                </mat-option>
+                                                <mat-option [value]="'entretenimiento'">
+                                                    Entretenimiento
+                                                </mat-option>
+                                                <mat-option [value]="'clasificados'">
+                                                    Clasificados
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        <mat-error class="small p-1" *ngIf="formGroupProductPrice.invalid">Debe completar todos los
+                            campos.
+                        </mat-error>
+                        <mat-error class="small p-1" *ngIf="!galeryLoadFinished()">Subiendo imagenes, espere por favor.
+                        </mat-error>
+                        <button mat-button matStepperPrevious>Anterior</button>
+                        <button *ngIf="!editProduct;else editBtn" class="btn btn-primary btn-submit"
+                            [disabled]="formGroupProductPrice.invalid || galeryFiles.length==0 || !galeryLoadFinished()"
+                            (click)="add()">Publicar</button>
+
+                        <ng-template #editBtn>
+                            <button class="btn btn-primary btn-submit"
+                                [disabled]="formGroupProductPrice.invalid || editProduct.galery.length==0 || !galeryLoadFinished()"
+                                (click)="saveEdited()">Guardar</button>
+                        </ng-template>
+
+                    </mat-step>
+
+                </mat-vertical-stepper>
+            </div>
+
         </div>
-    
-    
+
+
+
+
+
+        <!---
+        <mat-vertical-stepper [linear]="true" #stepper class="stepper">
+
+            <ng-template matStepperIcon="edit">
+                <li class="fas fa-check"></li>
+            </ng-template>
+
+            <ng-template matStepperIcon="done">
+            </ng-template>
+
+            <mat-step [stepControl]="formGroupProductTitle">
+                <form class="" [formGroup]="formGroupProductTitle" novalidate>
+                    <div class="col-12 ">
+
+                        <div class="flex-fill">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>Título</mat-label>
+                                <input matInput #input maxlength="60"
+                                    placeholder="ej: Cooler Contigo 24 onz, Toyota Meru" type="text"
+                                    formControlName="title" class="input-right-align"
+                                    (keyup.Space)="input.value = toSentenceFormat(input.value)">
+                                <mat-hint align="end">{{input.value?.length || 0}}/60</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+
+                        <mat-radio-group aria-label="Select an option" formControlName="quality" [color]="'primary'">
+                            <mat-radio-button value="Nuevo">Nuevo</mat-radio-button>
+                            <mat-radio-button value="Usado">Usado</mat-radio-button>
+                        </mat-radio-group>´
+
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="formGroupProductGalery">
+                <form [formGroup]="formGroupProductGalery" novalidate>
+
+                    <label class="small p-1"><strong>Imagenes:</strong> {{galeryFiles.length}}/7</label><label
+                        class="small p-2" *ngIf="galeryFiles.length>0"><strong>Imagen principal:</strong>
+                        {{galeryFiles[0].name}}</label>
+                    <label class="small text-danger p-2"><strong>{{sizeError}}</strong></label>
+                    <label class="small p-2 text-danger" *ngIf="galeryFiles.length==0">Debe seleccionar al menos
+                        una
+                        imagen.
+                    </label>
+                    <div class="d-flex flex-wrap">
+                        <div class=" file-preview-zone" id="file-preview-zone" dropzone (hovered)="toggleHover($event)"
+                            (dropped)="onDrop($event)" [class.hovering]="isHovering">
+                            <input id="file-upload" multiple formControlName="galery" type="file" class="file-upload"
+                                accept=".png, .jpg" (change)="saveImgFile($event)">
+                            <label id="label-file-upload" for="file-upload" class="custom-file-upload btn">
+                            </label>
+                        </div>
+
+                        <ng-container *ngIf="editProduct">
+                            <div *ngFor="let img of editProductGalery; let i=index">
+                                <div class="file-preview-container img-container">
+                                    <img src="{{img}}" class="img img-fluid">
+                                    <button class="shadow-sm btn-trash" (click)="deleteImgEdit(i)">
+                                        <li class="fas fa-trash-alt"></li>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div *ngFor="let file of galeryFiles; let i=index">
+                            <div id="{{file.name}}" class="file-preview-container">
+                                <upload-task [file]="file" (cancel)="deleteImg($event)"
+                                    (finished)="onImgLoadFinished($event)"></upload-task>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 ">
+                        <div class="flex-fill description">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>Descripción</mat-label>
+                                <textarea matInput #textArea maxlength="3000" rows="10" type="text"
+                                    formControlName="description" class="input-right-align"></textarea>
+
+                                <mat-hint align="end">{{textArea.value?.length || 0}}/3000</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="formGroupProductPrice">
+                <form class="" [formGroup]="formGroupProductPrice" novalidate>
+                    <div class="col-lg-6">
+                        <div class="flex-fill ">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>Precio</mat-label>
+                                <input matInput type="number" formControlName="price"
+                                    class="input-right-align price-input">
+                                <span matSuffix class="p-2">
+                                    <mat-select [value]="'$'" formControlName="amountCurrency">
+                                        <mat-option [value]="'$'">
+                                            $
+                                        </mat-option>
+                                        <mat-option [value]="'Bs'">
+                                            Bs
+                                        </mat-option>
+                                    </mat-select>&nbsp;
+                                </span>
+
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="flex-fill ">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>Categoría</mat-label>
+                                <mat-select formControlName="category">
+                                    <mat-option [value]="'vehiculos'">
+                                        Vehículos
+                                    </mat-option>
+                                    <mat-option [value]="'electronica'">
+                                        Electrónica
+                                    </mat-option>
+                                    <mat-option [value]="'casa y jardin'">
+                                        Casa y jardín
+                                    </mat-option>
+                                    <mat-option [value]="'ropa y accesorios'">
+                                        Ropa y accesorios
+                                    </mat-option>
+                                    <mat-option [value]="'pasatiempos'">
+                                        Pasatiempos
+                                    </mat-option>
+                                    <mat-option [value]="'familia'">
+                                        Familia
+                                    </mat-option>
+                                    <mat-option [value]="'alquileres'">
+                                        Alquileres
+                                    </mat-option>
+                                    <mat-option [value]="'viviendas en venta'">
+                                        Viviendas en venta
+                                    </mat-option>
+                                    <mat-option [value]="'entretenimiento'">
+                                        Entretenimiento
+                                    </mat-option>
+                                    <mat-option [value]="'clasificados'">
+                                        Clasificados
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </form>
+                <mat-error class="small p-1" *ngIf="formGroupProduct.invalid">Debe completar todos los campos.
+                </mat-error>
+                <mat-error class="small p-1" *ngIf="!galeryLoadFinished()">Subiendo imagenes, espere por favor.
+                </mat-error>
+                <button *ngIf="!editProduct;else editBtn" class="btn btn-primary btn-submit"
+                    [disabled]="formGroupProduct.invalid || galeryFiles.length==0 || !galeryLoadFinished()"
+                    (click)="add()">Publicar</button>
+
+                <ng-template #editBtn>
+                    <button class="btn btn-primary btn-submit"
+                        [disabled]="formGroupProduct.invalid || editProduct.galery.length==0 || !galeryLoadFinished()"
+                        (click)="saveEdited()">Guardar</button>
+                </ng-template>
+
+            </mat-step>
+        </mat-vertical-stepper>
+
+
+-->
     </div>
+
+
+
+
+
+
+
+</div>
 
 <ng-template #loading>
     <div class="container text-center">
 
-    
+
     </div>
 
 </ng-template>

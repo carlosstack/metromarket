@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConstantsService } from 'src/app/services/constants.service';
 import { OfertInterface } from "../../../../models/ofert";
 import { AuthService } from 'src/app/services/auth.service';
+import { OfertPreviewComponent } from '../../tools/ofert-preview/ofert-preview.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalConfirmComponent } from '../../tools/modal-confirm/modal-confirm.component';
 
 
 
@@ -17,8 +20,6 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class NewBuyComponent implements OnInit {
 
-
-
   public constants;
 
   @Input() public type;
@@ -30,7 +31,7 @@ export class NewBuyComponent implements OnInit {
 
   private ofert: OfertInterface = {};
 
-  constructor(private authService:AuthService,private normalOfertService: NormalOfertService, private formBuilder: FormBuilder, private constService: ConstantsService) { }
+  constructor(public dialog: MatDialog, private authService: AuthService, private normalOfertService: NormalOfertService, private formBuilder: FormBuilder, private constService: ConstantsService) { }
 
   ngOnInit() {
 
@@ -46,8 +47,7 @@ export class NewBuyComponent implements OnInit {
   buildFormAmountAndRate() {
     this.formGroupAmountAndRate = this.formBuilder.group({
       amountCurrency: ['$', [Validators.required]],
-      amountMin: ['', [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]\d*$/)]],
-      amountMax: [''],
+      amount: ['', [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]\d*$/)]],
       rate: ['', [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]\d*$/)]],
     });
   }
@@ -59,56 +59,49 @@ export class NewBuyComponent implements OnInit {
     });
   }
 
-  getAmountName() {
-    if (this.range) {
-      //esto pone el monto máximo a que sea requerido por el form.
-      this.formGroupAmountAndRate.get('amountMax').setValidators([Validators.required, Validators.min(1), Validators.pattern(/^[0-9]\d*$/)]);
-      this.formGroupAmountAndRate.get('amountMax').updateValueAndValidity();
-      return 'Monto mínimo';
-    } else {
 
-      //esto pone el monto máximo lo resetea para que no sea requerido en caso de desactivar la opcion rango.
-      this.formGroupAmountAndRate.get('amountMax').clearValidators();
-      this.formGroupAmountAndRate.get('amountMax').updateValueAndValidity();
-      return 'Monto';
-    }
+  openDialogPreview(): void {
+    this.authService.isAuth().subscribe((user) => {
+      this.setValuesToOfert();
+      const dialogRef = this.dialog.open(ModalConfirmComponent, {
+        width: '300px',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result) {
+          this.addOfert()
+        }
+      });
+    })
 
   }
-
-  getSlideToggleForRangeName() {
-    if (!this.range) {
-      return 'Activar rango!';
-    } else {
-      return 'Rango activado!';
-    }
-  }
-
 
   addOfert() {
-    this.setValuesToOfert();
     this.normalOfertService.addOfert(this.ofert);
   }
 
   setValuesToOfert() {
-
-
     this.authService.isAuth().subscribe(user => {
 
-    console.log(this.formGroupBanks.get('to').value);
-    this.ofert.phoneNumber = user.phoneNumber
-    this.ofert.amountMin = this.formGroupAmountAndRate.get('amountMin').value;
-    this.ofert.amountMax = this.formGroupAmountAndRate.get('amountMax').value;
-    this.ofert.rate = this.formGroupAmountAndRate.get('rate').value;
-    this.ofert.currencyAmount = this.formGroupAmountAndRate.get('amountCurrency').value;
-    this.ofert.dateDelivery='';
-    this.ofert.acceptedBy='';
-  
+      this.ofert.amountToSend = this.formGroupAmountAndRate.get('amount').value;
+      this.ofert.currencyAmountToSend = this.formGroupAmountAndRate.get('amountCurrency').value;
 
-    this.getDataFromPayForm(this.formGroupBanks.get('to').value);
+      this.ofert.rate = this.formGroupAmountAndRate.get('rate').value;
+      this.ofert.currencyRate = 'Bs';
 
-    this.ofert.from = this.formGroupBanks.get('from').value;
-    this.ofert.type = this.type;
-    this.ofert.status = 'new';
+      this.ofert.amountToReceive = this.ofert.amountToSend * this.ofert.rate
+      this.ofert.currencyAmountToReceive = this.ofert.currencyRate
+
+      this.ofert.acceptedBy = '';
+
+
+      this.getDataFromPayForm(this.formGroupBanks.get('to').value);
+
+      this.ofert.from = this.formGroupBanks.get('from').value;
+      this.ofert.type = this.type;
+      this.ofert.statusOwner = 'NEW';
+      this.ofert.status = 'NEW';
     })
   }
 
@@ -118,14 +111,14 @@ export class NewBuyComponent implements OnInit {
 
   getDataFromPayForm(data) {
 
-    this.ofert.payForms=[{}];
-    this.ofert.payFormsAb=[{}];
+    this.ofert.payForms = [{}];
+    this.ofert.payFormsAb = [{}];
 
     for (let index = 0; index < data.length; index++) {
 
       this.ofert.payForms[index] = data[index].name;
       this.ofert.payFormsAb[index] = data[index].ab;
-      
+
     }
   }
 

@@ -1,31 +1,52 @@
-
-
-<nav class="navbar navbar-expand ml-auto nav-top shadow-sm">
+<nav class="navbar navbar-expand nav-top shadow-sm">
     <div class="container-fluid">
         <!-- Brand -->
-        <div class="d-flex">
-            <div  hidden class="btn bg-white"><li class="fas fa-bars p-2 nav-bars-btn"></li></div>
-            <img   class="img-fluid logo " src="./../../../../assets/icon2.png">
-
-
-            <a  class="navbar-brand p-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink=""
-                id="title">Samannet</a>
-
+        <div class="logo-background">
+            <img class="img-fluid logo " src="./../../../../assets/alizon.png">
         </div>
         <!-- Navbar links -->
-        <div class="collapse navbar-collapse w-100 order-md-0 dual-collapse2 nav-item nav-links-group flex-row-reverse text-center">
+        <div class="navbar-collapse nav-links-group flex-row-reverse hidden-in-mobile">
 
-            <div class="d-flex">
-            <a class="nav-link notify" title="Notificaciones" 
-                routerLink="/"><i class="far fa-bell fa-2x"></i> <span hidden class="badge badge-danger">2</span></a>
+            <a id="exchange" title="Exchange" class=" nav-link hidden-in-mobile "
+                [routerLink]="['/app/exchange/e',{ outlets: { exchange: ['all'] } }]">
+                <li class="fas fa-exchange-alt"></li>
+            </a>
+            <a id="marketplace" title="Marketplace" class=" nav-link hidden-in-mobile"
+                [routerLink]="['/app/marketplace/m',{ outlets: { marketplace: ['products'] } }]">
+                <li class="fas fa-store "></li>
+            </a>
+            <a hidden id="forum" title="Libros y Guías" class=" nav-link hidden-in-mobile"
+                [routerLink]="['/app/ebookShare/es',{ outlets: { ebook: ['all'] } }]">
+                <i class="fas fa-book"></i>
+            </a>
+
+            <a id="answers" title="Preguntas y Respuestas" class=" nav-link hidden-in-mobile"
+                [routerLink]="['/app/answers/a',{ outlets: { answer: ['activity'] } }]">
+                <i class="far fa-comment-alt" hidden></i>
+            </a>
+
+        </div>
+        <button type="button" class="btn btn-outline-secondary mr-2" placement="bottom"
+        ngbPopover="This is simple example form ItSolutionStuff.com" popoverTitle="Popover on bottom">
+  Popover on bottom
+</button>
+        <div class="navbar-collapse flex-row-reverse ">
             
+            <div class="dropdown hidden-in-mobile" dropdown>
+                <div dropdownToggle role="button">
+                    <!-- {2} -->
+                    <a class="btn nav-link small user" title="Notificaciones"> <li class="far fa-user"></li>
+                    </a>
+                </div>
+                <div *dropdownMenu class="dropdown-menu">
+                    <a class="dropdown-item small btn" routerLink="/app/myAccount">Mi Perfil</a>
+                    <a class="dropdown-item small btn" (click)="onLogout()">Salir</a>
+                </div>
             </div>
-            
-            <a  class="nav-link page-name" routerLink="/app/myAccount">Mi cuenta</a>
-            <a class=" nav-link page-name" 
-                [routerLink]="['/app/exchange/e',{ outlets: { exchange: ['all'] } }]">Exchange</a>
-            <a class=" nav-link page-name" [routerLink]="['/app/marketplace/m',{ outlets: { marketplace: ['products'] } }]">Marketplace</a>
+            <a id="answers" title="Preguntas y Respuestas" class=" nav-link hidden-in-mobile"
+            [routerLink]="['/app/answers/a',{ outlets: { answer: ['activity'] } }]">
+            <i class="far fa-comment-alt" ></i>
+        </a>
         </div>
     </div>
 </nav>
-<nav class="navbar navbar-expand ml-auto toolbar "></nav>

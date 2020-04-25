@@ -1,180 +1,198 @@
-<div class="container-fluid">
+<div class="container text-dark">
     <div class="row">
-
-
         <div class="process col-12">
             <div class="process-row">
-                <div class="process-step">
-                    <button [style.background-color]="getColorStatusNew(ofert.status)" type="button"
-                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                <div class="process-step ">
+                    <button [style.background-color]=" getColorStatusNew(getStatus())"  type="button"
+                        class="btn btn-circle " disabled="disabled"><i
                             class="fas fa-user fa-2x"></i></button>
+                    <div class="small text-secondary">Esperando</div>
                 </div>
-                <div class="process-step">
-                    <button [style.background-color]="getColorStatusPending(ofert.status)" type="button"
-                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                <div class="process-step ">
+                    <button [style.background-color]="getColorStatusPending(getStatus())" type="button"
+                        class="btn btn-circle " disabled="disabled"><i
                             class="fas fa-tasks fa-2x"></i></button>
-                </div>
-                <div class="process-step" *ngIf="ofert.status!='canceled-and-waiting-for-rating'">
-                    <button [style.background-color]="getColorStatusWaiting(ofert.status)" type="button"
-                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
-                            class="fas fa-thumbs-up fa-2x"></i></button>
-                </div>
-                <div *ngIf="ofert.status==='canceled-and-waiting-for-rating'" class="process-step">
-                    <button type="button" class="btn btn-default btn-circle shadow-sm bg-danger" disabled="disabled"><i
-                            class="fas fa-thumbs-up fa-2x"></i></button>
+                    <div class="small text-secondary">Procesando</div>
+
                 </div>
 
+                <div class="process-step ">
+                    <button [style.background-color]="getColorStatusWaiting(getStatus())" type="button"
+                        class="btn btn-circle " disabled="disabled"><i
+                            class="fas fa-star fa-2x"></i></button>
+                    <div class="small text-secondary">Calificando</div>
+                </div>
 
-                <div *ngIf="ofert.status!='canceled-and-finalized' && ofert.status!='canceled-by-owner'"
-                    class="process-step">
-                    <button [style.background-color]="getColorStatusFinalized(ofert.status)" type="button"
-                        class="btn btn-default btn-circle shadow-sm" disabled="disabled"><i
+                <div *ngIf="getStatus()!='CANCELED'" class="process-step ">
+                    <button [style.background-color]="getColorStatusFinalized(getStatus())" type="button"
+                        class="btn  btn-circle " disabled="disabled"><i
                             class="fas fa-check-double fa-2x"></i></button>
+                    <div class="small text-secondary">Completada</div>
+
                 </div>
 
-                <div *ngIf="ofert.status==='canceled-and-finalized'" class="process-step">
-                    <button [style.background-color]="getColorStatusFinalized(ofert.status)" type="button"
-                        class="btn btn-default bg-danger btn-circle" disabled="disabled"><i
+                <div *ngIf="getStatus()==='CANCELED'" class="process-step ">
+                    <button type="button" [style.background-color]=" getColorStatusCanceled(getStatus())"
+                        class="btn   btn-circle" disabled="disabled"><i
                             class="fas fa-times fa-2x"></i></button>
+                    <div class="small text-secondary">Cancelada</div>
                 </div>
 
-                <div *ngIf="ofert.status==='canceled-by-owner'" class="process-step">
-                    <button type="button" class="btn btn-default btn-circle shadow-sm bg-danger" disabled="disabled"><i
-                            class="fas fa-times fa-2x"></i></button>
-                </div>
 
             </div>
 
-        </div>
 
-        <div class="col-12 p-3">
+
+        </div>
+        <div class="col-12">
 
             <div class="row">
 
-                <div class="col-md-4 col-left">
+                <div class="col-lg-4">
 
-                    <div class="profile-sidebar shadow-sm bg-white">
+                    <div class="profile-sidebar">
                         <!-- SIDEBAR USERPIC -->
                         <div class="profile-userpic">
                             <img src="{{person.photoUrl}}" class="img-fluid mx-auto d-block img-thumbnail" alt="">
                         </div>
-                        <!-- END SIDEBAR USERPIC -->
-                        <!-- SIDEBAR USER TITLE -->
-                        <div class="profile-usertitle">
-                            <div class="profile-usertitle-name">
-                                @{{person.username}}
-                            </div>
-                            <div class="profile-usertitle-job">
-                                <li class="fas fa-user-check"></li> Verificado
-                            </div>
-                        </div>
-                        <!-- END SIDEBAR USER TITLE -->
-                        <!-- APP RATING -->
+                        <table class="table small">
 
-                        <app-rating [user]="person.username"></app-rating>
+                            <tbody>
+                                <tr>
+                                    <th>Nombre y Apellido: </th>
+                                    <td>
+                                        {{person.firstName}} {{person.lastName}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Genéro: </th>
+                                    <td>
+                                        {{person.gender}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>CI: </th>
+                                    <td>
+                                        {{person.dni}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Telefono: </th>
+                                    <td>
+                                        {{person.phone_number}}
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                         <!-- END APP RAITN -->
-                        <!-- SIDEBAR MENU -->
-                        <nav class="profile-usermenu ">
-                            <button class="d-flex btn justify-content-center align-items-center nav-link"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                                [routerLink]="[{ outlets: {exchange: ['my-oferts'] } }]">
-                                <i class="p-2 fas fa-user-cog"></i>
-                                <div class="text-btn"> Configuración</div>
-                            </button>
-
-
-
-                        </nav>
-                        <!-- END MENU -->
                     </div>
 
                 </div>
-                <div class="col-md-8  col-right">
+                <div class="col-lg-8 ">
+                    <div class="col-right ">
+                        <table class="table transaction-details-table small">
+                            <thead class="">
+                                <tr>
+                                    <td class="">Publicado el día:</td>
+                                    <td>
+                                        <div> {{ ofert.date | date:'short' }}</div>
+                                    </td>
+                                </tr>
 
+                            </thead>
+                            <tbody>
+                                <tr class="table-transaction-id">
+                                    <td>ID</td>
+                                    <td> {{ ofert.id }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Tipo de transacción: </td>
+                                    <td>
+                                        {{ofert.type}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tasa: </td>
+                                    <td class=""> {{ ofert.rate }} {{ofert.currencyRate}} </td>
 
-                    <div class="alert alert-info p-2 shadow-sm">Importante:</div>
+                                </tr>
+                                <tr>
+                                    <td>Monto a entregar / transferir:</td>
+                                    <td>
+                                        <div class="">
+                                            {{ ofert.amountToSend + ofert.currencyAmountToSend  }}&nbsp;
+                                            {{ ofert.from }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Monto a recibir:</td>
+                                    <td class="d-flex">
+                                        {{ ofert.amountToReceive}}{{ofert.currencyAmountToReceive }}&nbsp;
+                                        <div class="" *ngFor="let payForm of ofert.payForms">
+                                            {{ payForm }}.&nbsp;
+                                        </div>
+                                    </td>
+                                </tr>
 
-                    <table class="table bg-white transaction-details-table shadow-sm">
-                        <thead>
-                            <tr>
-                                <th>ID DE TRANSACCIÓN: {{ ofert.id }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="">{{ofert.type}} {{ ofert.amountMin + ofert.currencyAmount}}<div
-                                            *ngIf="ofert.amountMax > 0"> - {{ofert.amountMax + ofert.currencyAmount}}</div>
-                                        {{ ofert.from }}</div> pago por: {{ ofert.payForms }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="">TASA: {{ ofert.rate }} Bs.</td>
+                            </tbody>
+                        </table>
+                        <div class=" action-box d-flex justify-content-center align-items-center ">
+                            <!--left col-->
+                            <div class=" text-center">
+                                <h4 *ngIf="(getStatus()==='NEW') && ofert.ownerUID===currentUserUID">
+                                    ¿Desea cancelar la transacción?</h4>
 
-                            </tr>
-                        </tbody>
-                    </table>
+                                <h4 *ngIf="getStatus()==='ACCEPTED'">
+                                    ¿Se ha completado la transacción?</h4>
 
-                    <div class="option alert alert-light shadow-sm">
-                        <!--left col-->
-                        <div class="success cardbox p-5 text-center ">
-                            <h3 *ngIf="(ofert.status==='pending' || ofert.status==='new') && type==='my-oferts'">
-                                ¿Desea
-                                cancelar la
-                                transacción?</h3>
+                                <h4 *ngIf="getStatus()==='COMPLETED'">
+                                    ¡Transacción completada!
+                                </h4>
+                                <h4 *ngIf="getStatus()==='CANCELED'">
+                                    ¡Transacción cancelada!
+                                </h4>
+                                <h4
+                                    *ngIf="getStatus()==='ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING' || getStatus()==='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'">
+                                    ¿Recomendarías a este compañero?
+                                </h4>
 
-                            <h3 *ngIf="ofert.status==='pending' && type==='accepted-oferts'">¿Se ha completado con
-                                éxito
-                                la
-                                transacción?</h3>
+                                <div class="">
+                                    <button class="btn btn-secondary btn-action "
+                                        *ngIf="(getStatus()==='NEW') && ofert.ownerUID===currentUserUID"
+                                        (click)="openDialogToCancel()">CANCELAR</button>
 
-                            <h3 *ngIf="ofert.status==='finalized'"><br>¡Transacción completada con exito!<br><br>
-                            </h3>
-                            <h3 *ngIf="ofert.status==='canceled-and-finalized'"><br>¡Transacción cancelada!<br><br>
-                            </h3>
-                            <h3 *ngIf="ofert.status==='canceled-by-owner'"><br>¡Transacción cancelada!<br><br></h3>
-                            <h3 *ngIf="ofert.status==='waiting-for-rating'">¡Transacción completada con exito!,
-                                califica
-                                a
-                                tu compañero</h3>
-                            <h3 *ngIf="ofert.status==='canceled-and-wating-for-rating'">¡Transacción cancelada!,
-                                califica a
-                                tu compañero</h3>
+                                    <button class="btn btn-primary btn-action "
+                                        *ngIf="getStatus()==='ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING'"
+                                        (click)="openSuccesful()">CALIFICAR</button>
 
-                            <div class="btn-group">
-                                <button class="btn btn-danger"
-                                    *ngIf="(ofert.status==='new' || ofert.status==='pending') && type==='my-oferts'"
-                                    mat-raised-button (click)="openDialogToCancel()">Cancelar</button>
+                                    <button class="btn btn-primary btn-action"
+                                        *ngIf="getStatus()==='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'"
+                                        (click)="openUnsuccesful()">CALIFICAR</button>
 
-                                <button class="btn btn-success" *ngIf="ofert.status==='waiting-for-rating'"
-                                    mat-raised-button (click)="openSuccesful()">Calificar</button>
+                                    <button class="btn btn-primary btn-action" *ngIf="getStatus()==='ACCEPTED'"
+                                        (click)="openDialogSuccess()">SI</button>
 
-                                <button class="btn btn-success" *ngIf="ofert.status==='canceled-and-wating-for-rating'"
-                                    mat-raised-button (click)="openUnsuccesful()">Calificar</button>
+                                    <button class="btn btn-secondary btn-action" *ngIf="getStatus()==='ACCEPTED'"
+                                        (click)="openDialogUnsuccess()">NO</button>
 
+                                    <button class="btn btn-primary btn-action" *ngIf="canChange()"
+                                        (click)="openDialogSuccess()">CAMBIAR A COMPLETADO</button>
 
-                                <button class="btn btn-success"
-                                    *ngIf="ofert.status==='pending' && type==='accepted-oferts'" mat-raised-button
-                                    (click)="openDialogSuccess()">SI</button>
-
-                                <button class="btn btn-danger"
-                                    *ngIf="ofert.status==='pending' && type==='accepted-oferts'" mat-raised-button
-                                    (click)="openDialogUnsuccess()">NO</button>
+                                </div>
 
                             </div>
 
                         </div>
-
                     </div>
-
-
                 </div>
-
 
             </div>
 
         </div>
 
     </div>
-    
+
 </div>

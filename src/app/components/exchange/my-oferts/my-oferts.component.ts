@@ -16,39 +16,32 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class MyOfertsComponent implements OnInit {
 
-  displayedColumns: string[] = ['owner', 'type', 'amountMin', 'payForms'];
+  displayedColumns: string[] = ['type','owner', 'amountMin', 'payForms','date', 'rate'];
   dataSource: MatTableDataSource<OfertInterface>;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  
+  public currentUID:string;
   constructor(private normalOfert: NormalOfertService, private authService: AuthService, private userService: UserService) {
     this.authService.isAuth().subscribe(user => {
-
-
-      this.userService.getMyOferts(user.displayName).subscribe(oferts => {
+      this.currentUID = user.uid;
+      this.normalOfert.getMyOferts(user.uid).subscribe(oferts => {
         this.oferts = oferts;
         this.dataSource = new MatTableDataSource(this.oferts);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    
-
-        
       })
 
     })
    }
 
   public oferts;
-
-
-  public type = 'my-oferts';
-
-  public currentUsername = '';
+  public currentUserUID;
 
   ngOnInit() {
-
-  
+    this.authService.isAuth().subscribe((user)=>{
+      this.currentUserUID = user.uid
+    })
 
   }
 
@@ -62,43 +55,47 @@ export class MyOfertsComponent implements OnInit {
 
   getColor(status: string) {
     switch (status) {
-      case 'new':
-        return 'blue';
-      case 'pending':
-        return 'green';
-      case 'waiting-for-rating':
-        return 'orange';
-      case 'finalized':
+      case 'ACCEPTED':
+        return 'teal';
+      case 'ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING':
+        return 'coral';
+      case 'ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING':
+        return 'coral';
+      case 'NEW':
+        return 'dodgerblue';
+      case 'CANCELED':
         return 'gray';
-      case 'canceled-and-finalized':
-        return 'gray';
-      case 'canceled-by-owner':
-        return 'gray';
-      case 'canceled-and-waiting-for-rating':
+      case 'COMPLETED':
         return 'gray';
     }
   }
 
-  getStatus(ofert: OfertInterface) {
-    switch (ofert.status) {
-      case 'new':
+  getStatus(status) {
+    switch (status) {
+      case 'NEW':
         return 'En espera';
-      case 'pending':
+      case 'ACCEPTED':
         return 'Aceptado';
-      case 'waiting-for-rating':
+      case 'SUCCESS_AND_WAITING_FOR_RATING':
         return 'Por calificar';
-      case 'finalized':
-        return 'Finalizado';
-      case 'canceled-and-finalized':
+      case 'UNSUCCESS_AND_WAITING_FOR_RATING':
+        return 'Por calificar';
+      case 'CANCELED':
         return 'Cancelado';
-      case 'canceled-by-owner':
-        return 'Cancelado';
-      case 'canceled-and-waiting-for-rating':
-        return 'Cancelado';
+      case 'COMPLETED':
+        return 'Completado';
     }
   }
 
   getDate(ofert: OfertInterface) {
     return Date.now();
   }
+
+getStatusByOfert(ofert) {
+  if (this.currentUserUID == ofert.ownerUID) {
+    return ofert.statusOwner;
+  } else if (this.currentUserUID == ofert.acceptedByUID) {
+    return ofert.statusAcceptedBy;
+  }
+}
 }

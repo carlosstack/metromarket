@@ -1,104 +1,89 @@
-<div class="container">
+<div class="container p-4">
 
-    <div  class="row">
+    <div class="row">
 
         <div class="col-sm-12"></div>
 
-        <div *ngIf="!submit && partner; else loading" class="col-sm-12">
-     
-            <div  class="text-center">
-                <h4 mat-dialog-title>Califica a tu compañero: @{{ partner.username }}</h4>
+        <div class="col-sm-12">
 
-                <div *ngIf="value===0" class="rating">
-
-                    <span id="1" (click)="setValue(5)" class="btn far fa-star"></span><span id="2" (click)="setValue(4)"
-                        class="btn far fa-star">
-                    </span><span id="3" (click)="setValue(3)" class="btn far fa-star"></span><span (click)="setValue(2)"
-                        id="4" class="btn far fa-star">
-                    </span><span id="5" class="btn far fa-star" (click)="setValue(1)"></span>
-                </div>
-                <div *ngIf="value===1" class="rating">
-
-                    <span id="1" (click)="setValue(5)" class="btn far fa-star"></span><span id="2" (click)="setValue(4)"
-                        class="btn far fa-star">
-                    </span><span id="3" (click)="setValue(3)" class="btn far fa-star"></span><span (click)="setValue(2)"
-                        id="4" class="btn far fa-star">
-                    </span><span id="5" class="btn fas fa-star" (click)="setValue(1)"></span>
-                </div>
-                <div *ngIf="value===2" class="rating">
-
-                    <span id="1" (click)="setValue(5)" class="btn far fa-star"></span><span id="2" (click)="setValue(4)"
-                        class="btn far fa-star">
-                    </span><span id="3" (click)="setValue(3)" class="btn far fa-star"></span><span (click)="setValue(2)"
-                        id="4" class="btn fas fa-star">
-                    </span><span id="5" class="btn fas fa-star" (click)="setValue(1)"></span>
-                </div>
-                <div *ngIf="value===3" class="rating">
-
-                    <span id="1" (click)="setValue(5)" class="btn far fa-star"></span><span id="2" (click)="setValue(4)"
-                        class="btn far fa-star">
-                    </span><span id="3" (click)="setValue(3)" class="btn fas fa-star"></span><span (click)="setValue(2)"
-                        id="4" class="btn fas fa-star">
-                    </span><span id="5" class="btn fas fa-star" (click)="setValue(1)"></span>
-                </div>
-                <div *ngIf="value===4" class="rating">
-
-                    <span id="1" (click)="setValue(5)" class="btn far fa-star"></span><span id="2" (click)="setValue(4)"
-                        class="btn fas fa-star">
-                    </span><span id="3" (click)="setValue(3)" class="btn fas fa-star"></span><span (click)="setValue(2)"
-                        id="4" class="btn fas fa-star">
-                    </span><span id="5" class="btn fas fa-star" (click)="setValue(1)"></span>
-                </div>
-                <div *ngIf="value===5" class="rating">
-
-                    <span id="1" (click)="setValue(5)" class="btn fas fa-star"></span><span id="2" (click)="setValue(4)"
-                        class="btn fas fa-star">
-                    </span><span id="3" (click)="setValue(3)" class="btn fas fa-star"></span><span (click)="setValue(2)"
-                        id="4" class="btn fas fa-star">
-                    </span><span id="5" class="btn fas fa-star" (click)="setValue(1)"></span>
-                </div>
-
+            <div class="">
+                <h4 mat-dialog-title>Califica a tu compañero: {{ partner.firstName }} {{partner.lastName}}</h4>
             </div>
 
-            <div class="text-center">
-                <br><br>
-                    <label for="sel1"><h5>Transacción no llevada a cabo por:</h5></label>
-                    <select class="form-control" id="sel1" (change)="rating.status=$event.target.value">
-                        <option>Seleccione una opción</option>
-                        <option>Fondos Insuficientes</option>
-                        <option>Decidí no hacerlo</option>
-                        <option>Compañero no se comunicó</option>
-                    </select>
-                </div>
 
-            <div class="text-center">
-                <br>
-                <h2>Deja tus comentarios</h2>
-                <br>
-                <!--
-                <form action="">
-                    <div class="form-group">
-                        <textarea [(ngModel)]="rating.comment" class="form-control" rows="3" id="comment" name="text"></textarea>
+            <form class="register-form" [formGroup]="formGroupRating" novalidate>
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <div class="flex-fill ">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>Transacción no llevada a cabo por</mat-label>
+                                <mat-select formControlName="excuse">
+                                    <mat-option [value]="'Masculino'">
+                                        Fondos Insuficientes
+                                    </mat-option>
+                                    <mat-option [value]="'Femenino'">
+                                        Decidí no hacerlo
+                                    </mat-option>
+                                    <mat-option [value]="'Otro'">
+                                        Compañero no se comunicó
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+
+                        <div class="flex-fill ">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>¿Recomendarías a este usuario?</mat-label>
+                                <mat-select formControlName="type">
+                                    <mat-option [value]="'POSITIVE'">
+                                        SI
+                                    </mat-option>
+                                    <mat-option [value]="'NEGATIVE'">
+                                        NO
+                                    </mat-option>
+                                    <mat-option [value]="'NEUTRAL'">
+                                        NEUTRAL
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+
+                        <div class="flex-fill ">
+                            <mat-form-field appearance="outline" class="mat-form-field">
+                                <mat-label>Comentarios sobre la Transacción</mat-label>
+                                <input matInput type="text" formControlName="comment" class="input-right-align">
+                            </mat-form-field>
+                        </div>
+
                     </div>
 
 
-                </form>-->
-            </div>
 
+                </div>
 
+            </form>
 
-            <button (click)="onSubmit()" type="submit" class=" btn btn-warning">Enviar calificación</button>
+            <button class="btn btn-primary" (click)="onSubmit()" [disabled]="formGroupRating.invalid" *ngIf="!submit; else loading">
+                 CALIFICAR
+            </button>
 
         </div>
 
         <ng-template #loading>
-        
-            </ng-template>
-        <br>
-        
+            <div class="col-12 d-flex justify-content-center">
+                <mat-spinner diameter="40" class="custom-spinner"></mat-spinner>
+            </div>
+        </ng-template>
 
 
-        <br><br><br><br>
+
     </div>
-
-   

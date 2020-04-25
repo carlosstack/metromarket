@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>¿Esta seguro?</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="profile-userpic text-center">
+                        <img src="{{ofert.ownerPhotoUrl}}" class="img-fluid mx-auto d-block img-thumbnail" alt="">
+                        {{ofert.owner}}
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <app-rating [UID]="userUID"></app-rating>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12">
+            <table class="table bg-white transaction-details-table small">
+                <tbody>
+
+                    <tr>
+                        <td> Tipo de transacción: </td>
+                        <td>
+                            {{ofert.type}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tasa: </td>
+                        <td class=""> {{ ofert.rate }} {{ofert.currencyRate}} </td>
+
+                    </tr>
+                    <tr>
+                        <td>Monto a entregar / transferir:</td>
+                        <td>
+                            <div class="">
+                                {{ ofert.amountToSend + ofert.currencyAmountToSend  }}&nbsp;
+                                {{ ofert.from }}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Monto a recibir:</td>
+                        <td class="d-flex">
+                            {{ ofert.amountToReceive}}{{ofert.currencyAmountToReceive }}&nbsp;
+                            <div class="" *ngFor="let payForm of ofert.payForms">
+                                {{ payForm }}.&nbsp;
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<div mat-dialog-actions>
+    <div class="btn-group text-center">
+        <button (click)="onNoClick()" class="btn btn-secondary"> NO </button>
+        <button [mat-dialog-close]="answer" cdkFocusInitial class="btn btn-primary"> SI </button>
+    </div>
+</div>

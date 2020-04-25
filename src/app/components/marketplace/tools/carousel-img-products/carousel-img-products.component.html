@@ -7,51 +7,60 @@
             <input type="radio" name="slides" id="slide-4">
             <input type="radio" name="slides" id="slide-5">
             <input type="radio" name="slides" id="slide-6">
+            <input type="radio" name="slides" id="slide-7">
             <ul class="carousel__slides">
                 <li class="carousel__slide">
                     <figure>
                         <div>
-                            <img src="https://picsum.photos/id/1041/800/450" alt="">
+                            <img src="{{galery[0]}}" alt="">
                         </div>
                 
                     </figure>
                 </li>
-                <li class="carousel__slide">
+                <li class="carousel__slide" *ngIf="galery[1]">
                     <figure>
                         <div>
-                            <img src="https://picsum.photos/id/1043/800/450" alt="">
+                            <img src="{{galery[1]}}" alt="">
                         </div>
          
                     </figure>
                 </li>
-                <li class="carousel__slide">
+                <li class="carousel__slide" *ngIf="galery[2]">
                     <figure>
                         <div>
-                            <img src="https://picsum.photos/id/1044/800/450" alt="">
+                            <img src="{{galery[2]}}" alt="">
                         </div>
                      
                     </figure>
                 </li>
-                <li class="carousel__slide">
+                <li class="carousel__slide" *ngIf="galery[3]">
                     <figure>
                         <div>
-                            <img src="https://picsum.photos/id/1045/800/450" alt="">
+                            <img src="{{galery[3]}}" alt="">
                         </div>
                     
                     </figure>
                 </li>
-                <li class="carousel__slide">
+                <li class="carousel__slide" *ngIf="galery[4]">
                     <figure>
                         <div>
-                            <img src="https://picsum.photos/id/1049/800/450" alt="">
+                            <img src="{{galery[4]}}" alt="">
                         </div>
                    
                     </figure>
                 </li>
-                <li class="carousel__slide">
+                <li class="carousel__slide" *ngIf="galery[5]">
                     <figure>
                         <div>
-                            <img src="https://picsum.photos/id/1052/800/450" alt="">
+                            <img src="{{galery[5]}}" alt="">
+                        </div>
+                      
+                    </figure>
+                </li>
+                <li class="carousel__slide" *ngIf="galery[6]">
+                    <figure>
+                        <div>
+                            <img src="{{galery[6]}}" alt="">
                         </div>
                       
                     </figure>
@@ -59,22 +68,25 @@
             </ul>    
             <ul class="carousel__thumbnails">
                 <li>
-                    <label for="slide-1"><img src="https://picsum.photos/id/1041/150/150" alt=""></label>
+                    <label for="slide-1"><img src="{{galery[0]}}" alt=""></label>
                 </li>
-                <li>
-                    <label for="slide-2"><img src="https://picsum.photos/id/1043/150/150" alt=""></label>
+                <li *ngIf="galery[1]">
+                    <label for="slide-2"><img src="{{galery[1]}}" alt=""></label>
                 </li>
-                <li>
-                    <label for="slide-3"><img src="https://picsum.photos/id/1044/150/150" alt=""></label>
+                <li *ngIf="galery[2]">
+                    <label for="slide-3"><img src="{{galery[2]}}" alt=""></label>
                 </li>
-                <li>
-                    <label for="slide-4"><img src="https://picsum.photos/id/1045/150/150" alt=""></label>
+                <li *ngIf="galery[3]">
+                    <label for="slide-4"><img src="{{galery[3]}}" alt=""></label>
                 </li>
-                <li>
-                    <label for="slide-5"><img src="https://picsum.photos/id/1049/150/150" alt=""></label>
+                <li *ngIf="galery[4]">
+                    <label for="slide-5"><img src="{{galery[4]}}" alt=""></label>
                 </li>
-                <li>
-                    <label for="slide-6"><img src="https://picsum.photos/id/1052/150/150" alt=""></label>
+                <li *ngIf="galery[5]">
+                    <label for="slide-6"><img src="{{galery[5]}}" alt=""></label>
+                </li>
+                <li *ngIf="galery[6]">
+                    <label for="slide-7"><img src="{{galery[6]}}" alt=""></label>
                 </li>
             </ul>
         </div>

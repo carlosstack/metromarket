@@ -1,199 +1,201 @@
-.container{
-padding-top: 5px;
-padding-bottom: 5px;
-}
-a{
-    color: #100;
-    text-decoration: none;
-}
-/*----/////////////////////////////////----*/
 
-.option-btn .fas{
-    padding-right: 8px;
-}
-
-/*----START buttons nav----*/
-
-.marketplace-nav-group{
-    margin-bottom: 10px;
-}
-
-
+   /* width */
+   ::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(209, 209, 209); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(209, 209, 209); 
+  }
 /*----START SEARCH BAR----*/
 
 .searchbar{
-    margin-bottom: auto;
-    height: 40px;
-    background-color: white;
-    border-radius: 20px;
-    padding: 1px;
-    margin-top: 10px;
-    margin-left: 10px;
-
-
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    position: relative;
-    z-index: 1;
-
+    margin-bottom: 10px;
+    height: 35px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    
     }
 
     .search_input{
-    color: black;
+    color: rgb(0, 0, 0);
     border: 0;
     outline: 0;
     background: none;
-    width: 0;
     caret-color:transparent;
     line-height: 40px;
-    transition: width 0.4s linear;
+    width: 100%;
     font-size: 0.8em;
-    }
-
-    .searchbar:hover > .search_input{
     padding: 0 10px;
-    width: 300px;
-    caret-color:red;
+
+    }
+    
+    .searchbar:hover > .search_input{
+    caret-color:rgb(248, 160, 22);;
     transition: width 0.4s linear;
     }
-    @media only screen and (max-width:800px){
-     
-        .text-btn{
-            display: none;
-            width: 40px;
-            height: 40px;
-        }
-        .fas{
-            font-size: 1.4em;
-        }
-
-        .option-btn .fas{
-            padding: 5px;
-        }
-        
-    }
     
-    @media only screen and (max-width:600px){
-        .searchbar:hover > .search_input{
-            padding: 0 10px;
-            width: 110px;
-            caret-color:red;
-            transition: width 0.4s linear;
-        }
-        
-    }
-
-    @media only screen and (max-width:350px){
-        .searchbar:hover > .search_input{
-            padding: 0 10px;
-            width: 80px;
-            caret-color:red;
-            transition: width 0.4s linear;
-        }
-    }
-    @media only screen and (min-width:800px) and (max-width:1024px){
-        .searchbar:hover > .search_input{
-            padding: 0 10px;
-            width: 300px;
-            caret-color:red;
-            transition: width 0.4s linear;
-        }
-        .text-btn{
-            font-size: 0.8em;
-        }
-        
-    }
-    
-
+    .btn-text{
+        padding: 5px;
+      }
     .searchbar:hover > .search_icon{
-    color: black;
+    color: rgb(0, 0, 0);
     }
 
     .search_icon{
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 20px;
     float: right;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    color:black;
+    color:rgb(0, 0, 0);
     text-decoration:none;
     }
-
-
-    /*--- START TRANSITION BUTTON EFFECT---*/
-  .option-btn {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
-    color: black;
-    border-radius: 25px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 0.8em;
-    height: 40px;
-    width: 180px;
-    background-color: white;
-    border-radius: 20px;
-    margin-top: 10px;
-    margin-left: 10px;
+    .search_icon > .fas{
+      color: rgb(0, 0, 0);
+    }
+      
+    a{
+      text-decoration: none;
+      margin-bottom: 2px;
+    }
     
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    position: relative;
-    z-index: 1;
-  }
+    
+    .main{
+      min-height: 100vh;
+      margin-left: 20vw;
+      padding-right: 10px;
+    }
+    
+    
+    .sidebar{
+      width: 20vw;
+      height: 100vh;
+      position: fixed;
+      padding-left: 15px;
+      padding-top: 15px;
+      padding-right: 15px;
+      padding-bottom: 60px;
+      border-right: 0.5px solid whitesmoke;
+
+
+    }
+    .sidebar-title{
+      padding: 5px;
+    }
+ 
+    
+   
+    .sidebar:hover{
+      overflow-y:scroll;
+
+    }
   
-  .option-btn::before , .searchbar::before{
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    border-radius: 25px;
-    top: 0;
-    left: 0;
-    background: rgba(255, 197, 90, 0.925);
-    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: linear-gradient(to right, orange, rgb(248, 212, 10));
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-    opacity: 0;
-  }
-  
-  .option-btn:hover ,.searchbar:hover {
-    background: rgba(255, 197, 90, 0.925);
-    color: #fff;
-  }
-  
-  .option-btn:hover:before  , .searchbar:hover:before{
-    opacity: 1;
-  }
+ 
+    
+.btn-text{
+  padding: 5px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 14px;
 
+}
+.btn-menu{
+  padding: 5px;
+  color: rgb(7, 7, 7);
+  font-weight: 500;
+  font-size: 14px;
+}
+    .fas{
+      width: 30px;
+      height: 30px;
+      padding: 8px;
+      border-radius: 50%;
+      font-size: 0.9em;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-    /*--- END TRANSITION BUTTON EFFECT---*/
+    .sidebar-icon{
+      background-color: transparent;
+      margin-right: 15px;
+      font-size: 1.1em;
+      padding: 10px;
+      color: #2196F3
+;
+      }
+      /*--- START CLASS ACTIVE ---*/
+    
+    .active{
+      background: whitesmoke;
+    } 
+    a:hover{
+      background: whitesmoke;
+    }     
+    /*--- END CLASS ACTIVE ---*/
+    /*--menu icons colors---*/
+    .icon-menu{
+      background: #2196F3;
 
-  /*--- START CLASS ACTIVE ---*/
+      
+    }
 
-.active{
-    background: rgba(255, 197, 90, 0.925);
-    background: -webkit-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -o-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: -moz-linear-gradient(to right, orange, rgb(255, 217, 0));
-    background: linear-gradient(to right, orange, rgb(248, 212, 10));
-} /*--- END CLASS ACTIVE ---*/
+    /*--- Cetegory icons colors --*/
+
+    .tag-vehicles{
+      background-color: tomato;
+    }
+    .tag-electronics{
+      background-color: teal;
+    }
+    .tag-home-garden{
+      background-color: blueviolet;
+    }
+    .tag-cloth{
+      background-color: coral;
+    }
+    .tag-recreation{
+      background-color: cornflowerblue;
+    }
+    .tag-family{
+      background-color: crimson;
+    }
+    .tag-home-rent{
+      background-color: goldenrod;
+    }
+    .tag-home-sell{
+      background-color: indigo;
+    }
+    .tag-entertaiment{
+      background-color: #2196F3
+;;
+    }
+    .tag-job{
+      background-color: darkorange;
+    }
+    
+    @media only screen and (max-width:900px) {
+    
+      .hidden-in-mobile{
+        display: none;
+      }
+      .main{
+        margin-left: 0;
+        padding: 0;
+      }
+    }

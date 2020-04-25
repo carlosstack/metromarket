@@ -1,0 +1,7 @@
+<div class="bg-white" *ngIf="product;else loading"><h4 class="title">Editar producto</h4>
+<app-new-product [editProduct]="product"></app-new-product>
+</div>
+
+<ng-template #loading>
+    <div class="p-2"> Cargando...</div>
+</ng-template>

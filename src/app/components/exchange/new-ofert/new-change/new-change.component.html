@@ -1,8 +1,6 @@
-
-
-<div class="col-md-12">
+<div class="">
     <div class="d-flex flex-column ">
-        <mat-vertical-stepper [linear]="true" #stepper class="stepper">
+        <mat-vertical-stepper [linear]="true" #stepper class="stepper" >
 
             <ng-template matStepperIcon="edit">
                 <li class="fas fa-check"></li>
@@ -13,7 +11,9 @@
 
 
             <mat-step [stepControl]="formGroupAmountAndRate">
-                <ng-template matStepLabel><h6>Ingresa el monto a cambiar y a recibir</h6></ng-template>
+                <ng-template matStepLabel>
+                    <h6>Ingresa el monto a cambiar y a recibir</h6>
+                </ng-template>
 
                 <div *ngIf="constants; else loadConstants">
 
@@ -24,8 +24,8 @@
                             <div class="col-md-6 ">
                                 <div class="flex-fill ">
                                     <mat-form-field appearance="outline" class="mat-form-field">
-                                        <input matInput placeholder="Monto a cambiar" type="number" formControlName="amountToChange"
-                                            class="input-right-align">
+                                        <input matInput placeholder="Monto a cambiar" type="number"
+                                            formControlName="amountToChange" class="input-right-align">
                                         <span matPrefix class="p-2">
 
                                             <mat-select [value]="'$'" formControlName="amountToChangeCurrency">
@@ -43,8 +43,8 @@
                             <div class="col-md-6 ">
                                 <div class="flex-fill ">
                                     <mat-form-field appearance="outline" class="mat-form-field">
-                                        <input matInput placeholder="Monto a recibir" type="number" formControlName="amountToReceive"
-                                            class="input-right-align">
+                                        <input matInput placeholder="Monto a recibir" type="number"
+                                            formControlName="amountToReceive" class="input-right-align">
                                         <span matPrefix class="p-2">
 
                                             <mat-select [value]="'$'" formControlName="amountToReceiveCurrency">
@@ -63,17 +63,19 @@
                         </div>
                     </form>
 
-                 
+
                     <button mat-button matStepperNext>Siguiente</button>
 
                 </div>
 
 
 
-              </mat-step>
+            </mat-step>
             <mat-step [stepControl]="formGroupBanks">
 
-                <ng-template matStepLabel><h6>Seleccione origen y destino de los fondos</h6></ng-template>
+                <ng-template matStepLabel>
+                    <h6>Seleccione origen y destino de los fondos</h6>
+                </ng-template>
                 <div *ngIf="constants; else loadConstants">
                     <form class="" [formGroup]="formGroupBanks" novalidate>
                         <div class="row">
@@ -108,38 +110,34 @@
                         </div>
                     </form>
                     <button mat-button matStepperPrevious>Anterior</button>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <button mat-raised-button [color]="'primary'" (click)="openDialogPreview()">Publicar
+                        oferta.</button>
 
                 </div>
 
             </mat-step>
-            <mat-step>
-                <ng-template matStepLabel><h6>Verifique y publique</h6></ng-template>
-
-                <div class="d-flex flex-column p-1">
-
-                <table></table>
-              
-                
-            </div>
-
-      
-            <div class="p-2">
-                <button mat-button matStepperPrevious>Anterior</button>
-                    <button mat-raised-button [color]="'primary'" (click)="addOfert()">De acuerdo, publicar oferta.</button>
-                </div>
-            </mat-step>
+         
         </mat-vertical-stepper>
     </div>
 
 </div>
 
-
-
 <ng-template #loadConstants>
-    <div class="col-md-12 p-4 loading-item">
-        <p>Cargando. Solo tomará un instante.</p>
+    <div class="loading-item">
+        <table class="table">
+            <tbody>
+                <tr class="">
+                    <td class="">
+                        <div class="item"></div>
+                        <div class="item hidden-in-desktop"></div>
+                        <div class="item-btn"></div>
+                    </td>
+                    <td class="hidden-in-mobile">
+                        <div class="item"></div>
+                    </td>
+                </tr>
+              
+            </tbody>
+        </table>
     </div>
-
 </ng-template>
-

@@ -1,5 +1,6 @@
 .btn{
     margin: 10px;
+    min-width: 80px;
 }
 
 .container{

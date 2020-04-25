@@ -1,12 +1,12 @@
-import { Injectable, ɵsetCurrentInjector } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestoreCollectionGroup } from "@angular/fire/firestore";
-import { UserInterface } from "../models/user";
-import { Observable, combineLatest } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { UserInterface, UserVerificationInterface } from "../models/user";
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { map } from 'rxjs/internal/operators/map';
-import { OfertInterface } from '../models/ofert';
 import { RatingInterface } from '../models/rating';
-import { MessageInterface } from '../models/message';
+import { Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { OfertInterface } from '../models/ofert';
 
 
 @Injectable({
@@ -14,177 +14,123 @@ import { MessageInterface } from '../models/message';
 })
 export class UserService {
 
-  constructor(private afs: AngularFirestore, private authService: AuthService) {
+  constructor(private router: Router, private afs: AngularFirestore, private authService: AuthService) {
 
   }
   private userCollection: AngularFirestoreCollection<UserInterface>;
-  private userOfertCollection: AngularFirestoreCollection<OfertInterface>;
-  private userOfertCollectionGroup: AngularFirestoreCollectionGroup<OfertInterface>;
-  private ofertDoc: AngularFirestoreDocument<OfertInterface>;
-  private ofertsDocs: AngularFirestoreDocument<OfertInterface[]>;
   private users: Observable<UserInterface[]>;
-  private oferts: Observable<OfertInterface[]>;
   private userDoc: AngularFirestoreDocument<UserInterface>;
-  private User: Observable<UserInterface>;
-  private ofert: Observable<OfertInterface>;
-
-  private chats: Observable<MessageInterface[]>;
-  private userChatsCollection: AngularFirestoreCollection<MessageInterface>;
-
-  private photoUrl = '../../../assets/profile.png';
 
   getAllUsers() {
 
-    this.userCollection = this.afs.collection<UserInterface>('users-profile');
+    this.userCollection = this.afs.collection<UserInterface>('users');
     this.users = this.userCollection.valueChanges();
 
     return this.users;
 
+  }
+  addUserVerification(user: UserVerificationInterface, _snackBar) {
+
+    var userVerificationDoc = this.afs.doc<UserVerificationInterface>(`users-verification/${user.uid}`).ref;
+    var userDoc = this.afs.doc<UserVerificationInterface>(`users/${user.uid}`).ref;
+
+    var batch = this.afs.firestore.batch()
+
+    batch.set(userVerificationDoc, user)
+    batch.set(userDoc, ({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      uid: user.uid,
+      dni:user.dni,
+      gender:user.gender,
+      address:user.address,
+      photoUrl: null,
+      phone_number: user.phone_number,
+      rating: 0,
+      rating_count: 0,
+      verified: true
+    }))
+
+    batch.commit().then(() => {
+      this.authService.isAuth().subscribe(u => {
+        u.updateProfile({
+          displayName: user.firstName+' '+user.lastName,
+          photoURL: null
+        }).then(() => {
+          this.showAlert('¡Cuenta verficada con exito!', _snackBar)
+          this.router.navigate([`/app/myAccount`])
+        }).catch((e) => {
+          this.showAlert('Oops! Ha ocurrido un error, intentalo nuevamente. ' + e, _snackBar)
+          return false
+        })
+      })
+    }).catch((e) => {
+      this.showAlert('Oops! Ha ocurrido un error, intentalo nuevamente.' + e, _snackBar)
+      return false
+    })
+
+    return false
+  }
+
+  showAlert(txt: string, _snackBar) {
+
+    _snackBar.open(txt, 'X', {
+      duration: 3000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+      panelClass: 'notif'
+    });
   }
 
   addUser(User: UserInterface): void {
 
     this.authService.isAuth().subscribe(user => {
 
-      this.afs.collection<UserInterface>('users-profile').doc('@' + `${User.username}`).set({
-        name: User.name,
-        email: User.email,
+      this.afs.collection<UserInterface>('users').doc(User.uid).set({
+        firstName: User.firstName,
+        lastName: User.lastName,
         uid: User.uid,
-        username: User.username,
         photoUrl: User.photoUrl,
         phone_number: User.phone_number,
         rating: User.rating,
         rating_count: User.rating_count
 
+      }).then((_) => {
+        user.updateProfile({
+          displayName: User.firstName + ' ' + User.lastName,
+          photoURL: User.photoUrl
+        }).then((_) => {
+          this.router.navigate(['app/exchange/e/(exchange:all)']);
+        })
       });
-
-      user.updateProfile({
-        displayName: User.username,
-        photoURL: User.photoUrl
-      })
 
     })
   }
 
-  getOneUser(idUser: string) {
-    this.userDoc = this.afs.collection<UserInterface>('users-profile').doc('@' + `${idUser}`);
-    return this.userDoc;
+  getOneUser(uid: string) {
+    this.userDoc = this.afs.collection<UserInterface>('users').doc(uid);
+    return this.userDoc.valueChanges();
   }
 
-  updateUser(User: UserInterface) {
-    this.afs.collection<UserInterface>('users-profile').doc('@' + `${User.username}`).set({
-      name: User.name,
-      email: User.email,
-      uid: User.uid,
-      username: User.username,
-      photoUrl: User.photoUrl,
-      phone_number: User.phone_number,
-      rating: User.rating
-    });
-
-
+  updateUser(user: UserInterface) {
+    this.afs.collection<UserInterface>('users').doc(user.uid).update(user)
   }
 
-  addOfertPartner(ofert): void {
-      this.afs.collection(`users-oferts/${ofert.acceptedByUID}/accepted-oferts`)
-      .doc(ofert.id).set(ofert);
-  }
-  updateMyOfert(ofert): void {
-      this.afs.collection(`users-oferts/${ofert.ownerUID}/normal-oferts`)
-      .doc(ofert.id).set(ofert);
-  }
+  addRatingPartner(rating: RatingInterface,ofert:OfertInterface):any {
 
-  sendNewMessage(ofert: OfertInterface, content: string, sendTo: string, sendBy: string): void {
-
-
-    this.authService.isAuth().subscribe(user => {
-
-      this.afs.collection(`users-chats`).doc(`@${ofert.owner}_@${ofert.acceptedBy}_${ofert.id}`).collection<MessageInterface>('messages').add({
-        content: content,
-        username: sendTo,
-        partner: sendBy,
-        date: Date.now()
-      });
-
-    });
+    var batch = this.afs.firestore.batch();
+    var ratingDoc = this.afs.collection<RatingInterface>(`users-reviews`).doc(rating.userUID).collection<RatingInterface>('reviews').doc(rating.ofertID).ref;
+    var ofertDoc = this.afs.collection<OfertInterface>('users-oferts').doc(ofert.ownerUID).collection('oferts').doc(ofert.id).ref;
+    
+    batch.set(ratingDoc,rating);
+    batch.set(ofertDoc,ofert);
+    return batch.commit()
 
   }
 
-  getMyMessages(ofert: OfertInterface) {
-
-    this.userChatsCollection = this.afs.collection(`users-chats`).doc(`@${ofert.owner}_@${ofert.acceptedBy}_${ofert.id}`).collection<MessageInterface>('messages', ref =>
-      ref.orderBy('date', 'asc'))
-
-    this.chats = this.userChatsCollection.valueChanges();
-
-    return this.chats;
-  }
-
-  getMyOferts(uid: string) {
-
-    this.userOfertCollectionGroup = this.afs.collectionGroup('normal-oferts', ref =>
-      ref.where('owner', '==', `${uid}`).orderBy('date', 'desc'))
-
-    this.oferts = this.userOfertCollectionGroup.valueChanges();
-
-    return this.oferts;
-  }
-
-  //Hacer consultas con querys
-  getMyOfertsByQuery(uid: string) {
-
-    this.userOfertCollection = this.afs.collection<OfertInterface>('normal-oferts', ref =>
-      ref.where('owner', '==', `${uid}`).orderBy('date', 'desc'));
-
-
-    this.oferts = this.userOfertCollection.valueChanges();
-
-    return this.oferts;
-  }
-
-  getMyAcceptedOferts(uid: string) {
-
-    this.userOfertCollection = this.afs.collection<OfertInterface>(`users-oferts/@${uid}/accepted-oferts`, ref =>
-      ref.orderBy('date', 'desc'));
-    this.oferts = this.userOfertCollection.valueChanges();
-
-    return this.oferts;
-  }
-
-  deleteOfert(idOfert: string) {
-
-    this.ofertDoc = this.afs.doc<OfertInterface>(`users-oferts/${idOfert}/normal-oferts`);
-    this.ofertDoc.delete();
-
-  }
-
-  getOneOfert(idOfert: string, uid: string, type: string) {
-
-
-
-    if (type == 'my-oferts') {
-      type = 'normal-oferts';
-    }
-
-    this.ofertDoc = this.afs.doc<OfertInterface>(`users-oferts/@${uid}/${type}/${idOfert}`);
-
-    return this.ofert = this.ofertDoc.snapshotChanges().pipe(map(action => {
-
-      if (action.payload.exists == false) {
-        return null;
-      } else {
-        const data = action.payload.data() as OfertInterface;
-        data.id = action.payload.id;
-        return data;
-      }
-    }))
-
-  }
-
-  addRatingPartner(rating: RatingInterface) {
-
-    return this.afs.collection<RatingInterface>(`users-rating`).doc(`@${rating.username}`).collection<RatingInterface>('my-ratings').add(rating);
-
+  getUserRatings(uid){
+    var ratingCollection = this.afs.collection<RatingInterface>(`users-reviews`).doc(uid).collection<RatingInterface>('reviews');
+    return ratingCollection.valueChanges();
   }
 
 }

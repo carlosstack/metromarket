@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-exchange-dashboard',
@@ -8,14 +7,11 @@ import { AuthService } from "../../../services/auth.service";
 })
 export class ExchangeDashboardComponent implements OnInit {
 
-  private user;
 
-  constructor(private auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.auth.isAuth().subscribe(user=>{
-      this.user = user;
-    });
+    
   }
 
 }

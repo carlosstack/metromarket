@@ -22,7 +22,6 @@ export class ConstantsService {
     
   getExchangeNewOfertComponentConstants() {
 
-    console.log('entra');
     this.constDoc = this.afs.collection("constants").doc('exchange');
 
     return this.constants = this.constDoc.snapshotChanges().pipe(map(action => {

@@ -1,0 +1,153 @@
+
+    
+  a{
+    text-decoration: none;
+    color: black;
+    margin-bottom: 2px;
+  }
+  
+  
+  .main{
+    min-height: 100vh;
+    margin-left: 20vw;
+    padding-right: 10px;
+ 
+  }
+  
+  
+  .sidebar{
+    width: 20vw;
+    height: 100vh;
+    position: fixed;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 60px;
+    border-right: 1px solid rgb(56, 68, 77);
+
+  }
+  .sidebar-title{
+    padding: 10px;
+  }
+
+  
+ 
+  .sidebar:hover{
+    overflow-y:scroll;
+
+  }
+  /* width */
+::-webkit-scrollbar {
+width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: rgb(0, 135, 189); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: rgb(0, 135, 189); 
+}
+  
+.btn-text{
+padding: 5px;
+color: rgb(108, 108, 134);
+font-weight: 600;
+font-size: 14px;
+
+}
+  .fas{
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 0.9em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar-icon{
+    background-color: transparent;
+    margin-right: 15px;
+    font-size: 1.1em;
+    padding: 10px;
+    
+  }
+  
+ 
+  
+  
+    /*--- START CLASS ACTIVE ---*/
+  
+  .active{
+    background: rgb(32, 46, 58);
+  } 
+  a:hover{
+    background: rgb(32, 46, 58);
+  } 
+ 
+  
+
+  
+  /*--- END CLASS ACTIVE ---*/
+  /*--menu icons colors---*/
+  .icon-menu{
+    background: rgb(83, 83, 255);
+    background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: -o-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: -moz-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+    background: linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+  }
+
+  /*--- Cetegory icons colors --*/
+
+  .tag-vehicles{
+    background-color: tomato;
+  }
+  .tag-electronics{
+    background-color: teal;
+  }
+  .tag-home-garden{
+    background-color: blueviolet;
+  }
+  .tag-cloth{
+    background-color: coral;
+  }
+  .tag-recreation{
+    background-color: cornflowerblue;
+  }
+  .tag-family{
+    background-color: crimson;
+  }
+  .tag-home-rent{
+    background-color: goldenrod;
+  }
+  .tag-home-sell{
+    background-color: indigo;
+  }
+  .tag-entertaiment{
+    background-color: dodgerblue;
+  }
+  .tag-job{
+    background-color: darkorange;
+  }
+  
+  @media only screen and (max-width:900px) {
+  
+    .hidden-in-mobile{
+      display: none;
+    }
+    .main{
+      margin-left: 0;
+      padding: 0;
+    }
+  }

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { StorageService } from 'src/app/services/storage.service';
 
 export interface Data {
   text: string;
@@ -17,36 +18,34 @@ export interface Data {
 @Component({
   selector: 'app-all-oferts',
   templateUrl: './all-oferts.component.html',
-  styleUrls: ['./all-oferts.component.css']
+  styleUrls: ['./all-oferts.component.css'],
+
 })
 export class AllOfertsComponent implements OnInit {
-  displayedColumns: string[] = ['owner', 'ownerData', 'type', 'amountMin', 'payForms'];
+  displayedColumns: string[] = ['type', 'owner', 'amountMin', 'payForms', 'date', 'rate'];
   dataSource: MatTableDataSource<OfertInterface>;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
-    this.dataSource.sort = sort;
-  }
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private userService: UserService, private _snackBar: MatSnackBar, private afs: AngularFirestore, public dialog: MatDialog, private router: Router, private normalOfert: NormalOfertService, private authService: AuthService) {
+
+  constructor(private storageService: StorageService, private userService: UserService, private _snackBar: MatSnackBar, private afs: AngularFirestore, public dialog: MatDialog, private router: Router, private normalOfert: NormalOfertService, private authService: AuthService) {
 
   }
 
   public oferts;
 
-  public currentUser;
-
-
 
   ngOnInit() {
     this.authService.isAuth().subscribe(user => {
-      this.currentUser = user
       this.normalOfert.getAllOferts(user.uid).subscribe(oferts => {
-        this.oferts = oferts.filter(ofert => ofert.ownerUID != user.uid);
+        this.oferts = oferts.filter((ofert)=>ofert.ownerUID!=user.uid).sort((a,b)=> b.date - a.date);
         this.dataSource = new MatTableDataSource(this.oferts);
+        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
     });
+
   }
 
   applyFilter(filterValue: string) {
@@ -77,26 +76,17 @@ export class AllOfertsComponent implements OnInit {
 
       if (result) {
         this.onAccept(ofert);
-        //window.location.href = 'https://api.whatsapp.com/send?phone='+ofert.phoneNumber;
       }
     });
   }
 
 
   onAccept(ofert) {
-
-    const takeOfert = this.afs.firestore.collection("users-oferts").doc(ofert.ownerUID).collection('normal-oferts').doc(ofert.id);
-
-    this.afs.firestore.runTransaction(t =>
-      t.get(takeOfert).then(ofert => {
-
-        t.set(takeOfert, { acceptedBy: this.currentUser.displayName, status: 'pending', acceptedByUID:this.currentUser.uid });
-
-      })).then(() => {
-        this.router.navigate([`/app/exchange/transaction/accepted-oferts/${ofert.id}`])
-        this.showAlert('¡Aceptaste esta oferta! Comunicate con tu compañero para completar la transacción.')
-      })
-      .catch(error => this.showAlert('Esta oferta ya fue tomada por alguien más.' + error));
+    this.normalOfert.updateOfertToAcepted(ofert, this._snackBar);
   }
 
+  getUser(uid: string) {
+    this.userService.getOneUser(uid).subscribe((user) => { return user })
+    return null
+  }
 }

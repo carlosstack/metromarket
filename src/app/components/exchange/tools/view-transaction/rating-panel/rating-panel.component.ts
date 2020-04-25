@@ -33,7 +33,7 @@ export class RatingPanelComponent implements OnInit {
 
       const partner = this.data.idUser;
 
-      this.userService.getOneUser(partner).valueChanges().subscribe(partner => {
+      this.userService.getOneUser(partner).subscribe(partner => {
         this.partner = partner;
       });
 

@@ -87,3 +87,16 @@ font-size: 1.5em;
 .rating{
   font-size: 1.7em;
 }
+
+.far,.fas{
+  color: white;
+  font-size: 2em;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+:host ::ng-deep .custom-spinner circle{   
+  stroke: rgba(2, 82, 255, 0.925);
+}

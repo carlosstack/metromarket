@@ -1,6 +1,6 @@
 <div class="">
     <div class="d-flex flex-column ">
-        <mat-vertical-stepper [linear]="true" #stepper class="stepper">
+        <mat-vertical-stepper [linear]="true" #stepper class="stepper" >
 
             <ng-template matStepperIcon="edit">
                 <li class="fas fa-check"></li>
@@ -20,15 +20,12 @@
                     <form class="" [formGroup]="formGroupAmountAndRate" novalidate>
 
                         <div class="row">
-                            <div class="col-md-12 d-flex justify-content-end">
-                                <mat-slide-toggle (change)="range= $event.checked">{{getSlideToggleForRangeName()}}
-                                </mat-slide-toggle>
-                            </div>
-                            <div class="col-md-12 p-4">
+
+                            <div class="col-md-6">
                                 <div class="flex-fill ">
                                     <mat-form-field appearance="outline" class="mat-form-field">
-                                        <input matInput placeholder="{{getAmountName()}}" type="number"
-                                            formControlName="amountMin" class="input-right-align">
+                                        <input matInput placeholder="Monto" type="number" formControlName="amount"
+                                            class="input-right-align">
                                         <span matPrefix class="p-2">
 
                                             <mat-select [value]="'$'" formControlName="amountCurrency">
@@ -43,29 +40,19 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-12 p-4" *ngIf="range">
 
-                                <div class="flex-fill ">
+
+                            <div class="col-md-6 ">
+                                <div class="flex-fill">
                                     <mat-form-field appearance="outline" class="mat-form-field">
-                                        <input matInput placeholder="Monto Máximo" type="number"
-                                            formControlName="amountMax" class="input-right-align">
-
+                                        <input matInput placeholder="Tasa" type="number" formControlName="rate"
+                                            class="input-right-align">
+                                        <span matPrefix>Bs&nbsp;</span>
 
                                     </mat-form-field>
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="col-md-12 ">
-                            <div class="flex-fill">
-                                <mat-form-field appearance="outline" class="mat-form-field">
-                                    <input matInput placeholder="Tasa" type="number" formControlName="rate"
-                                        class="input-right-align">
-                                    <span matPrefix>Bs&nbsp;</span>
-
-                                </mat-form-field>
-                            </div>
-
                         </div>
 
                     </form>
@@ -86,7 +73,7 @@
                 <div *ngIf="constants; else loadConstants">
                     <form class="" [formGroup]="formGroupBanks" novalidate>
                         <div class="row">
-                            <div class="col-md-6 p-1">
+                            <div class="col-md-6">
 
                                 <mat-form-field appearance="outline" class="mat-form-field">
                                     <mat-label>Origen</mat-label>
@@ -119,29 +106,13 @@
                         </div>
                     </form>
                     <button mat-button matStepperPrevious>Anterior</button>
-                    <button mat-button matStepperNext>Siguiente</button>
-
-                </div>
-
-            </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>
-                    <h6>Verifique y publique</h6>
-                </ng-template>
-
-                <div class="d-flex flex-column p-1">
-
-                    <table>
-                    </table>
-                </div>
-
-
-                <div class="p-2">
-                    <button mat-button matStepperPrevious>Anterior</button>
-                    <button mat-raised-button [color]="'primary'" (click)="addOfert()">De acuerdo, publicar
+                    <button mat-raised-button [color]="'primary'" (click)="openDialogPreview()">Publicar
                         oferta.</button>
+
                 </div>
+
             </mat-step>
+          
         </mat-vertical-stepper>
     </div>
 
@@ -150,120 +121,21 @@
 
 
 <ng-template #loadConstants>
-    <div class="col-md-12 p-4 loading-item">
-        <p>Cargando. Solo tomará un instante.</p>
-    </div>
-
-</ng-template>
-
-
-
-
-<!--      
-     
-
-                            <div *ngIf="ofert.type">
-                                <div *ngIf="constants; else loadConstants">
-                                    <form class="" [formGroup]="formGroupBuyAndSellFixedOfert"
-                                        novalidate>
-                                        <div class="row">
-
-                                            <div class="col-md-6 ">
-                                                <div class="flex-fill ">
-                                                    <mat-form-field appearance="outline"
-                                                        class="mat-form-field">
-                                                        <input matInput placeholder="Monto mínimo"
-                                                            type="number" formControlName="amountMin"
-                                                            class="input-right-align">
-                                                        <span matPrefix class="p-2">
-                                                            <mat-select [value]="'$'"
-                                                                formControlName="currencyAmountMin">
-                                                                <mat-option [value]="'$'">$</mat-option>
-                                                                <mat-option [value]="'E'">E
-                                                                </mat-option>
-
-                                                            </mat-select>&nbsp;
-                                                        </span>
-
-                                                    </mat-form-field>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6 ">
-                                                <div class="flex-fill ">
-                                                    <mat-form-field appearance="outline"
-                                                        class="mat-form-field">
-                                                        <input matInput placeholder="Monto máximo"
-                                                            type="number" formControlName="amountMax"
-                                                            class="input-right-align">
-
-                                                        <span matPrefix class="p-2">
-                                                            <mat-select [value]="'$'"
-                                                                formControlName="currencyAmountMin">
-                                                                <mat-option [value]="'$'">$</mat-option>
-                                                                <mat-option [value]="'E'">E
-                                                                </mat-option>
-
-                                                            </mat-select>&nbsp;
-                                                        </span>
-
-                                                    </mat-form-field>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-12 ">
-                                                <div class="flex-fill ">
-                                                    <mat-form-field appearance="outline"
-                                                        class="mat-form-field">
-                                                        <input matInput placeholder="Tasa" type="number"
-                                                            formControlName="rate"
-                                                            class="input-right-align">
-                                                        <span matPrefix>BSS&nbsp;</span>
-
-                                                    </mat-form-field>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6 ">
-
-                                                <mat-form-field appearance="outline" class="mat-form-field">
-                                                    <mat-label>Origen</mat-label>
-                                                    <mat-select formControlName="from" multiple>
-                                                        <mat-optgroup *ngFor="let group of constants.group"
-                                                            [label]="group.name">
-                                                            <mat-option *ngFor="let item of group.items"
-                                                                [value]="item.name">
-                                                                {{item.name}}
-                                                            </mat-option>
-                                                        </mat-optgroup>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-
-                                            <div class="col-md-6 ">
-
-                                                <mat-form-field appearance="outline" class="mat-form-field">
-                                                    <mat-label>Destino</mat-label>
-                                                    <mat-select formControlName="to" multiple>
-                                                        <mat-optgroup *ngFor="let group of constants.group"
-                                                            [label]="group.name">
-                                                            <mat-option *ngFor="let item of group.items"
-                                                                [value]="item.name">
-                                                                {{item.name}}
-                                                            </mat-option>
-                                                        </mat-optgroup>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                        <button mat-raised-button [color]="'primary'" class=" p-2 btn "
-                                            [disabled]="formGroupBuyAndSellFixedOfert">Publicar</button>
-
-                                    </form>
-                                </div>
-                            </div>
-           
-
+    <div class="loading-item">
+        <table class="table">
+            <tbody>
+                <tr class="">
+                    <td class="">
+                        <div class="item"></div>
+                        <div class="item hidden-in-desktop"></div>
+                        <div class="item-btn"></div>
+                    </td>
+                    <td class="hidden-in-mobile">
+                        <div class="item"></div>
+                    </td>
+                </tr>
               
-
--->
+            </tbody>
+        </table>
+    </div>
+</ng-template>

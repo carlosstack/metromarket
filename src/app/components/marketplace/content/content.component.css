@@ -1,5 +1,5 @@
-.container{
-    padding-top: 10px;
+.container-fluid{
+    padding-top: 20px;
 
     
   }
@@ -10,6 +10,7 @@
       margin-bottom: 10px;
   }
 
+
 .card-product .img-wrap {
     overflow: hidden;
     position: relative;
@@ -18,27 +19,53 @@
     width: 100%; 
 }
 
-.price{
-    font-weight: 500;
-    font-size: 14px;
-    color: rgb(80, 80, 80);
-}
+
 .img-wrap {
     height: 100%;
     object-fit: contain;
     object-position: center center;
 }
+.card-product{
+    background-color: whitesmoke;
+    border: 1px solid whitesmoke;
+
+}
+.card-product .img-wrap{
+    position: relative;
+    height: 210px;
+    
+
+}
+.price{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    color: black;
+    padding: 5px;
+    min-width: 100px;
+    background: whitesmoke;
+    opacity: 0.9;
+    border-radius: 2px;
+}
+
+.product-title{
+    height: 50px;
+    padding: 5px;
+    color: black;
+}
 .card-product .img-wrap img {
-    height: 30%;
+    height: 100%;
     width: 100%;
 }
 .card-product .info-wrap {
     overflow: hidden;
-    border-top: 1px solid #eee;
+    border-top: 0.5px solid rgb(129, 123, 123);
 }
 .card-product .bottom-wrap {
     padding: 15px;
-    border-top: 1px solid #eee;
+    border-top: 0.5px solid rgb(214, 214, 214);
 }
 
 .label-rating { margin-right:10px;
@@ -55,25 +82,7 @@
     color: #999;
 }
 
-.card{
 
-        display:block;
-        -webkit-transition:-webkit-transform 0.8s ease-out;
-        -moz-transition:-moz-transform 0.8s ease-out;
-        -o-transition:-o-transform 0.8s ease-out;
-        -ms-transition:-ms-transform 0.8s ease-out;
-        transition:transform 0.8s ease-out;
-        background-color: white;
-        padding: 5px;
-        border-radius: 3px;
-        
-}
-
-.card:hover{
-   transform: scale(1.05);
-    
-    
-}
 
 .title{
     display: none;

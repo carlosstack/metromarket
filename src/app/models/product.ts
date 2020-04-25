@@ -1,11 +1,14 @@
 export interface ProductInterface{
     id ?: string;
-    name ?:string;
+    title ?:string;
+    productSearch?:string[];
     description ?:string;
     price ?: number;
+    currency?:string;
     category ?: string;
     owner_id ?:string;
-    owner_name ?: string;
-    owner_phone_number ?: string;
+    galery?:Array<string>;
+    status?:string;
+    quality?:string;
     date ?: number;
 }

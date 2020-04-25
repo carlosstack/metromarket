@@ -1,51 +1,42 @@
+<h3>Reviews</h3>
+<div class="d-flex p-3 text-center">
+    <div class="p-1"> {{countPositive}} <li class="fas fa-check"></li></div>
+    <div class="p-1"> {{countNeutral}} <li class="fas fa-point"></li></div>
+    <div class="p-1"> {{countNegative}} <li class="fas fa-times"></li></div>
+</div>
 
+<div class="example-container small bg-white">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >
+              <strong>Tipo</strong></th>
+            <td mat-cell *matCellDef="let rating" >
+      
+              <div class="text-center small">
+                <label class="text-secondary h6">{{rating.type}}</label>
+              </div>
+      
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="comment">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >
+              <strong>Tipo</strong></th>
+            <td mat-cell *matCellDef="let rating" >
+      
+              <div class="text-center small">
+                <label class="text-secondary p-1">{{rating.date}}</label>
+                <label class="text-secondary">{{rating.comment}}</label>
+              </div>
+      
+            </td>
+          </ng-container>
+       
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-            <div class="d-flex justify-content-center">
+    <mat-paginator [pageSizeOptions]="[5, 20, 30, 100]" class=""></mat-paginator>
 
-                <div *ngIf="getRatingRounded()===0" class="rating">
-
-                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
-                    </span><span id="3" class="far fa-star "></span><span id="4" class="far fa-star ">
-                    </span><span id="5" class="far fa-star "></span>
-                </div>
-
-                <div *ngIf="getRatingRounded()===1" class="rating">
-
-                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
-                    </span><span id="3" class="far fa-star "></span><span id="4" class="far fa-star ">
-                    </span><span id="5" class="fas fa-star"></span>
-                </div>
-
-                <div *ngIf="getRatingRounded()===2" class="rating">
-
-                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
-                    </span><span id="3" class="far fa-star "></span><span id="4" class="fas fa-star">
-                    </span><span id="5" class="fas fa-star"></span>
-                </div>
-
-                <div *ngIf="getRatingRounded()===3" class="rating">
-
-                    <span id="1" class="far fa-star "></span><span id="2" class="far fa-star ">
-                    </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
-                    </span><span id="5" class="fas fa-star"></span>
-                </div>
-
-                <div *ngIf="getRatingRounded()===4" class="rating">
-
-                    <span id="1" class="far fa-star "></span><span id="2" class="fas fa-star">
-                    </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
-                    </span><span id="5" class="fas fa-star"></span>
-                </div>
-
-                <div *ngIf="getRatingRounded()===5" class="rating">
-
-                    <span id="1" class="fas fa-star"></span><span id="2" class="fas fa-star">
-                    </span><span id="3" class="fas fa-star"></span><span id="4" class="fas fa-star">
-                    </span><span id="5" class="fas fa-star"></span>
-                </div>
-
-                <div class=""> &nbsp;({{ rating_count }})  </div>
-
-            </div>
-
-            
+  </div>

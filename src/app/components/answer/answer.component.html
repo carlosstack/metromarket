@@ -1,1 +1,102 @@
-<p>answer works!</p>
+<!--/ ESTRUCTURA PRINCIPAL DEL MARKETPLACE -->
+<div class="">
+    <div class="sidebar  hidden-in-mobile navbar-expand">
+        <div class="sidebar-title d-flex h4">
+            <li class="sidebar-icon fas fa-comment-alt p-2 text-primary"></li>
+            <h4 class="text-white">
+                Q&A Chat
+            </h4>
+        </div>
+        <!-- Links -->
+
+
+        <a class=" d-flex p-2 align-content-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[{ outlets: {answer: ['activity'] } }]"><i class="fas fa-box icon-menu"></i>
+            <div class="btn-text">Recientes</div>
+        </a>
+
+        <a class="d-flex p-2 align-content-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[{ outlets: { answer: ['new'] } }]">
+            <i class="fas fa-plus icon-menu"></i>
+            <div class="btn-text">Preguntar algo</div>
+        </a>
+        <a class="d-flex p-2 align-content-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[{ outlets: {answer: ['my-answers'] } }]"><i class="fas fa-list-ul icon-menu"></i>
+            <div class="btn-text">Mis Actividad</div>
+        </a>
+
+        <div class="p-2 ">
+            <h5 class="text-white">Temas</h5>
+        </div>
+        <div class="categories">
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','vehiculos'] } }]"><i
+                    class="fas fa-car tag-vehicles"></i>
+                <div class="btn-text">Vehículos</div>
+            </a>
+            <a class="d-flex p-2 align-content-center " routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','electronica'] } }]"><i
+                    class=" d-flex justify-content-center fas fa-mobile-alt tag-electronics"></i>
+                <div class="btn-text">Electrónica</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','casa y jardin'] } }]"><i
+                    class="d-flex justify-content-center fas fa-home tag-home-garden"></i>
+                <div class="btn-text">Casa y jardín</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','ropa y accesorios'] } }]"><i
+                    class="d-flex justify-content-center fas fa-tshirt tag-cloth"></i>
+                <div class="btn-text">Ropa y accesorios</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','pasatiempos'] } }]"><i
+                    class="d-flex justify-content-center fas fa-guitar tag-recreation"></i>
+                <div class="btn-text">Pasatiempos</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','familia'] } }]"><i
+                    class="d-flex justify-content-center fas fa-heart tag-family"></i>
+                <div class="btn-text">Familia</div>
+            </a>
+
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','alquileres'] } }]"><i
+                    class="fas fa-home tag-home-rent"></i>
+                <div class="btn-text">Alquileres</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','viviendas en venta'] } }]"><i
+                    class="fas fa-home tag-home-sell"></i>
+                <div class="btn-text">Viviendas en venta</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','entretenimiento'] } }]"><i
+                    class="fas fa-gamepad tag-entertaiment"></i>
+                <div class="btn-text">Entretenimiento</div>
+            </a>
+            <a class="d-flex p-2 align-content-center" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[{ outlets: {marketplace: ['category','clasificados'] } }]"><i
+                    class="fas fa-toolbox tag-job"></i>
+                <div class="btn-text">Clasificados</div>
+            </a>
+
+
+        </div>
+
+    </div>
+    <div class="main">
+
+        <router-outlet name='answer'></router-outlet>
+    </div>
+</div>

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import { UserService } from '../../../services/user.service';
-import { from } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserInterface } from '../../../models/user';
+import { ValidateEmail } from '../../validators/email.validator';
 
 @Component({
   selector: 'app-register-form',
@@ -13,46 +11,45 @@ import { UserInterface } from '../../../models/user';
 })
 export class RegisterFormComponent implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private userService: UserService) { }
-  public email: string = '';
-  public pass: string = '';
-  public email2: string = '';
-  public pass2: string = '';
+  formGroupRegister: FormGroup;
 
+  private loading: boolean = false;
+  private error:string ='';
 
-  user: UserInterface = {
-    uid: '',
-    name: '',
-    email: '',
-    phone_number: '',
-    photoUrl: '',
-    username: ''
-
-  }
-
-
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.buildFormRegister();
   }
 
-  onRegister(): void {
-    this.authService.registerUser(this.email2, this.pass2)
-      .then((res) => {
+  buildFormRegister() {
+    this.formGroupRegister = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
+  }
 
-        this.router.navigate(['/myaccount(sidebar:sidebar)']);
-
-      }).catch(err => console.log('err', err));
+  errorMessage(error) {
+    this.loading = false;
+    this.error = error;
 
   }
 
-  onLoginEmail(): void {
-
-    this.authService.loginUser(this.email, this.pass)
-      .then((res) => {
-        this.router.navigate(['/social(sidebar:sidebar)']);
-
-      }).catch(err => console.log('err', err.mesage));
+  hideErrorMessage() {
+    this.error ='';
   }
- 
+
+  onRegister() {
+    if(this.formGroupRegister.valid){
+    this.loading = true;
+    this.authService.registerUser(this.formGroupRegister.get('email').value, this.formGroupRegister.get('password').value)
+      .then(() => {
+        this.router.navigate(['/app/exchange/e', { outlets: { exchange: ['all'] } }]);
+      }).catch(error => this.errorMessage(error));
+   }else{
+    this.error = 'Email or password in bad format.';
+    }
+  }
+
 
 }

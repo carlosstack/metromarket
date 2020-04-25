@@ -1,0 +1,177 @@
+
+a{
+    color: #100;
+    text-decoration: none;
+}
+/*----/////////////////////////////////----*/
+
+.option-btn .fas{
+    padding-right: 8px;
+}
+
+/*----START buttons nav----*/
+
+.marketplace-nav-group{
+    margin-bottom: 10px;
+}
+
+
+/*----START SEARCH BAR----*/
+
+.searchbar{
+    margin-bottom: 10px;
+    height: 45px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    margin-left: 10px;
+
+    }
+
+    .search_input{
+    color: black;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    width: 300px;
+    font-size: 0.8em;
+    padding: 0 10px;
+
+    }
+    .searchbar:hover > .search_input{
+    caret-color:blue;
+    transition: width 0.4s linear;
+    }
+    
+    .btn-text{
+        padding: 5px;
+      }
+    .searchbar:hover > .search_icon{
+    color: black;
+    }
+
+    .search_icon{
+    height: 30px;
+    width: 30px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:black;
+    text-decoration:none;
+    }
+
+
+  
+
+    /*--- END TRANSITION BUTTON EFFECT---*/
+
+
+      
+      
+      .main{
+        min-height: 100vh;
+        margin-left: 24.5vw;
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+      
+      
+      .side-bar{
+        padding-right: 10px;
+        height: 100vh;
+        position: fixed;
+        background-color: white;
+      }
+      
+      
+      .text-btn{
+        padding: 5px;
+      }
+      .fas{
+        width: 40px;
+        height: 40px;
+        padding: 12px;
+        background-color: whitesmoke;
+        border-radius: 50%;
+        font-size: 1.1em;
+      }
+      
+        .nav-link{
+          display: flex;
+        }
+      
+        .table-outlet{
+          padding-top: 10px;
+        }
+      
+      
+        @media only screen and (max-width:900px){
+      
+          .btn-text{
+            display: none;
+          }
+        
+          .fas{
+            font-size: 1.4em;
+          }
+      
+        .fas{
+            padding: 5px;
+        }
+      
+        .hidden-in-mobile{
+          display: none;
+        }
+        }
+      
+        @media only screen and (min-width:800px) and (max-width:1024px){
+      
+          .btn-text{
+            font-size: 0.8em;
+          }
+        
+      
+        }
+      
+        /*--- START CLASS ACTIVE ---*/
+      
+      .active{
+        background: rgb(251, 251, 251);
+      } 
+      
+      .active > .fas{
+        color: white;
+      
+        background: rgb(83, 83, 255);
+        background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+        background: -o-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+        background: -moz-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+        background: linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+      }
+      
+      a:hover > .fas{
+        color: white;
+        background: rgb(83, 83, 255);
+        background: -webkit-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+        background: -o-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+        background: -moz-linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+        background: linear-gradient(to right, rgb(83, 83, 255), rgb(0, 174, 255));
+      }
+      
+      /*--- END CLASS ACTIVE ---*/
+      
+      
+      @media only screen and (max-width:900px) {
+      
+        .hidden-in-mobile{
+          display: none;
+        }
+        .main{
+          margin-left: 0;
+          padding: 0;
+        }
+      }

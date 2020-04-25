@@ -1,0 +1,52 @@
+<!--/ ESTRUCTURA PRINCIPAL DEL MARKETPLACE -->
+
+<div class="side-bar col-3 shadow-sm hidden-in-mobile">
+    <div class="p-2 ">
+        <h4>Libros y Guias</h4>
+    </div>
+    <!-- Links -->
+    
+    <div class="searchbar shadow-sm d-flex p-2 align-content-center">
+        <input class="search_input  " type="text" name="" placeholder="Buscar">
+        <a class="search_icon btn"><i class="fas fa-search"></i></a>
+    </div>
+    <a class=" d-flex p-2 align-content-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="[{ outlets: {ebook: ['all'] } }]"><i class="fas fa-box"></i>
+        <div class="text-btn">Descubrir</div>
+    </a>
+
+    <a class="d-flex p-2 align-content-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="[{ outlets: { ebook: ['new'] } }]">
+        <i class="fas fa-plus"></i>
+        <div class="text-btn">Compartir algo</div>
+    </a>
+    <a class="d-flex p-2 align-content-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="[{ outlets: {ebook: ['my-ebooks'] } }]"><i class="fas fa-list-ul"></i>
+        <div class="text-btn">Mis publicaciones</div>
+    </a>
+
+    
+
+    <div class="p-2 ">
+        <h6>Categorías</h6>
+    </div>
+
+    <a class=" d-flex p-2 align-content-center"><i class="fas fa-book"></i>
+        <div class="text-btn">Matematicas</div>
+    </a>
+
+    <a class="d-flex p-2 align-content-center" >
+        <i class=" fas fa-book"></i>
+        <div class="text-btn">Lenguaje</div>
+    </a>
+    <a class="d-flex p-2 align-content-center" ><i class=" fas fa-book"></i>
+        <div class="text-btn">Novelas</div>
+    </a>
+    <a class="d-flex p-2 align-content-center" ><i class=" fas fa-user"></i>
+        <div class="text-btn">Cincia Ficción</div>
+    </a>
+
+</div>
+<div class="main col-lg-9">
+    <router-outlet name='ebook'></router-outlet>
+</div>

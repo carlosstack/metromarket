@@ -1,123 +1,62 @@
-<div class="container bootstrap snippet">
+<div class="container">
     <div class="row">
-
-
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <!--left col-->
-
-            <div class="text-center">
-                <div class=" text-center containerPhoto">
-                    <img *ngIf="user.photoUrl; else profileNull" src="{{ user.photoUrl }}"
-                        class="card avatar img-thumbnail" alt="avatar">
-
-                    <ng-template #profileNull>
-                        <img src="{{ photoUrlUserNull }}" class="avatar img-thumbnail" alt="avatar">
-
-                    </ng-template>
-                </div>
-
-                <input #imageUser type="hidden" [value]="urlImage | async">
-
-                <input type="file" class="card file-upload " accept=".png, jpg" (change)="onUpload($event);">
-
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
-                        aria-valuemax="100" [style.width]="(uploadPercent | async) +'%'">
-                        <br>
-                    </div>
-                </div>
-
-                <button *ngIf="urlImage | async; else btnDisabled" type="submit" id="uploadBtn" class="btn btn-warning"
-                    (click)="onUploadPhotoURL();">Actualizar</button>
-
-
-                <ng-template #btnDisabled>
-                    <button type="submit" disabled=true id="uploadBtn" class="btn btn-warning">Actualizar
-                    </button>
-                </ng-template>
-
-            </div><br>
-
-
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-            </ul>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Social Media</div>
-                <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
-                        class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
-                        class="fa fa-google-plus fa-2x"></i>
-                </div>
+        <!--left col-->
+        <div class="col-12 containerPhoto d-flex justify-content-center align-items-center">
+            <img src="{{ user.photoUrl }}" class="card avatar img-thumbnail">
+        </div>
+        <div class="col-12  d-flex justify-content-center align-items-center">
+            <input type="file" class="card file-upload form-control btn shadow-sm" accept=".png, .jpg"
+                (change)="onUpload($event);">
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="title">
+                <h1>{{user.firstName}} {{user.lastName}}</h1>
             </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-center ">
+            <table class="table small bg-white">
+
+                <tbody>
+                    <tr>
+                        <th>Nombre y Apellido: </th>
+                        <td>
+                            {{user.firstName}} {{user.lastName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Telefono: </th>
+                        <td>
+                            {{user.phone_number}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Genero: </th>
+                        <td>
+                            {{user.gender}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>DNI: </th>
+                        <td>
+                            {{user.dni}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Dirección: </th>
+                        <td>
+                            {{user.address}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
 
         </div>
-        <!--/col-3-->
-        <div class="col-sm-9">
-
-            <form class="form" action="##" method="post" id="registrationForm">
-                <div class="form-group">
-
-                    <div class="col-xs-6">
-                        <label for="first_name">
-                            <h4>Nombre/s y apellido/s</h4>
-                        </label>
-                        <input [(ngModel)]="user.name" type="text" class="form-control" name="first_name" id="first_name"
-                            placeholder="Ingrese su nombre y apellido" title="Su nombre y apellido">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-6">
-                        <label for="mobile">
-                            <h4>Telefóno Celular</h4>
-                        </label>
-                        <input [(ngModel)]="user.phone_number" type="number" class="form-control" name="mobile" id="mobile"
-                            placeholder="Ingrese su número de telefóno celular" title="Su número de telefóno celular">
-                    </div>
-                </div>
-                <div class="form-group">
-
-                        <div class="col-xs-6">
-                            <label for="username">
-                                <h4>Nombre de usuario</h4>
-                            </label>
-                            <input [(ngModel)]="user.username" type="text" class="form-control" name="username" id="username"
-                                placeholder="Ingrese su nombre de usuario" title="Su nombre de usuario">
-                        </div>
-                    </div>
-                <div class="form-group">
-
-                    <div class="col-xs-6">
-                        <label for="email">
-                            <h4>Correo electronico Unimet</h4>
-                        </label>
-                        <input disabled=true  [(ngModel)]="user.email" type="email" class="form-control" name="email" id="email"
-                            placeholder="you@email.com" title="Su correo electornico">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <br>
-                        <button (click)="onSave()" class="btn btn-lg btn-warning" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>
-                            Save</button>
-                       
-                    </div>
-                </div>
-            </form>
-
-            <hr>
-
-
+        <div class="col-12 change-my-password-btn d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary">Editar datos</button>
+            <button class="btn btn-secondary">Cambiar contraseña</button>
         </div>
         <!--/col-9-->
     </div>
-    <!--/row-->
+</div>
+<!--/row-->

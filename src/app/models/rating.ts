@@ -1,8 +1,11 @@
 export interface RatingInterface{
-    username?:string;
-    partner ?:string;
-    value ?: number;
+    ofertID?:string;
+    userUID?:string;
+    partnerName?:string;
+    partnerUID ?:string;
+    type ?: string;
     comment ?: string;
-    date ?: string;
-    status ?: string;
+    excuse?:string;
+    status?:string;
+    date ?: number;
 }

@@ -1,47 +1,38 @@
-<form (submit)='onRegister()' class="register-form">
-    <h1 class="p-2">Crea una cuenta</h1>
-    <h6 class="p-2">Solo te tomará unos minutos</h6>
-    <div class="d-flex form-item name-and-surname">
-        <div class="text-center form-item-name flex-fill">
-            <input type="text" name="name" class="form-control" placeholder="Nombre">
+<form class="register-form " [formGroup]="formGroupRegister" novalidate>
+
+    <div class="row p-2">
+
+        <div class="col-md-12">
+
+            <div class="flex-fill ">
+                <mat-form-field appearance="legacy" class="mat-form-field">
+                    <input matInput placeholder="Email @correo.unimet.edu.ve" type="email" formControlName="email"
+                        class="input-right-align" (click)="hideErrorMessage()">
+                </mat-form-field>
+            </div>
+
         </div>
-        <div class="text-center form-item-surname flex-fill">
-            <input type="surname" name="surname" class="form-control" placeholder="Apellido">
+        <div class="col-md-12">
+
+            <div class="flex-fill ">
+                <mat-form-field appearance="legacy" class="mat-form-field">
+                    <input matInput placeholder="Contraseña" type="password" formControlName="password"
+                        class="input-right-align" (click)="hideErrorMessage()">
+                        <mat-hint class="error-label">{{error}}</mat-hint>
+                </mat-form-field>
+            </div>
+
         </div>
+       
+        
+
     </div>
-    <br>
-    <div class="d-flex text-center  form-item">
-        <input [(ngModel)]="email2" type="email" class="form-control flex-fill" name="email" placeholder="Email">
-    </div>
-    <br>
-
-    <div class="d-flex text-center  form-item">
-        <input [(ngModel)]="pass2" type="password" name="pass" class="form-control flex-fill"
-            placeholder="Ingresa una Contraseña">
-    </div>
-
-    <div class="form-item-sexo d-flex form-item">
-
-        <h6 class="form-item-sexo-title">Genero:</h6>
-
-        <div class="  form-item-sexo-option">
-            <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">Másculino
-            </label>
-        </div>
-        <div class=" form-item-sexo-option">
-            <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">Femenino
-            </label>
-        </div>
-        <div class=" form-item-sexo-option">
-            <label class="form-check-label ">
-                <input type="radio" class="form-check-input" name="optradio">Otro
-            </label>
-        </div>
+ 
+    <div class="col-md-12 p-3">
+    <button class="btn btn-warning" mat-raised-button (click)="onRegister()" *ngIf="!loading; else spinner">Crear cuenta</button>
+    <ng-template #spinner>
+        <mat-spinner diameter="50" class="custom-spinner" ></mat-spinner>
+    </ng-template>
     </div>
 
-    <div class="mt-4">
-        <button class="btn sign-up-btn" type="submit">Registrarme</button>
-    </div>
 </form>
