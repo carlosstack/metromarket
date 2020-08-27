@@ -1,0 +1,12 @@
+.sidebar{
+    position: fixed !important;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    color: black;
+    z-index: 9999;
+}
+
+
+  
+  

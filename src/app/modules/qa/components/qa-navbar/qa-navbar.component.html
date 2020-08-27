@@ -1,0 +1,23 @@
+
+    <mat-toolbar class="sticky-top">
+        <div class="d-flex align-items-center ">
+            <mat-icon color="primary" fontSet="material-icons"> question_answer</mat-icon>
+            <span class="ml-3 text-primary">Foro</span>
+        </div>
+       
+        <div class="mx-auto mr-4 d-flex align-items-center ">
+            <span class="material-icons">
+                search
+            </span> 
+                <input type="text" class="" placeholder="Busca por palabras claves o etiquetas"
+                    (input)="search($event.target.value)">
+        </div>
+       
+        <div class="mt-2 mb-2 ">
+            <button mat-button [routerLink]="['/app/qa/a',{ outlets:{qa:['new']}}]"
+                class="btn ask__btn w-100">
+                <li class="far fa-dot-circle"></li>
+                <span class="ml-2">PREGUNTAR</span>
+            </button>
+        </div>
+    </mat-toolbar>

@@ -1,0 +1,34 @@
+<h5 class="pl-4 pr-4 pt-4 pb-2">Mis comentarios</h5>
+<hr>
+<div *ngFor="let comment of page.data | async">
+    <div class="comment__container pb-2">
+        <div class="d-flex flex-warp">
+            <span class="text-secondary small pt-2">{{comment.date | dateAgo}} has comentado en</span>&nbsp;
+            <a class="text-primary small pt-2"
+                [routerLink]="['/app/qa/a',{outlets:{qa:['question-page',comment.parentUID,comment.parentID]}}]">{{comment.parentTitle }}</a>
+
+            <div ngbDropdown class="small d-inline-block ml-auto mr-2">
+                <button mat-button class="text-secondary" id="dropdownBasic1" ngbDropdownToggle></button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu dropdown-menu-right">
+                    <button ngbDropdownItem class="small">Editar</button>
+                    <button ngbDropdownItem class="small">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        <div class="comment__content">
+            <p>{{comment.content}}</p>
+        </div>
+    </div>
+    <hr>
+</div>
+<p class="ml-4" *ngIf="page.done | async">No hay más preguntas!</p>
+<p class="ml-4" *ngIf="page.empty | async">Aún no hay disponibles!</p>
+<div class="d-flex justify-content-center" *ngIf="page.error | async">
+    <div class="d-flex flex-column justify-content-center">
+        <p class="pb-2 h6 text-center">Ha ocurrido un error</p>
+        <button class="btn-rounded btn btn-outline-primary ml-4 mr-4" (click)="page.retry()">
+            <li class="fas fa-redo p-1"></li> Reintentar
+        </button>
+    </div>
+</div>
+<app-loading *ngIf="page.loading | async"></app-loading>

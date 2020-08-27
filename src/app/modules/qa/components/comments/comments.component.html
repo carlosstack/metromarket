@@ -1,0 +1,17 @@
+<div class="comments__container" [class.border-t]="comments.length > 0">
+    <div *ngFor="let comment of comments">
+        <p class="comment small">{{comment.content}} - <span class="text-primary">{{comment.owner}}</span>&nbsp;<span
+                class="date__container">{{comment.date | dateAgo }}</span>
+            <li class="fas fa-times small btn text-secondary" *ngIf="currentUID==comment.uid"
+                (click)="delete(comment.id)"></li>
+        </p>
+    </div>
+
+    <a class="ml-2 small text-primary" (click)="get()" *ngIf="showMoreBtn && commentsCount > 0">Ver {{commentsCount}} comentarios</a>
+    <p class="ml-2 small text-primary" *ngIf="showMoreLoading">Cargando...</p>
+
+</div>
+<div class="input__container">
+    <input type="text" placeholder="Agrega un comentario" class="small" [(ngModel)]="commentInput"
+        (keyup.enter)="add()">
+</div>

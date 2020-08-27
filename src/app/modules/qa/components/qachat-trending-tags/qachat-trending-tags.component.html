@@ -1,0 +1,18 @@
+<div class="tagcloud03 pt-2">
+    <div class="d-flex flex-wrap ">
+        <div *ngFor="let tag of page.data | async">
+            <a href="#">{{tag.tag}}
+                <span>{{tag.count}}</span>
+            </a>
+        </div>
+    </div>
+</div>
+    <div class="d-flex justify-content-center" *ngIf="page.error | async">
+        <div class="d-flex flex-column justify-content-center">
+            <p class="pb-2 h6">Ha ocurrido un error</p>
+            <button class="btn-rounded btn btn-outline-primary ml-4 mr-4" (click)="page.retry()">
+                <li class="fas fa-redo pr-2"></li> Reintentar
+            </button>
+        </div>
+    </div>
+    <app-loading *ngIf="page.loading | async"></app-loading>

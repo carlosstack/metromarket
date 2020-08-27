@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserAccountRoutingModule } from './user-account-routing.module';
-import {UserAccountComponent } from "../../components/user-account/user-account.component";
+import {UserAccountComponent } from "./pages/user-account.component";
 
 @NgModule({
   declarations: [UserAccountComponent],

@@ -1,0 +1,38 @@
+<form class="register-form " [formGroup]="formGroupLogin" novalidate>
+
+    <div>
+
+        <div class="">
+
+            <div class="flex-fill ">
+                <mat-form-field appearance="outline" class="mat-form-field">
+                    <input matInput placeholder="Email" type="email" formControlName="email"
+                        class="input-right-align" (click)='hideErrorMessage()'>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <div class="">
+
+            <div class="flex-fill ">
+                <mat-form-field appearance="outline" class="mat-form-field">
+                    <input matInput placeholder="Contraseña" type="password" formControlName="password"
+                        class="input-right-align" (click)='hideErrorMessage()'>
+                    <mat-hint class="error-label">{{error}}</mat-hint>
+                </mat-form-field>
+            </div>
+
+        </div>
+       
+    </div>
+   
+    <div class="d-flex justify-content-center align-items-center">
+
+    <button mat-button (click)="onLoginEmail()" class="btn flex-fill text-center" *ngIf="!loading; else spinner">Iniciar sesión</button>
+    <ng-template #spinner>
+        <mat-spinner diameter="50" class="custom-spinner" ></mat-spinner>
+    </ng-template>
+    
+    </div>
+
+</form>

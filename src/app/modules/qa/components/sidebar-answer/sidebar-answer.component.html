@@ -1,0 +1,45 @@
+<div class="sidebar__container d-flex flex-column">
+
+
+    <a href="" class="p-2" routerLink="/app/qa/a" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <div class="d-flex align-items-center ml-2">
+            <mat-icon fontSet="material-icons"> home</mat-icon>
+            <span class="ml-2">Inicio</span>
+        </div>
+    </a>
+    <a href="" class="p-2" [routerLink]="['/app/qa/a',{ outlets:{qa:['tags']}}]"
+        [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <div class="d-flex align-items-center ml-2">
+            <mat-icon fontSet="material-icons"> local_offer</mat-icon>
+            <span class="ml-2">Etiquetas</span>
+
+        </div>
+    </a>
+    <a href="" class="p-2" [routerLink]="['/app/qa/a',{ outlets:{qa:['my-questions']}}]"
+        [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+
+        <div class="d-flex align-items-center ml-2">
+            <mat-icon fontSet="material-icons"> help_center</mat-icon>
+            <span class="ml-2">Preguntas</span>
+        </div>
+    </a>
+    <a href="" class="p-2" [routerLink]="['/app/qa/a',{ outlets:{qa:['my-answers']}}]"
+        [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <div class="d-flex align-items-center ml-2">
+            <mat-icon fontSet="material-icons"> announcement
+            </mat-icon>
+            <span class="ml-2">Respuestas</span>
+        </div>
+    </a>
+    <a href="" class="p-2" [routerLink]="['/app/qa/a',{ outlets:{qa:['my-comments']}}]"
+        [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        <div class="d-flex align-items-center ml-2">
+            <mat-icon fontSet="material-icons"> chat_bubble
+            </mat-icon>
+            <span class="ml-2">Comentarios</span>
+        </div>
+    </a>
+
+
+
+</div>

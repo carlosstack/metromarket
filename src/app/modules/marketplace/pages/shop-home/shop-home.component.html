@@ -1,0 +1,64 @@
+
+
+<div class="carousel__container">
+    <ngb-carousel id="carousel" class="carousel" *ngIf="images" [showNavigationArrows]="false" [showNavigationIndicators]="false" >
+        <ng-template ngbSlide *ngFor="let image of images">
+          <div class="picsum-img-wrapper" >
+            <img src="{{image}}" class="img img-fluid">
+          </div>
+          
+        </ng-template>
+    
+      </ngb-carousel>
+</div>
+<div class="p-4 d-flex">
+  <h5 >Últimos agregados</h5> <a class="p-1 text-warning">Ver todo</a>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center" *ngFor="let product of recentProducts">
+      <div class="card">
+        <img class="img img-fluid" src="{{product.galery[0]}}">
+        <div class="p-2 product-title__container">
+          <div class="product-title__text">
+              {{ product.title }}
+          </div>
+          <div class="product-price__text">
+              {{product.currency}} {{product.price | number}}
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="categories" hidden>
+    <h5 class="text-center categories__title">Categorías</h5>
+    <div class="p-2">
+        <div class="w-100 h-100 categories__container">
+            <ul>
+                <li class="d-flex"><a href="">Vehículos</a></li>
+                <li class="d-flex"><a href="">Alimentos y bebidas</a></li>
+                <li class="d-flex"><a href="">Casa y hogar</a></li>
+                <li class="d-flex"><a href="">Deportes y ejercicios</a></li>
+                <li class="d-flex"><a href="">Tecnología</a></li>
+                <li class="d-flex"><a href="">Ropa y accesorios</a></li>
+                <li class="d-flex"><a href="">Pasatiempos</a></li>
+                <li class="d-flex"><a href="">Familia</a></li>
+                <li class="d-flex"><a href="">Alquileres</a></li>
+                <li class="d-flex"><a href="">Viviendas en venta</a></li>
+                <li class="d-flex"><a href="">Entretenimiento</a></li>
+                <li class="d-flex"><a href="">Papelería</a></li>
+                <li class="d-flex"><a href="">Artículos de Límpieza</a></li>
+                <li class="d-flex"><a href="">Productos para mascotas</a></li>
+                <li class="d-flex"><a href="">Libros</a></li>
+                <li class="d-flex"><a href="">Autoperiquitos</a></li>
+                <li class="d-flex"><a href="">Teléfonos celulares</a></li>
+                <li class="d-flex"><a href="">Consumibles</a></li>
+                <li class="d-flex"><a href="">Electronica</a></li>
+                 <li class="d-flex"><a href="">Autoperiquitos</a></li>
+                <li class="d-flex"><a href="">Teléfonos celulares</a></li>
+                
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="mySidebar" class="sidebar sticky-top">
+    <button mat-button class="closebtn btn" (click)="closeNav()">
+      <li class="fas fa-times"></li>
+    </button>
+    <a routerLink="/app" (click)="closeNav()">Apps</a>
+    <div class="apps">
+      <a routerLink="/app/exchange/e" (click)="closeNav()">Intercambio</a>
+      <a routerLink="/app/shop/s" (click)="closeNav()">Incio</a>
+    </div>
+  
+  </div>
+  
+  <div id="main">
+    <div class="nav d-flex align-items-center ">
+      <a class="btn" id="openbtn" (click)="openNav()"> 
+       <li class="fas fa-bars"></li>
+      </a>
+    </div>
+  
+  </div>

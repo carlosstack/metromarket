@@ -1,0 +1,28 @@
+<div class="ml-4 pl-4 navbar__container ">
+    <div class="">
+    <nav class="navbar navbar-expand nav-top">
+        <a class="title d-flex" routerLink='/app/shop/s'>
+            <div class="d-flex justify-content-center title__icon__container">
+                <li class="fas fa-shopping-bag title__icon"></li>
+            </div>
+        </a>
+    
+        <div class="container-fluid d-flex">
+            
+            <div class="navbar-collapse d-flex flex-row justify-content-center">
+                <div class="searchbar d-flex justify-content-center align-content-center">
+                    <input class="search_input  " type="text" name="" placeholder="¿Qué estas buscando?" [(ngModel)]="query"
+                        (keyup.enter)="search()">
+                    <a class="search_icon btn" (click)="search()"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+            <div class=" d-flex flex-row-reverse my-store__container p-4"> 
+                <a [routerLink]="['/app/shop/s',{ outlets:{shop:['new']}}]" class="new-product__btn shadow-sm" > <li class="fas fa-plus p-1 hidden-in-desktop"></li> <span class="hidden-in-mobile">PUBLICAR</span> </a>
+                <a [routerLink]="['/app/shop/s',{ outlets:{shop:['my-products']}}]" class="products-list__btn"> <li class="fas fa-list-ul p-1 hidden-in-desktop"></li> <span class="hidden-in-mobile">MIS PRODUCTOS</span></a>
+            </div>
+          
+        </div>
+        
+    </nav>
+</div>
+  </div>

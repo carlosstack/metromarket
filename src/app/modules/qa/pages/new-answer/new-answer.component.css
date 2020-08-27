@@ -1,0 +1,26 @@
+.container{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+form{
+    margin-top: 10px;
+}
+.mat-form-field{
+    width: 100%;
+    font-size: 13px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+
+
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-end {
+  border-radius: 0;
+}
+.e-richtexteditor .e-dialog .e-img-uploadwrap.e-droparea{
+    display: none !important;
+}
+.e-richtexteditor .e-linkheader {
+    display: none !important;
+}

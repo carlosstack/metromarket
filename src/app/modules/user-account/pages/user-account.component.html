@@ -1,0 +1,73 @@
+<div class="container">
+    <strong><h4>Mis datos</h4></strong>
+    <div class="row">
+        <!--left col-->
+        <div class="p-4 col-12 d-flex justify-content-left align-items-center">
+           <div id="thumbnail__container" class="thumbnail__container">
+            <input id="thumbnail" type="file" class="btn avatar" accept=".png, .jpg"
+            (change)="onUpload($event);">
+            <span class=" file-upload__icon">            <li class="fas fa-camera"></li>
+            </span>
+            {{user.firstName}} {{user.lastName}}
+           </div>
+        </div>
+        <div class="col-12">
+            <table class="w-100 table bg-white">
+                <tbody>
+                    <tr>
+                        <td>Nombre y Apellido: </td>
+                        <td>
+                           <span class="d-flex flex-row"> {{user.firstName}} {{user.lastName}}</span>
+                        </td>
+                        <td>
+                             <span class="d-flex flex-row-reverse justify-content-right p-1"><li class="fas fa-angle-right text-primary"></li></span>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td>Telefono: </td>
+                        <td>
+                            {{user.phone_number}}
+                        </td>
+                        <td>
+                            <span class="d-flex flex-row-reverse justify-content-right p-1"><li class="fas fa-angle-right text-primary"></li></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Genero: </td>
+                        <td>
+                            {{user.gender}}
+                        </td>
+                        <td>
+                            <span class="d-flex flex-row-reverse justify-content-right p-1"><li class="fas fa-angle-right text-primary"></li></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>DNI: </td>
+                        <td>
+                            {{user.dni}}
+                        </td>
+                        <td>
+                            <span class="d-flex flex-row-reverse justify-content-right p-1"><li class="fas fa-angle-right text-primary"></li></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dirección: </td>
+                        <td>
+                            {{user.address}}
+                        </td>
+                        <td>
+                            <span class="d-flex flex-row-reverse justify-content-right p-1"><li class="fas fa-angle-right text-primary"></li></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-left align-items-center">
+                <button class="btn btn-primary">Cambiar contraseña</button>
+            </div>
+
+        </div>
+       
+        <!--/col-9-->
+    </div>
+</div>
+<!--/row-->

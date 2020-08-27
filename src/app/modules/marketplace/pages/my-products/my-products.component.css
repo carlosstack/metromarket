@@ -1,0 +1,62 @@
+table,mat-paginator{
+  width: 100%;
+  background-color: transparent !important;
+  
+  }
+  mat-form-field{
+    width: 100%;
+  }
+
+  .component__container{
+    border: 2px solid rgb(245, 247, 248);
+    border-radius: 5px;
+    background-color: white;
+}
+
+.page__container{
+    padding-top: 3%;
+    padding-right: 30%;
+    padding-left: 10%;
+}
+
+  .title-page__text{
+    margin-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .thumbnail-product{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    object-fit: scale-down;
+  }
+
+  .filter {
+    width: 100%;
+  }
+
+  .mat-select__actions{
+    max-width: 100px;
+    font-size: 12px;
+  }
+
+@media only screen and (max-width:810px ) {
+  .mat-select__actions{
+    max-width: 80px;
+    font-size: 10px;
+  }
+  .page__container{
+    background-color: white;
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .component__container{
+    border: none;
+    margin-top: 20px;
+    border-radius: 0;
+  }
+}

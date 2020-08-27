@@ -1,12 +1,85 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "./assets/themes/alizon-theme.scss";
 
-body{
-background: rgb(255, 255, 255);
-font-family: "Lato";
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('assets/fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('assets/fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('assets/fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('assets/fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('assets/fonts/montserrat/Montserrat-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-SemiBold;
+  src: url('assets/fonts/montserrat/Montserrat-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url('assets/fonts/montserrat/Montserrat-Regular.ttf'); 
 }
 
 
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body{
+  background-color: rgb(255, 255, 255);
+  font-size: 16px;
+  line-height: 1.625;
+  font-family: Roboto;
+  }
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+  color: #6675df;
+}
+
+/*---------------------------------------------*/
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+}
+
+
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+
+hr{
+  border: 0.5px solid rgb(245, 247, 248);
+}
 
 /* width */
 ::-webkit-scrollbar {

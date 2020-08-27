@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand nav-top" hidden>
+    <div class="container-fluid">
+
+
+        <div class="navbar-collapse flex-row ">
+        </div>
+        <div class="menu d-flex">
+            <div ngbDropdown class="d-inline-block" display="dynamic" placement="bottom-right">
+                <a type="button" class="btn" id="dropdownForm1" ngbDropdownToggle (click)=" saveLastOpenedDate()">
+                    <li class="fas fa-bell"></li><span class="badge badge-danger text-center"
+                        *ngIf="notifCount>0">{{notifCount}}</span>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1" class="p-1">
+                    <app-notifications class="px-4 py-3"></app-notifications>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem class="btn btn-primary">Ver todas las notificaciones</button>
+                </div>
+            </div>
+            <div ngbDropdown>
+
+            </div>
+            <a class="small btn" [routerLink]="['/app/myAccount']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <li class="fas fa-user"></li>
+            </a>
+
+        </div>
+    </div>
+</nav>
+<mat-toolbar>
+    <span>Third Line</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+</mat-toolbar>
+
+<ng-template #notificaciones>
+    <app-notifications></app-notifications>
+</ng-template>
+
+

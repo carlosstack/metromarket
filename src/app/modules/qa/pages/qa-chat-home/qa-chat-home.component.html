@@ -1,0 +1,27 @@
+<div class="w-100">
+  
+    <mat-tab-group mat-stretch-tabs>
+
+        <mat-tab label="Populares">
+            <ng-template matTabContent>
+                <app-popular-questions></app-popular-questions>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Recientes">
+            <ng-template matTabContent>
+                <app-recent-questions></app-recent-questions>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Esta semana">
+            <ng-template matTabContent>
+                <app-by-date-questions [date]="604800"></app-by-date-questions>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Este mes">
+            <ng-template matTabContent>
+                <app-by-date-questions [date]="2592000"></app-by-date-questions>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

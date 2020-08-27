@@ -1,0 +1,57 @@
+<h4 class="p-2">FILTRO AVANZADO</h4>
+<div>
+  <form class="" [formGroup]="formGroup" novalidate>
+    <div class="row p-1">
+      <div class="col-md-6 ">
+        <div class="flex-fill ">
+          <mat-form-field appearance="outline" class="mat-form-field">
+            <mat-label>Monto mínimo</mat-label>
+            <input matInput type="number" formControlName="amountMin" class="input-right-align">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="flex-fill ">
+          <mat-form-field appearance="outline" class="mat-form-field">
+            <mat-label>Monto máximo</mat-label>
+            <input matInput type="number" formControlName="amountMax" class="input-right-align">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="flex-fill ">
+          <mat-form-field appearance="outline" class="mat-form-field">
+            <mat-label>Tasa Máxima</mat-label>
+            <input matInput type="number" formControlName="rateMax" class="input-right-align">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="flex-fill">
+          <mat-form-field appearance="outline" class="mat-form-field">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="type">
+              <mat-option [value]="'COMPRA'">
+                Compras
+              </mat-option>
+              <mat-option [value]="'VENTA'">
+                Ventas
+              </mat-option>
+              <mat-option [value]="'CAMBIO'">
+                Cambios
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="p-2">  
+    <label *ngIf="invalidForm()" class="small text-danger">Debe completar por lo menos un campo.</label>
+  </div>
+  <div class="d-flex">
+    <button mat-button class="bg-secondary flex-fill" (click)="onNoClick()">Volver</button>
+    <button mat-button class="applyBtn flex-fill" [mat-dialog-close]="formGroup.value">Aplicar</button>
+  </div>
+
+</div>

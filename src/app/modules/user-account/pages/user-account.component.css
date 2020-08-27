@@ -1,0 +1,49 @@
+button{
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+.container{
+  padding-top: 8%;
+  padding-left: 16%;
+  padding-right: 16%;
+}  
+ .thumbnail__container{
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    
+}
+.thumbnail__container:hover{
+  
+}
+.file-upload__icon{
+  display: none;
+
+}
+.thumbnail__container:hover .file-upload__icon{
+  position: absolute;
+  display: block;
+  width: 150px;
+  height: 150px;
+  top: 0;
+  left: 175px;
+  font-size: 40px;
+  color: gray;
+  
+}
+.table{
+}
+  .avatar{
+    opacity: 0;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+  
+  }
+

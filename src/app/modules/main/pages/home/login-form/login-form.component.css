@@ -1,0 +1,30 @@
+.container{
+  
+  }
+  .register-form{
+    padding-top: 20px;
+    width: 100%;
+  }
+  
+  mat-form-field{
+    border-radius: 30px;
+    width: 100%;
+  }
+  .btn{
+    background-color: rgb(0, 174, 255);
+    color: #ffffff;
+    margin-top: 25px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+ .error-label{
+     font-size: 10px;
+     color: red;
+ }
+
+  
+  
+ :host ::ng-deep .custom-spinner circle{   
+    stroke: blue;
+}

@@ -1,24 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AnswerComponent } from "../../components/answer/answer.component";
-import { NewAnswerComponent } from 'src/app/components/answer/new-answer/new-answer.component';
-import { AnswerActivityComponent } from 'src/app/components/answer/answer-activity/answer-activity.component';
-import { MyAnswersComponent } from 'src/app/components/answer/my-answers/my-answers.component';
-import { AnswerPageComponent } from 'src/app/components/answer/answer-page/answer-page.component';
+import { AnswerComponent } from "./pages/main/answer.component";
+import { NewAnswerComponent } from 'src/app/modules/qa/pages/new-answer/new-answer.component';
+import { AnswerActivityComponent } from 'src/app/modules/qa/pages/answer-activity/answer-activity.component';
+import { MyAnswersComponent } from 'src/app/modules/qa/pages/my-answers/my-answers.component';
+import { AnswerPageComponent } from 'src/app/modules/qa/pages/answer-page/answer-page.component';
+import { QaChatHomeComponent } from 'src/app/modules/qa/pages/qa-chat-home/qa-chat-home.component';
+import { MyQuestionsComponent } from 'src/app/modules/qa/pages/my-questions/my-questions.component';
+import { TagsComponent } from 'src/app/modules/qa/pages/tags/tags.component';
+import { MyQachatCommentsComponent } from 'src/app/modules/qa/pages/my-qachat-comments/my-qachat-comments.component';
 
 const routes: Routes = [
   {
     path: 'a',
     component: AnswerComponent,
-    children:[
-      {path:'new',component: NewAnswerComponent, outlet:'answer'},
-      {path:'activity',component: AnswerActivityComponent, outlet:'answer'},
-      {path:'my-answers',component: MyAnswersComponent, outlet:'answer'},
-      {path:'answer-page/:id',component: AnswerPageComponent, outlet:'answer'},
-      { path:'**', redirectTo:'activity'}
+    children: [
+      { path: '', component: QaChatHomeComponent, outlet: 'qa' },
+      { path: 'new', component: NewAnswerComponent, outlet: 'qa' },
+      { path: 'my-answers', component: MyAnswersComponent, outlet: 'qa' },
+      { path: 'my-questions', component: MyQuestionsComponent, outlet: 'qa' },
+      { path: 'my-comments', component: MyQachatCommentsComponent, outlet: 'qa' },
+      { path: 'question-page/:uid/:id', component: AnswerPageComponent, outlet: 'qa' },
+      { path: 'tags', component: TagsComponent, outlet: 'qa' },
+      { path: '**', redirectTo: '' }
     ]
-  }, 
-  { path:'**', redirectTo:'a'}
+  },
+  { path: '**', redirectTo: 'a' }
 
 ];
 

@@ -1,0 +1,52 @@
+<h5 class="pl-4 pr-4 pt-4 pb-2">Añadir pregunta</h5>
+<hr>
+<div class="container">
+
+    <form [formGroup]="formGroupNewQuestion" novalidate>
+
+        <mat-form-field appearance="outline" class="mat-form-field">
+            <mat-error *ngIf="formGroupNewQuestion.get('title').invalid">Debe agregar un título a su pregunta.
+            </mat-error>
+            <mat-label>Título</mat-label>
+            <input matInput #input maxlength="100" placeholder="ej: Cooler Contigo 24 onz, Toyota Meru" type="text"
+                formControlName="title" class="input-right-align">
+            <mat-hint align="end">{{input.value?.length || 0}}/100</mat-hint>
+
+        </mat-form-field>
+
+        <ejs-richtexteditor id='iframeRTE' [toolbarSettings]='tools' [iframeSettings]='iframe' [height]='350'
+            formControlName="description" [insertImageSettings]='insertImageSettings'></ejs-richtexteditor>
+
+        <mat-form-field appearance="outline" class="mat-form-field">
+            <mat-error *ngIf="formGroupNewQuestion.get('tags').invalid">Debe agregar al menos una etiqueta.</mat-error>
+            <mat-label>Etiquetas</mat-label>
+            <mat-chip-list #chipList aria-label="Etiquetas" formControlName="tags">
+                <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(tag)">
+                    {{tag.name}}
+                    <li matChipRemove *ngIf="removable"
+                        class="fas fa-times d-flex justify-content-center align-items-center"></li>
+                </mat-chip>
+                <input #tagInput placeholder="Etiquetas" [matChipInputFor]="chipList" [formControl]="tagCtrl"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)" [matAutocomplete]="auto">
+
+            </mat-chip-list>
+            <mat-hint align="start">Añade hasta 5 etiquetas separadas por comas.</mat-hint>
+            <mat-hint align="end">{{tags.length}}/5</mat-hint>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                    {{tag}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <button class="d-flex ml-auto btn btn-primary" *ngIf="!loading; else loadingQuestion" (click)="addQuestion()"
+            [disabled]="formGroupNewQuestion.invalid"> Publicar
+        </button>
+    </form>
+</div>
+
+<ng-template #loadingQuestion>
+    <app-loading></app-loading>
+</ng-template>

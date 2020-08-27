@@ -1,0 +1,88 @@
+
+
+<div class="container">
+
+    <div class="row" *ngIf="products ; else loading">
+
+        <div class="col-3 p-2 categories__container">
+            <div *ngIf="query">
+                <h4><strong>{{query}}</strong></h4>
+            </div>
+
+            <div *ngIf="category">
+                <h4><strong>{{category}}</strong></h4>
+            </div>
+            <div *ngIf="products">
+                <p class="small">{{products.length}} resultados</p>
+            </div>
+            <br>
+            <div class="w-100 h-100 categories__container">
+                <ul>
+                    <li class="d-flex"><a href="">Vehículos</a></li>
+                    <li class="d-flex"><a href="">Alimentos y bebidas</a></li>
+                    <li class="d-flex"><a href="">Casa y hogar</a></li>
+                    <li class="d-flex"><a href="">Deportes y ejercicios</a></li>
+                    <li class="d-flex"><a href="">Tecnología</a></li>
+                    <li class="d-flex"><a href="">Ropa y accesorios</a></li>
+                    <li class="d-flex"><a href="">Pasatiempos</a></li>
+                    <li class="d-flex"><a href="">Familia</a></li>
+                    <li class="d-flex"><a href="">Alquileres</a></li>
+                    <li class="d-flex"><a href="">Viviendas en venta</a></li>
+                    <li class="d-flex"><a href="">Entretenimiento</a></li>
+                    <li class="d-flex"><a href="">Papelería</a></li>
+                    <li class="d-flex"><a href="">Artículos de Límpieza</a></li>
+                    <li class="d-flex"><a href="">Productos para mascotas</a></li>
+                    <li class="d-flex"><a href="">Libros</a></li>
+                    <li class="d-flex"><a href="">Autoperiquitos</a></li>
+                    <li class="d-flex"><a href="">Teléfonos celulares</a></li>
+                    <li class="d-flex"><a href="">Consumibles</a></li>
+                    <li class="d-flex"><a href="">Electronica</a></li>
+                    <li class="d-flex"><a href="">Autoperiquitos</a></li>
+                    <li class="d-flex"><a href="">Teléfonos celulares</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row col-9" *ngIf=" products ; else loading">
+            <div class="col-12" *ngFor="let product of products">
+                <figure class=" card-product">
+                    <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        [routerLink]="['/app/shop/s',{ outlets:{shop:['product',product.id]}}]" class="d-flex">
+                        <div class="img-wrap ">
+                            <img class="img img-fluid" src="{{product.galery[0]}}">
+                        </div>
+                        <div class="p-2">
+                            <div class="product-title__text">
+                                {{ product.title }}
+                            </div>
+                            <div class="product-price__text">
+                                {{product.currency}} {{product.price | number}}
+                            </div>
+                        </div>
+                    </a>
+                </figure>
+            </div> <!-- col // -->
+        </div> <!-- row.// -->
+    </div> <!-- row.// -->
+
+
+
+
+    <div *ngIf="products.length==0">
+        <app-loading-marketplace></app-loading-marketplace>
+    </div>
+
+
+    <ng-template #loading>
+
+
+        <app-loading-marketplace></app-loading-marketplace>
+
+    </ng-template>
+
+</div>
+<!--container.//-->
+
+
+
+<!--<app-page></app-page>-->

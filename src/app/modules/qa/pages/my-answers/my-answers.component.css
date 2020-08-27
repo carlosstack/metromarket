@@ -1,0 +1,12 @@
+.answer__container{
+    padding-left: 20px;
+}
+.answer__content{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+.btn-rounded {
+    border-radius: 20px;
+}

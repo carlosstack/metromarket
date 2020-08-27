@@ -1,0 +1,34 @@
+<div>
+    <div class="d-flex align-items-center">
+        <h5 class="pl-4 pr-4 pt-4 pb-2">Etiquetas</h5>
+        <div class="ml-auto mt-2 pr-2">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar etiquetas" (input)="search($event.target.value)">
+              </div>
+        </div>
+    </div>
+    <hr>
+    <div class="ml-4 mr-4 mt-4">
+        <div class="tagcloud03 d-flex flex-warp">
+            <ul *ngFor="let tag of page.data | async">
+                <li><a href="#">{{tag.tag}}<span>{{tag.count}}</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="ml-4" *ngIf="page.done | async">No hay más preguntas!</p>
+    <p class="ml-4" *ngIf="page.empty | async">Aún no hay disponibles!</p>
+    <div class="d-flex justify-content-center" *ngIf="page.error | async">
+        <div class="d-flex flex-column justify-content-center">
+            <p class="pb-2 h6">Ha ocurrido un error</p>
+            <button class="btn-rounded btn btn-outline-primary ml-4 mr-4" (click)="page.retry()">
+                <li class="fas fa-redo pr-2"></li> Reintentar
+            </button>
+        </div>
+    </div>
+    <app-loading *ngIf="page.loading | async"></app-loading>
+
+</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

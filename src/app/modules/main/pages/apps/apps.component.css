@@ -1,0 +1,51 @@
+
+  .container-fluid{
+    min-height: 100vh;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: rgb(248, 249, 250);
+  }
+ 
+  .card{
+    padding: 0;
+    height: 180px;
+    font-size: 18px;
+    width: 180px;
+    border-radius: 20px;
+    color: white;
+
+  }
+  .card-icon{
+    font-size: 80px;
+  }
+  button{
+    margin: 0;
+  }
+  .img{
+    height: 80px;
+    width: 90px;
+  
+  }
+  span{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  .welcome{
+    margin-top: 40px;
+    margin-bottom: 25px;
+  }
+
+  .orange-gradient{
+    color: rgb(255, 175, 62);
+    background: white;  /* fallback for old browsers */
+   
+    
+  }
+  .green-gradient{
+    color: rgb(38, 67, 255);
+    background: white;  /* fallback for old browsers */
+}

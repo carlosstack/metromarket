@@ -1,0 +1,15 @@
+.title{
+  padding-top: 10px;
+  padding-bottom: 20px;
+
+}
+.dashboard-container{
+ 
+}
+/*------*/
+
+@media only screen and (max-width:810px ) {
+  .title{
+    text-align: center !important;
+  }
+}

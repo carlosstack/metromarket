@@ -1,0 +1,27 @@
+<div id="mySidebar" class="sidebar">
+  <button mat-button class="closebtn btn" (click)="closeNav()">
+    <li class="fas fa-times"></li>
+  </button>
+  <a routerLink="/app" (click)="closeNav()">Apps</a>
+  <div class="apps p-4">
+    <a routerLink="/app/exchange/e" (click)="closeNav()">Intercambio</a>
+    <a routerLink="/app/forum/f" (click)="closeNav()">Foro</a>
+    <a routerLink="/app/shop/s" (click)="closeNav()">Tienda</a>
+  </div>
+  <div class="user-menu">
+    <a routerLink="/app/myAccount" (click)="closeNav()">Mi cuenta</a>
+    <a href="#" (click)="closeNav()">Cerrar sesión</a>
+  </div>
+
+</div>
+
+<div id="main">
+  <div class="nav d-flex align-items-center p-2">
+    <a class="btn" id="openbtn" (click)="openNav()">
+      <span class="material-icons">
+        apps
+        </span>
+    </a>
+  </div>
+
+</div>

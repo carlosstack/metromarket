@@ -1,0 +1,45 @@
+.sidebar__container {
+    height:100vh;
+    width: 240px;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+}
+.sidebar__container a{
+    color: grey;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-radius: 40px;
+}
+
+
+.title__container{
+    margin-bottom: 40px;
+}
+.title{
+    display: flex;
+    align-items: center;
+  }
+  .title__text{
+    
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  
+  .title__icon__container{
+    font-size: 100px;
+  }
+  .title__icon{
+      font-size: 26px;
+      margin-left: 10px;
+      color: dodgerblue;
+  }
+
+  .active,.sidebar__container a:hover{
+      color: dodgerblue !important;
+      background-color: rgb(230, 241, 252);
+
+
+  }

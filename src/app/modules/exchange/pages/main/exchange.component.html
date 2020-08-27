@@ -1,0 +1,39 @@
+<!--/ ESTRUCTURA PRINCIPAL DEL MARKETPLACE -->
+
+<div class="">
+    <div class="sidebar" >
+        <div class="d-flex justify-content-center">
+            
+            <a class="d-flex justify-content-center align-items-center img__container" [routerLink]="['/app/exchange/e']">
+                <img src="../../../assets/exchange-icon.png" alt="" class="img img-fluid">
+            </a>
+        </div>
+          <div class="nav d-flex flex-column">
+             <a class="h6" [routerLink]="['/app/exchange/e']" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">
+                <li class="fas fa-search-dollar"></li><span class="p-3">Disponibles</span>
+            </a>
+             <a class="h6" [routerLink]="['/app/exchange/e',{ outlets:{exchange:['buy']}}]"
+             routerLinkActive="active">
+                <li class="fas fa-dollar-sign"></li><span class="p-3">Comprar</span>
+            </a>
+             <a class="h6" [routerLink]="['/app/exchange/e',{ outlets:{exchange:['sell']}}]"
+             routerLinkActive="active">
+                <li class="fas fa-money-bill"></li><span class="p-3">Vender</span>
+            </a>
+             <a class="h6" [routerLink]="['/app/exchange/e',{ outlets:{exchange:['change']}}]"
+             routerLinkActive="active">
+                <li class="fas fa-exchange-alt"></li><span class="p-3">Cambiar</span>
+            </a>
+            <a class="h6"  [routerLink]="['/app/exchange/e',{ outlets:{exchange:['dashboard']}}]"
+            routerLinkActive="active">
+                <li class="fas fa-list-alt"></li><span class="p-3">Actividad</span>
+            </a>
+   
+          </div>
+    </div>
+    <div id="main" class="main">
+        <router-outlet name='exchange'></router-outlet>
+    </div>
+    
+</div>

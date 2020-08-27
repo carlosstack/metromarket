@@ -1,0 +1,85 @@
+<div *ngIf="question && answers;else loading">
+    <div class=" pl-4 pr-4 question-description__title">
+        <h3 class="title">{{question.title}}</h3>
+        <div class="date__container d-flex"> publicado {{question.date | dateAgo}} por &nbsp; <span
+                class="text-primary"> {{question.owner}} </span></div>
+       
+    </div>
+    <hr>
+    <div class="d-flex">
+        <div class="question-tools__container d-flex flex-column p-2 align-items-center h-100">
+            <li class="fas fa-angle-up" (click)="addVoteToQuestion(true)"
+                [class.text-primary]="question.votes[currentUser.uid]==true"></li>
+            <span>{{question.votesCount}}</span>
+            <li class="fas fa-angle-down" (click)="addVoteToQuestion(false)"
+                [class.text-primary]="question.votes[currentUser.uid]==false"></li>
+        </div>
+        <div class="question-page__container w-100">
+            
+            <div class="question-description__container">
+                <div [innerHtml]="question.description | sanitizeHtml" class="description"></div>
+            </div>
+            <div class="p-2">
+                <app-comments [parentUID]="question.ownerUID" [parentTitle]="question.title" [parentID]="question.id"
+                    [commentsCount]="question.commentsCount" [collection]="getQuestionsCommentsPath(question.id)"
+                    [docID]="question.id" [docUID]="question.ownerUID">
+                </app-comments>
+            </div>
+        </div>
+
+    </div>
+    <h6 class="answer-count__container"> {{question.answers}} respuestas</h6>
+    <div *ngFor="let answer of answers">
+        <hr>
+        <div class="d-flex">
+            <div class="answer-tools__container d-flex flex-column p-2 align-items-center h-100">
+                <li class="fas fa-angle-up" (click)="addVoteToAnswer(true,answer)"
+                    [class.text-primary]="answer.votes[currentUser.uid]==true"></li>
+                <span>{{answer.votesCount}}</span>
+                <li class="fas fa-angle-down" (click)="addVoteToAnswer(false,answer)"
+                    [class.text-primary]="answer.votes[currentUser.uid]==false"></li>
+            </div>
+            <div class="answer-page__container w-100">
+                <div class="answer-description__title">
+                    <div class="d-flex flex-column small date__container">
+                        publicado {{answer.date | dateAgo }} por: {{answer.owner}}
+                    </div>
+                </div>
+                <div class="answer-description__container">
+                    <div [innerHtml]="answer.content | sanitizeHtml" class="description"></div>
+                </div>
+                <div class="p-2">
+                    <app-comments [parentUID]="question.ownerUID" [parentTitle]="question.title" [parentID]="question.id"
+                        [commentsCount]="answer.commentsCount" [collection]="getAnswersCommentsPath(answer.id)"
+                        [docID]="answer.id" [docUID]="answer.uid">
+                    </app-comments>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="your-answer__container">
+        <hr>
+        <h5 class="your-answer-title__container" *ngIf="answers.length===0;else yourAnswer">¡Se el primero en responder!
+        </h5>
+        <form [formGroup]="rteForm" (ngSubmit)="addAnswer()">
+            <ejs-richtexteditor formControlName="answer" id='iframeRTE' [toolbarSettings]='tools'
+                [iframeSettings]='iframe' [height]='200' [pasteCleanupSettings]="pasteCleanupSettings">
+            </ejs-richtexteditor>
+            <button class="d-flex ml-auto add-answer__btn btn btn-primary" type="submit">Agregar
+                respuesta</button>
+        </form>
+
+    </div>
+
+</div>
+<ng-template #yourAnswer>
+    <h5 class="your-answer-title__container">Tu respuesta</h5>
+</ng-template>
+
+<ng-template #loading>
+    <div class="container d-flex justify-content-center">
+        <app-loading></app-loading>
+    </div>
+</ng-template>

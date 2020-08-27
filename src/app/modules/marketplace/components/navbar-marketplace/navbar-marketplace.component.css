@@ -1,0 +1,164 @@
+.navbar__container{
+    width: calc(100% - 40px);
+    background-color: white;
+
+    
+  }
+  .navbar{
+    height: 60px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 0;
+  
+  }
+
+.title{
+    display: flex;
+    align-items: center;
+  }
+  .title__text{
+    
+    margin-left: -14px;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+  }
+  
+  .title__icon__container{
+    font-size: 100px;
+    color: rgb(255, 175, 62);
+  }
+  .title__icon{
+      font-size: 35px;
+      margin-right: 20px;
+  }
+
+  .menu a{
+    color: rgb(179, 179, 179);
+  }
+  
+  
+     
+  /*----START SEARCH BAR----*/
+  
+  .searchbar{
+      width: 100%;
+      height: 100%;
+      background-color: rgb(255, 255, 255);
+      border: 2px solid rgb(245, 247, 248);
+      border-radius: 5px;
+      margin-right: 30px;
+      margin-left: 10px;
+  }
+  
+      .search_input{
+      color: rgb(0, 0, 0);
+      border: 0;
+      outline: 0;
+      background: none;
+      caret-color:transparent;
+      width: 100%;
+      font-size: 16px;
+      padding-left: 20px;
+      text-align: left;
+      }
+      
+      .searchbar:hover > .search_input{
+      caret-color:rgb(248, 160, 22);
+      transition: width 0.4s linear;
+      }
+      
+      .search_icon{
+      height: 40px;
+      margin: 0;
+      width: 40px;
+      float: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color:gray;
+      text-decoration:none;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    
+    .my-store__container{
+      padding-top: 10px;
+    }
+
+    .new-product__btn{
+      border-radius: 20px;
+      font-size: 14px;
+      padding-left: 20px;
+      padding-right: 20px;
+      background-color: rgb(255, 175, 62);
+      color: white;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .products-list__btn{
+      border-radius: 5px;
+      font-size: 12px;
+      background-color: white;
+      margin-right: 10px;
+      font-weight: 600;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+        /*--- START CLASS ACTIVE ---*/
+      
+      .menu .active{
+        color: black;
+      } 
+      .menu a:hover{
+        color: black;
+      } 
+  
+      
+      .hidden-in-desktop{
+        display: none;
+      }
+
+      .hidden-in-mobile{
+        display: block;
+      }
+      @media only screen and (max-width:810px ) {
+        .hidden-in-desktop{
+          display: block;
+        }
+
+        .hidden-in-mobile{
+          display: none;
+        }
+
+        .navbar__container{
+          padding-left: 5px;
+        }
+        .title__icon{
+          font-size: 25px;
+          margin-right: 10px;
+      }
+        .searchbar{
+          width: 100%;
+          margin-right: 5px;
+        }
+        .my-store__container{
+          margin-right: 5px;
+        }
+        .my-store__container a{
+          margin-right: 5px;
+        }
+        .new-product__btn{
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-left: 5px;
+        }
+     
+      }

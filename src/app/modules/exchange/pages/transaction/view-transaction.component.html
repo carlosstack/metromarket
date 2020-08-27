@@ -1,0 +1,164 @@
+
+<div class="transaction__container" *ngIf="ofert && person;else loading">
+
+    <!--<app-custom-stepper [status]="getStatusNumber()"></app-custom-stepper>-->
+
+    <div>
+        <div class="p-3 statusbar d-flex align-items-center">
+            <h6 *ngIf="status==='NEW'">Esperando que la oferta sea aceptada por un
+                compañero en
+                nuestra red.</h6>
+            <h6 *ngIf="status==='ACCEPTED'">
+                ¿Se ha completado la transacción?</h6>
+
+            <h6 *ngIf="status==='COMPLETED'">
+                ¡Transacción completada!
+            </h6>
+
+            <h6 *ngIf="status==='ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING'">
+                ¿Recomendarías a este compañero?
+            </h6>
+            <h6 *ngIf="status==='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'">
+                ¿Recomendarías a este compañero?
+            </h6>
+            <h6 *ngIf="status==='CANCELED'">
+                ¡Transacción cancelada!
+            </h6>
+
+            <button class="btn tupla-btn btn-primary small " *ngIf="status==='ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING'"
+                (click)="openSuccesful()">CALIFICAR</button>
+
+            <button class="btn tupla-btn btn-primary small" *ngIf="status==='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'"
+                (click)="openUnsuccesful()">CALIFICAR</button>
+
+            <div class="d-flex tupla-btn" *ngIf="status==='ACCEPTED'">
+                <button class="btn btn-primary small " (click)="openDialogSuccess()">SI</button>
+
+                <button class="btn btn-secondary small " (click)="openDialogUnsuccess()">NO</button>
+            </div>
+            <div class="d-flex">
+                <button class="btn tupla-btn btn-secondary small"
+                    *ngIf="(status==='NEW') && ofert.ownerUID===currentUserUID"
+                    (click)="openDialogToCancel()">CANCELAR</button>
+                <button class="btn tupla-btn btn-secondary mark-as-completed-btn" *ngIf="canChange()"
+                    (click)="openDialogSuccess()">CAMBIAR A
+                    COMPLETADO</button>
+            </div>
+        </div>
+        <br>
+
+        <div class="col-left" *ngIf="ofert.acceptedByUID">
+
+            <h6 class="title text-left">Tu compañero es: {{person.firstName}} {{person.lastName}}</h6>
+
+            <div class="row ">
+                <div class="col-3">
+                    <div class="profile-userpic">
+                        <img src="{{person.photoUrl}}" class="img-fluid mx-auto d-block img" alt="">
+                    </div>
+                </div>
+                <div class="col-9">
+                    <table class="table small table-profile bg-white">
+                        <tbody>
+                            <tr>
+                                <td>Nombre y Apellido: </td>
+                                <td>
+                                    {{person.firstName}} {{person.lastName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Genéro: </td>
+                                <td>
+                                    {{person.gender}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CI: </td>
+                                <td>
+                                    {{person.dni}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Telefono: </td>
+                                <td>
+                                    {{person.phone_number}}
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+            <h6 class="title text-left">Detalles de la transacción</h6>
+
+            <div class="col-right ">
+                <table class="table transaction-details-table small bg-white">
+                    <thead class="">
+                        <tr>
+                            <td class="">Publicado el día:</td>
+                            <td>
+                                <div> {{ ofert.date | date:'short' }}</div>
+                            </td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr class="table-transaction-id">
+                            <td>ID</td>
+                            <td> {{ ofert.id }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Tipo de transacción: </td>
+                            <td>
+                                {{ofert.type}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tasa: </td>
+                            <td class=""> {{ ofert.rate }} {{ofert.currencyRate}} </td>
+
+                        </tr>
+                        <tr>
+                            <td>Monto a entregar / transferir:</td>
+                            <td>
+                                <div class="">
+                                    {{ ofert.amountToSend + ofert.currencyAmountToSend  }}&nbsp;
+                                    {{ ofert.from }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Monto a recibir:</td>
+                            <td class="d-flex">
+                                {{ ofert.amountToReceive}}{{ofert.currencyAmountToReceive }}&nbsp;
+                                <div class="" *ngFor="let payForm of ofert.payForms">
+                                    {{ payForm }}.&nbsp;
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+           
+            </div>
+        </div>
+
+    </div>
+    <div *ngIf="status==='ACCEPTED' || status ==='ACCEPTED_SUCCESS_AND_WAITING_FOR_RATING' || status==='ACCEPTED_UNSUCCESS_AND_WAITING_FOR_RATING'">
+        <h6 class="title text-left">Habla con {{person.firstName}} {{person.lastName}}</h6>
+
+        <app-messenger [id]="ofert.id" [uid]="person.uid" [name]="person.firstName+' '+person.lastName" *ngIf="person"></app-messenger>
+    
+    </div>
+   </div>
+
+   <ng-template #loading>
+       <div class="container d-flex justify-content-center">
+           <app-loading></app-loading>
+       </div>
+   </ng-template>
+   

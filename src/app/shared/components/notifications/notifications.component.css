@@ -1,0 +1,20 @@
+span,p{
+    display: flex;
+    justify-content: left;
+}
+
+.small{
+    font-size: 12px;
+}
+.notif{
+    height: 60px;
+    width: 250px;
+    margin-bottom: 2px;
+}
+.notif:hover{
+    background-color: whitesmoke;
+}
+.date{
+    font-size: 9px;
+
+}

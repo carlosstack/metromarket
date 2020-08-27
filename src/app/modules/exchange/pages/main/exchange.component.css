@@ -1,0 +1,95 @@
+.main{
+  min-height: 100vh;
+  margin-left: 200px;
+  padding-top: 4%;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: rgb(245, 247, 248);
+  border-right: 0.5px solid rgb(245, 247, 248);
+  padding: 15px;
+}
+
+.logo{
+  height: 120px;
+  border-radius: 20px;
+}
+.nav{
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+a{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: rgb(82, 100, 116);
+  width: 175px;  
+}
+  a li{
+    padding-left: 20px;
+  }
+      /*--- START CLASS ACTIVE ---*/
+    
+    .active{
+      color: rgb(57, 57, 57);
+      background-color: white;
+    } 
+    .active li{
+      color: dodgerblue;
+      
+    } 
+    a:hover{
+      color: rgb(57, 57, 57);
+      background-color: white;
+    }    
+    
+    a:hover li{
+      color: dodgerblue;
+    }  
+    /*--- END CLASS ACTIVE ---*/
+   
+    .img__container{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+    }
+
+
+
+@media only screen and (max-width:810px ) {
+  .main{
+    margin-left: 60px;
+    padding-top: 20px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .sidebar{
+    padding-top: 40px;
+    width: 60px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .img__container{
+    margin-bottom: 20px;
+    width: 60px;
+    height: 60px;
+  }
+  .nav{
+    padding: 0;
+  }
+  .sidebar .nav a{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .sidebar .nav a span{
+    display: none;
+  }
+}

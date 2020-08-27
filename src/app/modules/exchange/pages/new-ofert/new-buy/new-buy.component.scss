@@ -1,0 +1,115 @@
+.input-right-align {
+  text-align: right;
+}
+
+input.input-right-align::-webkit-outer-spin-button,
+input.input-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.input-right-align {
+  -moz-appearance: textfield;
+}
+
+
+.title{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.stepper{
+  background-color: transparent;
+}
+.mat-form-field{
+  width: 100%;
+}
+
+:host ::ng-deep .custom-spinner circle{   
+  stroke: rgba(255, 197, 90, 0.925);
+}
+
+
+
+
+/* -----START LOADING TABLE ------*/
+
+/*---transition efect----*/
+.loading-item{
+animation-duration: 2s;
+animation-iteration-count: infinite;
+color: whitesmoke;
+}
+button{
+margin: 5px;
+background-color:dodgerblue;
+color: white;
+border-radius: 20px;
+}
+
+
+.stepper{
+height: 100%;
+}
+
+
+.item{
+
+margin-left: 10px;
+height: 60px;
+width: auto;
+background-color: rgb(238, 238, 255);
+border-radius: 5px;
+}
+
+.item-btn{
+margin-top:10px ;
+margin-left: 10px;
+height: 40px;
+width: 30%;
+border-radius: 20px;
+background-color: rgb(238, 238, 255);
+}
+
+
+.hidden-in-desktop{
+display: none;
+}
+
+@media only screen and (max-width:900px){
+
+.item{
+margin-top: 15px;
+margin-bottom:5px ;
+margin-left: 0px;
+height: 50px;
+}
+
+.item-btn{
+margin-top:15px ;
+margin-left: 0px;
+height: 40px;
+width: 50%;
+border-radius: 15px;
+}
+
+.hidden-in-desktop{
+display: block;
+}
+
+.hidden-in-mobile{
+display: none;
+}
+
+}
+h6{
+font-weight: 500;
+}
+h6,div,span,button{
+font-family: Poppins-Regular;
+}
+
+
+@media only screen and (max-width:810px ) {
+  .title{
+    text-align: center !important;
+  }
+}

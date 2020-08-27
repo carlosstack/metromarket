@@ -1,0 +1,37 @@
+$mainColor: #FFE2E2;
+$greyColor: whitesmoke;
+
+$greyDarkenColor: darken($greyColor, 5);
+
+.item {
+    border: 8px solid #fff;
+}
+
+.rect {
+    height: 64px;
+    width: 64px;
+    
+    // Clear fix
+    border-right: 315px solid white;
+}
+
+.line {
+    height: 100px;
+    border-bottom: 0.5px solid whitesmoke;
+}
+
+.pre {
+    background: linear-gradient(to right, $greyColor 8%, $greyDarkenColor 18%, $greyColor 33%);
+    background-size: 200% 50px;
+    animation: preloadAnimation 2s infinite;
+}
+
+
+@keyframes preloadAnimation {
+    from {
+        background-position: -280px 0
+    }
+    to {
+        background-position: 300px 0
+    }
+}

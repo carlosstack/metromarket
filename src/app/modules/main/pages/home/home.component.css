@@ -1,0 +1,12 @@
+.page__container{
+  height: 100vh;
+}
+.header{
+  position: absolute;
+  top: 0;
+}
+.navbar-brand span{
+margin-left: 10px;
+font-weight: 600;
+font-size: 32px;
+}

@@ -1,0 +1,73 @@
+/*--- START OFERT TABLE ---*/
+
+table,mat-paginator{
+  background-color: transparent;
+  width: 100%;
+}
+ /*--- title ---*/
+ .title{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: black;
+}
+
+
+/*------*/
+
+.table-filter{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+
+}
+
+
+img{
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+  border-radius: 50%;
+}
+
+
+.table-row:hover > td{
+  background: rgb(238, 238, 255);
+  cursor:pointer; 
+  cursor: hand;
+  
+  }
+
+/*-----TEXT----*/
+
+
+button{
+  margin: 5px;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  font-weight: 600;
+}
+.select__btn{
+  font-size: 12px;
+  background-color: dodgerblue;
+
+}
+
+.user-details__td{
+  width: 30%;
+}
+
+
+/* -----END TABLE ------*/
+
+
+
+@media only screen and (max-width:810px ) {
+  .title{
+    text-align: center;
+  }
+}

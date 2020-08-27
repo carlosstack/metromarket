@@ -1,0 +1,13 @@
+<div *ngIf="notifications; else loading">
+    <div *ngFor="let notif of notifications">
+        <div (click)="link(notif.link)" class="btn notif small">
+            <span class="date"> {{ notif.date | date:'short' }}</span>
+            <span class="text-primary ">{{notif.title}}</span>
+            <p id="notif">{{notif.info}}</p>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading class="p-3" ></app-loading>
+</ng-template>

@@ -1,0 +1,29 @@
+<div class="navbar__container">
+    <div class="">
+    <nav class="navbar navbar-expand nav-top">
+        <div class="title__container">
+            <a class="title d-flex" routerLink='/app/shop/s'>
+                <div class="d-flex justify-content-center title__icon__container text-dark">
+                    <li class="far fa-comment-alt title__icon"></li>
+                </div>
+            </a>
+        </div>
+    
+        <div class="container-fluid d-flex">
+            
+            <div class="navbar-collapse d-flex flex-row justify-content-center">
+                <div class="searchbar d-flex justify-content-center align-content-center">
+                    <input class="search_input  " type="text" name="" placeholder="Busca por palabras claves o etiquetas" [(ngModel)]="query"
+                        (keyup.enter)="search()">
+                    <a class="search_icon btn" (click)="search()"><i class="fas fa-search"></i></a>
+                </div>
+            </div>
+            <div class=" d-flex flex-row-reverse my-answer__container p-4"> 
+                <a [routerLink]="['/app/qa/a',{ outlets:{qa:['new']}}]" class="new-ask__btn bg-primary shadow-sm" > <li class="far fa-dot-circle p-1"></li> <span class="hidden-in-mobile">Añadir pregunta</span> </a>
+            </div>
+          
+        </div>
+        
+    </nav>
+</div>
+  </div>

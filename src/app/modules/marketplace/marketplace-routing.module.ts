@@ -1,30 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MarketplaceComponent } from "../../components/marketplace/marketplace.component";
-import { NewProductComponent } from 'src/app/components/marketplace/new-product/new-product.component';
-import { ContentComponent } from 'src/app/components/marketplace/content/content.component';
-import { MyProductsComponent } from 'src/app/components/marketplace/my-products/my-products.component';
-import { ProductDetailsComponent } from 'src/app/components/marketplace/tools/product-details/product-details.component';
-import { MarketplaceSearchComponent } from 'src/app/components/marketplace/marketplace-search/marketplace-search.component';
-import { MarketplaceCategoryComponent } from 'src/app/components/marketplace/marketplace-category/marketplace-category.component';
-import { EditProductComponent } from 'src/app/components/marketplace/edit-product/edit-product.component';
+import { MarketplaceComponent } from "./pages/main/marketplace.component";
+import { NewProductComponent } from 'src/app/modules/marketplace/pages/new-product/new-product.component';
+import { MyProductsComponent } from 'src/app/modules/marketplace/pages/my-products/my-products.component';
+import { ProductDetailsComponent } from 'src/app/modules/marketplace/pages/product-details/product-details.component';
+import { MarketplaceSearchComponent } from 'src/app/modules/marketplace/pages/marketplace-search/marketplace-search.component';
+import { MarketplaceCategoryComponent } from 'src/app/modules/marketplace/pages/marketplace-category/marketplace-category.component';
+import { EditProductComponent } from 'src/app/modules/marketplace/pages/edit-product/edit-product.component';
+import { ShopHomeComponent } from 'src/app/modules/marketplace/pages/shop-home/shop-home.component';
 
 const routes: Routes = [
   {
-    path: 'm',
-    component: MarketplaceComponent,
-    children:[
-      {path:'new',component: NewProductComponent, outlet:'marketplace'},
-      {path:'products',component: ContentComponent, outlet:'marketplace'},
-      {path:'my-products',component: MyProductsComponent, outlet:'marketplace'},
-      {path:'search/:q',component: MarketplaceSearchComponent, outlet:'marketplace'},
-      {path:'category/:category',component: MarketplaceCategoryComponent, outlet:'marketplace'},
-      {path:'edit/:id',component: EditProductComponent, outlet:'marketplace'},
-      { path: 'product/:id', component:ProductDetailsComponent, outlet:'marketplace'}
+    path: 's', component: MarketplaceComponent,
+    children: [
+      { path: '', component: ShopHomeComponent, outlet: 'shop' },
+      { path: 'new', component: NewProductComponent, outlet: 'shop' },
+      { path: 'my-products', component: MyProductsComponent, outlet: 'shop' },
+      { path: 'search/:q', component: MarketplaceSearchComponent, outlet: 'shop' },
+      { path: 'category/:category', component: MarketplaceCategoryComponent, outlet: 'shop' },
+      { path: 'edit/:id', component: EditProductComponent, outlet: 'shop' },
+      { path: 'product/:id', component: ProductDetailsComponent, outlet: 'shop' },
     ]
-  }, 
- 
-  { path:'**', redirectTo:'m'}
+  },
+  { path: '**', redirectTo: 'm' }
 
 ];
 

@@ -1,0 +1,27 @@
+<div id="frame">
+    <div id="content" class="content">
+        <div class="contact-profile d-flex align-items-center p-2">
+            <p>{{name}}</p>
+           
+        </div>
+        <div id="messages" class="messages" >
+            <ul *ngFor="let msg of messages">
+                <li class="sent" *ngIf="msg.uid===uid;else replies">
+                    <p>{{msg.text}}</p>
+                </li>
+               <ng-template #replies>
+                <li class="replies">
+                    <p>{{msg.text}}</p>
+                </li>
+               </ng-template>
+               
+            </ul>
+        </div>
+        <div class="message-input">
+            <div class="wrap">
+                <input type="text" placeholder="Escribele a tu compañero..." [(ngModel)]="message.text" (keyup.enter)="addMsg()"/>
+                <button class="submit" (click)="addMsg()"><i class="fa fa-paper-plane" aria-hidden="true" ></i></button>
+            </div>
+        </div>
+    </div>
+</div>

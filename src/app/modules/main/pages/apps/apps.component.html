@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="text-left mt-4 mb-4">
+        <h1>Miniapps</h1>
+    </div>
+    <div class="row">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center p-2" [routerLink]="['/app/shop/s']">
+            <button mat-button
+                class="d-flex justify-content-center align-items-center card shadow-sm btn orange-gradient">
+                <li class="fas fa-shopping-bag card-icon"></li>
+                <span>Marketplace</span>
+            </button>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center p-2" [routerLink]="['/app/qa/a']">
+            <button mat-button
+                class="d-flex justify-content-center align-items-center card shadow-sm btn bg-white text-primary">
+                <li class="fas fa-comment-alt card-icon"></li>
+                <span>Q&A Chat</span>
+            </button>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center p-2">
+            <button mat-button
+                class="d-flex justify-content-center align-items-center card shadow-sm btn green-gradient"
+                [routerLink]="['/app/exchange/e']">
+                <img src="../../../../assets/exchange-icon.png" alt="" class="img img-fluid">
+                <span>Exchange</span>
+            </button>
+        </div>
+    </div>
+</div>

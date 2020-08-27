@@ -1,0 +1,31 @@
+.mat-toolbar {
+    background: #fff;
+    color: #000;
+    border-bottom: 0.5px solid rgb(245, 247, 248);
+    padding-left: 70px;
+    padding-right: 40px;
+  }
+
+  .mat-icon {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  input{
+    background-color: transparent;
+    font-size: 14px;
+    border: none;
+    width: 300px;
+    padding-left: 10px;
+    color: black;
+  }
+  input:focus{
+    border:none
+  }
+  .menu{
+    margin-left: 180px;
+  }
+  .menu a{
+    font-size: 14px;
+    color: black;
+  }
